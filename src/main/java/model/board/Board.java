@@ -12,6 +12,10 @@ public class Board {
      */
     private boolean[][] visible;
 
+    public Piece[][] getBoard() {
+        return board;
+    }
+
     /**
      * Deletes the Piece at coordinates [x,y] and those around it if necessary.
      * The method assumes the coordinate point to a valid place on the board
@@ -20,7 +24,7 @@ public class Board {
      * @param y The y-coordinate
      */
     public void delete(int x, int y) {
-        board[x][y].delete(board);
+        board[x][y].delete(this, x, y);
         board[x][y] = null;
     }
 
@@ -91,7 +95,7 @@ public class Board {
      * @param y The y-coordinate
      * @return the Piece casted into a ColorBlock, or null if the space is empty or not castable
      */
-    private ColorBlock isAColorBlock(int x, int y) {
+    public ColorBlock isAColorBlock(int x, int y) {
         ColorBlock current = isAColorBlock(x, y);
         if (isInsideBoard(x, y) && !isEmpty(x, y)) return (ColorBlock) board[x][y];
         return null;
@@ -104,7 +108,7 @@ public class Board {
      * @param y The y-coordinate
      * @return true if the coordinates are on the board, false otherwise
      */
-    private boolean isInsideBoard(int x, int y) {
+    public boolean isInsideBoard(int x, int y) {
         return x < 0 || x >= board.length || y < 0 || y >= board[x].length;
     }
 
@@ -129,14 +133,14 @@ public class Board {
     }
 
     /**
-     * Deletes all the Bees that are on the lowest row
+     * Deletes all the Bees that are on the lowest row if they are free
      *
      * @return the number of deleted bees
      */
     private int deleteBees() {
         int nbDeleted = 0;
         for (int j = 0; j < board[board.length - 1].length; j++) {
-            if (board[board.length - 1][j] instanceof Bee) {
+            if (board[board.length - 1][j] instanceof Bee && board[board.length - 1][j].isFree()) {
                 board[board.length - 1][j] = null;
                 nbDeleted += 1;
             }
@@ -147,7 +151,7 @@ public class Board {
     /**
      * From the bottom, moves Pieces to fill the empty spaces.
      * An empty space can be filled with a Piece that is just above or in the above right corner.
-     *
+     * Decor elements can't move.
      * @return true if a change was made, false otherwise
      */
     private boolean fillEmptySpaces() {
@@ -157,13 +161,15 @@ public class Board {
                 if (isEmpty(i, j)) {
                     if (isInsideBoard(i - 1, j)  // the Piece just above
                             && !isEmpty(i - 1, j)
-                            && board[i - 1][j].isFree()) {
+                            && board[i - 1][j].isFree()
+                            && !(board[i - 1][j] instanceof Decor)) {
                         board[i][j] = board[i - 1][j];
                         board[i - 1][j] = null;
                         change = true;
                     } else if (isInsideBoard(i - 1, j + 1) // the Piece above and right
                             && !isEmpty(i - 1, j + 1)
-                            && board[i - 1][j + 1].isFree()) {
+                            && board[i - 1][j + 1].isFree()
+                            && !(board[i - 1][j + 1] instanceof Decor)) {
                         board[i][j] = board[i - 1][j + 1];
                         board[i - 1][j + 1] = null;
                         change = true;

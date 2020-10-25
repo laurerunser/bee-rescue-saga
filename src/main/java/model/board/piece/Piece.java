@@ -1,12 +1,14 @@
 package model.board.piece;
 
+import model.board.Board;
+
 public abstract class Piece {
     private String iconPath;
     private String trappedIconPath;
     private int points;
     private boolean isFree;
 
-    public void free() {
+    public void setFree() {
         isFree = true;
     }
 
@@ -14,9 +16,16 @@ public abstract class Piece {
         return isFree;
     }
 
-    public abstract void delete(Piece[][] board);
+    /**
+     * Delete the surrounding Pieces from the board if needed
+     *
+     * @param board The board
+     * @param x     The x-coordinate of the Piece
+     * @param y     The y-coordinate of the Piece
+     */
+    public abstract void delete(Board board, int x, int y);
 
-    //TODO : implement delete everywhere
 
     // TODO: fix the constructors
+
 }
