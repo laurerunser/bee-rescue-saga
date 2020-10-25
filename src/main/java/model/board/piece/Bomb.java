@@ -1,5 +1,5 @@
 package model.board.piece;
 
-public class Bomb {
+public class Bomb extends Piece implements PieceBonus {
 
 }

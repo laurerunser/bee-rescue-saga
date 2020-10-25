@@ -1,5 +1,5 @@
 package model.board.piece;
 
-public class EraseColorBlocks {
+public class EraseColorBlocks extends Piece implements PieceBonus {
     private String color;
 }

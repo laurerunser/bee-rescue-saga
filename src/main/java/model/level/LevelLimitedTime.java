@@ -1,27 +1,23 @@
 package model.level;
 
-import model.board.piece.Piece;
-
 public class LevelLimitedTime extends Level {
+    /**
+     * The number of seconds available to do the Level
+     */
     private int seconds;
+    /** The number of points the Player gets per second left at the end */
     private int pointsPerSecondLeft;
 
-    @Override
-    public void updateBoard() {
-
-    }
-
+    /** {@inheritDoc} */
     @Override
     public boolean hasWon() {
-        return false;
+        return allBeesSaved() && (seconds >= 0);
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean hasLost() {
-        return false;
+        return !allBeesSaved() && (seconds == 0);
     }
 
-    public Piece getNewBlock() {
-
-    }
 }

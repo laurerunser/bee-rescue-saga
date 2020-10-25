@@ -1,5 +1,6 @@
 package model.board.piece;
 
-public class Bee {
+public class Bee extends Piece {
+
 
 }

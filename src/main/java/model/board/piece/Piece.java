@@ -13,4 +13,10 @@ public abstract class Piece {
     public boolean isFree() {
         return isFree;
     }
+
+    public abstract void delete(Piece[][] board);
+
+    //TODO : implement delete everywhere
+
+    // TODO: fix the constructors
 }

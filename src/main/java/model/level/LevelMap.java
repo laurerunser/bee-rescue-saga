@@ -1,7 +1,5 @@
 package model.level;
 
-import model.bonus.Bonus;
-
 public class LevelMap {
     private int currentLevel;
     private Level[] levels;
@@ -12,12 +10,11 @@ public class LevelMap {
 
     }
 
-    public boolean playLevel(int level, Bonus[] bonus) {
-
-    }
-
+    /**
+     * Uncovers the next 10 levels on the map
+     */
     public void uncoverMap() {
-
+        levelVisible += 10;
     }
 
 }

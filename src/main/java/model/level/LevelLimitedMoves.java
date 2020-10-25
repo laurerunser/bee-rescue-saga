@@ -1,27 +1,22 @@
 package model.level;
 
-import model.board.piece.Piece;
-
 public class LevelLimitedMoves extends Level {
+    /**
+     * The number of moves available to the Player
+     */
     private int moves;
+    /** The amount of points the Player gets for each move left at the end*/
     private int pointsPerMoveLeft;
 
-    @Override
-    public void updateBoard() {
-
-    }
-
+    /** {@inheritDoc} */
     @Override
     public boolean hasWon() {
-        return false;
+        return (moves >= 0) && allBeesSaved();
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean hasLost() {
-        return false;
-    }
-
-    public Piece getNewBlock() {
-
+        return !allBeesSaved() && (moves == 0);
     }
 }
