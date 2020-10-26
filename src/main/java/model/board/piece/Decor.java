@@ -6,6 +6,9 @@ public class Decor extends Piece {
     private final static String iconPath = "";
     private final static String trappedIconPath = "";
 
+    /**
+     * Constructs a Decor : can't be deleted so doesn't have points
+     */
     public Decor() {
         super(0, true);
     }

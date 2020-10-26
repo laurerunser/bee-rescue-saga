@@ -2,6 +2,7 @@ package model.board.piece;
 
 import model.board.Board;
 
+
 public class Bee extends Piece {
     private final static String iconPath = "";
     private final static String trappedIconPath = "";

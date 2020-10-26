@@ -3,9 +3,7 @@ package model.board.piece;
 import model.board.Board;
 
 public class EraseColorBlocks extends Piece implements PieceBonus {
-    /**
-     * The color of the blocks this Piece deletes. Can be : yellow, red, green, blue, orange, purple
-     */
+    /** The color of the blocks this Piece deletes. Can be : yellow, red, green, blue, orange, purple */
     private final String color;
 
     private final static String iconPath = "";
@@ -43,8 +41,7 @@ public class EraseColorBlocks extends Piece implements PieceBonus {
                 }
             }
         }
-        board.getBoard()[x][y] = null;
-        pointsWon = pointsWon * getPoints(); // multiply by the coefficient of the EraseColorBlocks
-        return pointsWon;
+        board.getBoard()[x][y] = null; // delete this from the board
+        return pointsWon * getPoints(); // multiply by the coefficient of the EraseColorBlocks
     }
 }

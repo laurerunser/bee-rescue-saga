@@ -9,60 +9,35 @@ import java.util.HashMap;
 import java.util.Map;
 
 public abstract class Level {
-    /**
-     * The number of Bees that were saves
-     */
+    /** The number of Bees that were saved */
     private int beeSaved;
-    /**
-     * The score of the Player on that Level
-     */
+    /** The score of the Player on that Level */
     private int score;
-    /**
-     * The Board associated with the Level
-     */
+    /** The Board associated with the Level */
     protected Board board;
-    /**
-     * The Bonus the Player already had (can be null)
-     */
+    /** The Bonus the Player already had (can be null) */
     protected Map<Bonus, Integer> availableBonus;
-    /**
-     * The free Bonus given to the Player for that Level (can be null)
-     */
+    /** The free Bonus given to the Player for that Level (can be null) */
     protected Bonus freeBonus;
-    /**
-     * The builder used to create new Pieces, based on the Level restrictions
-     */
+    /** The builder used to create new Pieces, based on the Level restrictions */
     private NewPieceBuilder builder;
 
-    /**
-     * The number of Bees the Player must save to win the Level
-     */
+    /** The number of Bees the Player must save to win the Level */
     private int objBees;
-    /**
-     * The number of points the Player must have to get 1 star
-     */
+    /** The number of points the Player must have to get 1 star */
     private int objScore1;
-    /**
-     * The number of points the Player must have to get 2 stars
-     */
+    /** The number of points the Player must have to get 2 stars */
     private int objScore2;
-    /**
-     * The number of points the Player must have to get 3 stars
-     */
+    /** The number of points the Player must have to get 3 stars */
     private int objScore3;
 
-    /**
-     * @return true of the Player won, false otherwise
-     */
+    /** @return true of the Player won, false otherwise */
     public abstract boolean hasWon();
 
-    /**
-     * @return true if the Player lost, false otherwise
-     */
+    /** @return true if the Player lost, false otherwise */
     public abstract boolean hasLost();
 
-    /**
-     * Computes how many stars the Player got in the Level, depending on the 3 score objectives
+    /** Computes how many stars the Player got in the Level, depending on the 3 score objectives
      *
      * @return the number of stars the Player got in that level
      */
@@ -73,9 +48,7 @@ public abstract class Level {
         else return 0;
     }
 
-    /**
-     * Updates the board and fills all empty spaces at the top with new Pieces
-     */
+    /** Updates the board and fills all empty spaces at the top with new Pieces */
     public void updateBoard() {
         int empty = updateBoardNoFill();
         for (int i = 0; i < empty; i++) {

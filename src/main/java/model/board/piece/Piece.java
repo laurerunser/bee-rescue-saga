@@ -4,26 +4,16 @@ import model.board.Board;
 
 //TODO : fill all the iconPath and trappedIconPath
 public abstract class Piece {
-    /**
-     * The path to the icon
-     */
+    /** The path to the icon */
     private final static String iconPath = "";
-    /**
-     * The path to the icon when the Piece is trapped/not free
-     */
+    /** The path to the icon when the Piece is trapped/not free */
     private final static String trappedIconPath = "";
-    /**
-     * The path to the current icon
-     */
+    /** The path to the current icon */
     private String currentIconPath;
 
-    /**
-     * The number of points the Player gets hen deleting the Piece, without the multiplicators or extra points
-     */
+    /** The number of points the Player gets hen deleting the Piece, without the multiplicators or extra points*/
     private final int points;
-    /**
-     * True if the Piece is free, false otherwise
-     */
+    /** True if the Piece is free, false otherwise */
     private boolean isFree;
 
     /**
@@ -42,24 +32,18 @@ public abstract class Piece {
         }
     }
 
-    /**
-     * Sets the Piece free. Changes the currentIconPath to the default iconPath.
-     */
+    /** Sets the Piece free. Changes the currentIconPath to the default iconPath. */
     public void setFree() {
         isFree = true;
         currentIconPath = iconPath;
     }
 
-    /**
-     * @return true if the Piece is free, false otherwise
-     */
+    /** @return true if the Piece is free, false otherwise */
     public boolean isFree() {
         return isFree;
     }
 
-    /**
-     * @return the number of points the Player gets when deleting the Piece
-     */
+    /** @return the number of points the Player gets when deleting the Piece */
     public int getPoints() {
         return points;
     }

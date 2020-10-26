@@ -2,18 +2,24 @@ package model.board;
 
 import model.board.piece.*;
 
+
 public class Board {
-    /**
-     * The array representing the board of the level
-     */
+    /** The array representing the board of the level */
     private Piece[][] board;
-    /**
-     * The array representing the visible portion of the board
-     */
+    /** The array representing the visible portion of the board */
     private boolean[][] visible;
 
+    /** @return the board */
     public Piece[][] getBoard() {
         return board;
+    }
+
+    /**
+     * Constructs a Board
+     * @param board the Piece[][] representing the board
+     */
+    public Board(Piece[][] board) {
+        this.board = board;
     }
 
     /**
@@ -22,10 +28,10 @@ public class Board {
      *
      * @param x The x-coordinate
      * @param y The y-coordinate
+     * @return the number of points won from deleting that Piece
      */
-    public void delete(int x, int y) {
-        board[x][y].delete(this, x, y);
-        board[x][y] = null;
+    public int delete(int x, int y) {
+        return board[x][y].delete(this, x, y);
     }
 
     /**
@@ -96,7 +102,6 @@ public class Board {
      * @return the Piece casted into a ColorBlock, or null if the space is empty or not castable
      */
     public ColorBlock isAColorBlock(int x, int y) {
-        ColorBlock current = isAColorBlock(x, y);
         if (isInsideBoard(x, y) && !isEmpty(x, y)) return (ColorBlock) board[x][y];
         return null;
     }

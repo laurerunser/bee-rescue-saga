@@ -1,9 +1,7 @@
 package model.level;
 
 public class LevelLimitedMoves extends Level {
-    /**
-     * The number of moves available to the Player
-     */
+    /** The number of moves available to the Player */
     private int moves;
     /** The amount of points the Player gets for each move left at the end*/
     private int pointsPerMoveLeft;

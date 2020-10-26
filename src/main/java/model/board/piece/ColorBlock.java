@@ -3,19 +3,26 @@ package model.board.piece;
 import model.board.Board;
 
 public class ColorBlock extends Piece {
-    /**
-     * The color of the block : yellow, red, green, blue, orange, purple
-     */
+    /** The color of the block : yellow, red, green, blue, orange, purple */
     private final String color;
 
     private final static String iconPath = "";
     private final static String trappedIconPath = "";
 
+    /**
+     * Constructs a ColorBlock
+     * @param points    The number of points the Player gets for deleting the Piece
+     * @param isFree    True if the Piece is free, false if it is trapped
+     * @param color     The color of the block
+     */
     public ColorBlock(int points, boolean isFree, String color) {
         super(points, isFree);
         this.color = color;
     }
 
+    /**
+     * @return the color
+     */
     public String getColor() {
         return color;
     }
@@ -46,7 +53,7 @@ public class ColorBlock extends Piece {
             }
         }
         pointsWon += getPoints(); // add the points from this
-        board.getBoard()[x][y] = null; // delete this from the Board
+        board.getBoard()[x][y] = null; // delete this from the board
         return pointsWon;
     }
 
