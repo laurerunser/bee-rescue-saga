@@ -16,14 +16,17 @@ public class NewPieceBuilder {
     private final int[] probabilitiesColors;
     /**
      * The available Pieces in this Level
+     * availablePieces[i][0] = the name of the Piece
+     * availablePieces[i][1] = the number of points for that Piece
      */
-    private final String[] availablePieces;
+    private final String[][] availablePieces;
     /**
      * The probability of getting each Piece in the Level : must be natural integers that add up to 100
      */
     private final int[] probabilitiesPiece;
 
-    public NewPieceBuilder(String[] availableColors, String[] availablePieces, int[] probabilitiesColors, int[] probabilitiesPiece) {
+    public NewPieceBuilder(String[] availableColors, String[][] availablePieces,
+                           int[] probabilitiesColors, int[] probabilitiesPiece) {
         this.probabilitiesColors = probabilitiesColors;
         this.availablePieces = availablePieces;
         this.availableColors = availableColors;
@@ -35,18 +38,20 @@ public class NewPieceBuilder {
      */
     public Piece getNewPiece() {
         String color = availableColors[getColor()];
-        String piece = availablePieces[getPiece()];
+        int indexPiece = getPiece();
+        String piece = availablePieces[indexPiece][0];
+        int points = Integer.parseInt(availablePieces[indexPiece][1]);
         return switch (piece) {
-            case "Bee" -> new Bee();
-            case "Bomb" -> new Bomb();
-            case "ColorBlock" -> new ColorBlock(color, false);
-            case "EraseColorBlocks" -> new EraseColorBlocks();
+            case "Bee" -> new Bee(points, false);
+            case "Bomb" -> new Bomb(points, false);
+            case "ColorBlock" -> new ColorBlock(points, false, color);
+            case "EraseColorBlocks" -> new EraseColorBlocks(points, false, color);
             default -> null;
         };
     }
 
     /**
-     * @return the index of a randomly chosen color (weighted with the porbabilities) in the availableColors array.
+     * @return the index of a randomly chosen color (weighted with the probabilities) in the availableColors array.
      */
     public int getColor() {
         int random = getRandom();
@@ -59,7 +64,7 @@ public class NewPieceBuilder {
     }
 
     /**
-     * @return the index of a randomly chosen color (weighted with the porbabilities) in the availablePiece array.
+     * @return the index of a randomly chosen color (weighted with the probabilities) in the availablePiece array.
      */
     public int getPiece() {
         int random = getRandom();

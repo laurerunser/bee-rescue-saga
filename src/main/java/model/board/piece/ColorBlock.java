@@ -8,7 +8,11 @@ public class ColorBlock extends Piece {
      */
     private final String color;
 
-    public ColorBlock(String color, boolean free) {
+    private final static String iconPath = "";
+    private final static String trappedIconPath = "";
+
+    public ColorBlock(int points, boolean isFree, String color) {
+        super(points, isFree);
         this.color = color;
     }
 
@@ -22,9 +26,11 @@ public class ColorBlock extends Piece {
      * @param board The board
      * @param x     The x-coordinate of the Piece
      * @param y     The y-coordinate of the Piece
+     * @return the number of points won
      */
     @Override
-    public void delete(Board board, int x, int y) {
+    public int delete(Board board, int x, int y) {
+        int pointsWon = 0;
         int[][] coordinates = new int[4][2];
         coordinates[0] = new int[]{x - 1, y};
         coordinates[1] = new int[]{x + 1, y};
@@ -35,11 +41,13 @@ public class ColorBlock extends Piece {
                     && !board.isEmpty(coordinates[i][0], coordinates[i][1])) {
                 ColorBlock c = board.isAColorBlock(coordinates[i][0], coordinates[i][1]); // null if not a ColorBlock
                 if (c != null && c.getColor().equals(this.color)) {
-                    c.delete(board, coordinates[i][0], coordinates[i][1]);
+                    pointsWon += c.delete(board, coordinates[i][0], coordinates[i][1]);
                 }
             }
         }
-        board.getBoard()[x][y] = null;
+        pointsWon += getPoints(); // add the points from this
+        board.getBoard()[x][y] = null; // delete this from the Board
+        return pointsWon;
     }
 
 }
