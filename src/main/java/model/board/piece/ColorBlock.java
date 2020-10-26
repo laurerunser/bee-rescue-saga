@@ -37,7 +37,9 @@ public class ColorBlock extends Piece {
      */
     @Override
     public int delete(Board board, int x, int y) {
-        int pointsWon = 0;
+        // TODO : free a Bee if in a box of the same color
+        int pointsWon = getPoints(); // add the points from this
+        board.getBoard()[x][y] = null; // delete this from the board
         int[][] coordinates = new int[4][2];
         coordinates[0] = new int[]{x - 1, y};
         coordinates[1] = new int[]{x + 1, y};
@@ -52,8 +54,6 @@ public class ColorBlock extends Piece {
                 }
             }
         }
-        pointsWon += getPoints(); // add the points from this
-        board.getBoard()[x][y] = null; // delete this from the board
         return pointsWon;
     }
 

@@ -114,7 +114,7 @@ public class Board {
      * @return true if the coordinates are on the board, false otherwise
      */
     public boolean isInsideBoard(int x, int y) {
-        return x < 0 || x >= board.length || y < 0 || y >= board[x].length;
+        return !(x < 0 || x >= board.length || y < 0 || y >= board[x].length);
     }
 
     /**
