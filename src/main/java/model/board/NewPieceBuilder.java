@@ -40,7 +40,7 @@ public class NewPieceBuilder {
         String piece = availablePieces[indexPiece][0];
         int points = Integer.parseInt(availablePieces[indexPiece][1]);
         return switch (piece) {
-            case "Bee" -> new Bee(points, false);
+            case "Bee" -> new Bee(points, "blue");
             case "Bomb" -> new Bomb(points, false);
             case "ColorBlock" -> new ColorBlock(points, false, color);
             case "EraseColorBlocks" -> new EraseColorBlocks(points, false, color);

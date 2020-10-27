@@ -102,7 +102,13 @@ public class Board {
      * @return the Piece casted into a ColorBlock, or null if the space is empty or not castable
      */
     public ColorBlock isAColorBlock(int x, int y) {
-        if (isInsideBoard(x, y) && !isEmpty(x, y)) return (ColorBlock) board[x][y];
+        if (isInsideBoard(x, y) && !isEmpty(x, y)) {
+            try {
+                return (ColorBlock) board[x][y];
+            } catch (ClassCastException e) {
+                return null;
+            }
+        }
         return null;
     }
 

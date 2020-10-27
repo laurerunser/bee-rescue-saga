@@ -29,6 +29,8 @@ public class ColorBlock extends Piece {
 
     /**
      * Delete recursively the surrounding Pieces if they are ColorBlocks of the same color.
+     * Be careful, it doesn't check if the move is possible : even if there is no other ColorBlock of the same color
+     * around, this will be deleted
      *
      * @param board The board
      * @param x     The x-coordinate of the Piece
@@ -37,7 +39,6 @@ public class ColorBlock extends Piece {
      */
     @Override
     public int delete(Board board, int x, int y) {
-        // TODO : free a Bee if in a box of the same color
         int pointsWon = getPoints(); // add the points from this
         board.getBoard()[x][y] = null; // delete this from the board
         int[][] coordinates = new int[4][2];
@@ -46,12 +47,22 @@ public class ColorBlock extends Piece {
         coordinates[2] = new int[]{x, y - 1};
         coordinates[3] = new int[]{x, y + 1};
         for (int i = 0; i < 4; i++) {
-            if (board.isInsideBoard(coordinates[i][0], coordinates[i][1])
-                    && !board.isEmpty(coordinates[i][0], coordinates[i][1])) {
-                ColorBlock c = board.isAColorBlock(coordinates[i][0], coordinates[i][1]); // null if not a ColorBlock
-                if (c != null && c.getColor().equals(this.color)) {
-                    pointsWon += c.delete(board, coordinates[i][0], coordinates[i][1]);
+            if (board.isInsideBoard(coordinates[i][0], coordinates[i][1]) && !board.isEmpty(coordinates[i][0], coordinates[i][1])) {
+                ColorBlock c = board.isAColorBlock(coordinates[i][0], coordinates[i][1]);
+                if (c != null && c.getColor().equals(this.color)) { // test if it is a ColorBlock
+                    if (c.isFree()) {
+                        pointsWon += c.delete(board, coordinates[i][0], coordinates[i][1]);
+                    } else {
+                        c.setFree();
+                    }
+                } else { // check if the Piece is a Bee of the same color
+                    Piece toTest = board.getBoard()[coordinates[i][0]][coordinates[i][1]];
+                    if (toTest instanceof Bee && !toTest.isFree() && ((Bee) toTest).getColor().equals(this.color)) {
+                        toTest.setFree(); // no points won from setting a Bee free
+                        // Bees don't recursively set each other free : they have to be in direct contact with the Piece
+                    }
                 }
+
             }
         }
         return pointsWon;

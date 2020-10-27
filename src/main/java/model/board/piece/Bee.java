@@ -6,16 +6,37 @@ import model.board.Board;
 public class Bee extends Piece {
     private final static String iconPath = "";
     private final static String trappedIconPath = "";
+    /**
+     * The color of the box the Bee can be trapped in : yellow, red, green, blue, orange, purple
+     * If the Bee is not trapped, color = "" (empty String)
+     */
+    private final String color;
 
     /**
-     * Constructs a Bee
+     * Constructs a Bee that is trapped in a box of that color
      *
      * @param points The number of points the Players gets when deleting (=saving) the Bee
-     * @param isFree True if the Bee is free, false if it is trapped
+     * @param color  The color of the box the bee is trapped in
      */
-    public Bee(int points, boolean isFree) {
-        super(points, isFree);
+    public Bee(int points, String color) {
+        super(points, false);
+        this.color = color;
     }
+
+    /**
+     * Constructs a free Bee
+     *
+     * @param points The number of points the Player gets when deleting (=saving) the Bee
+     */
+    public Bee(int points) {
+        super(points, true);
+        color = "";
+    }
+
+    /**
+     * @return the color of the box the Bee is trapped in
+     */
+    public String getColor() { return color; }
 
     /**
      * A Bee can only be deleted when the Board updates itself and finds a Bee in the bottom row.

@@ -117,8 +117,8 @@ public class BombTest extends TestCase {
             }
         }
         p[1][1] = a;
-        p[0][1] = new Bee(12, false);
-        p[0][2] = new Bee(12, true);
+        p[0][1] = new Bee(12, "blue");
+        p[0][2] = new Bee(12);
         Board board = new Board(p);
         p[1][1].delete(board, 1, 1);
         assertNotNull(p[0][1]);
