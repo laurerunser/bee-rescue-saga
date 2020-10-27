@@ -72,7 +72,7 @@ public class ColorBlockTest extends TestCase {
         p[0][2] = new Bee(2, "red");
         p[1][0] = new Bee(2, "blue");
         p[1][1] = new ColorBlock(2, true, "red");
-        p[2][1] = new Bee(2);
+        p[2][1] = new EraseColorBlocks(2, false, "red");
         p[2][2] = new Bee(2);
         Board board = new Board(p);
         int result = p[1][1].delete(board, 1, 1);
@@ -81,6 +81,6 @@ public class ColorBlockTest extends TestCase {
         assertFalse(p[0][2].isFree());
         assertTrue(p[2][1].isFree());
         assertFalse(p[1][0].isFree());
-
     }
+
 }

@@ -21,6 +21,8 @@ public class EraseColorBlocks extends Piece implements PieceBonus {
         this.color = color;
     }
 
+    public String getColor() { return color; }
+
     /**
      * Delete the surrounding Pieces from the board if needed
      *
@@ -30,18 +32,24 @@ public class EraseColorBlocks extends Piece implements PieceBonus {
      */
     @Override
     public int delete(Board board, int x, int y) {
+        int coefficient = getPoints();
+        board.getBoard()[x][y] = null; // delete this from the board
         int pointsWon = 0;
         for (int i = 0; i < board.getBoard().length; i++) {
             for (int j = 0; j < board.getBoard()[i].length; j++) {
                 if (board.isInsideBoard(i, j) && !board.isEmpty(i, j)) {
                     ColorBlock c = board.isAColorBlock(i, j); // null if not a ColorBlock
                     if (c != null && c.getColor().equals(this.color)) {
-                        pointsWon += c.delete(board, i, j);
+                        if (c.isFree()) {
+                            pointsWon += c.delete(board, i, j);
+                        } else {
+                            c.setFree();
+                            System.out.println("ok");
+                        }
                     }
                 }
             }
         }
-        board.getBoard()[x][y] = null; // delete this from the board
-        return pointsWon * getPoints(); // multiply by the coefficient of the EraseColorBlocks
+        return pointsWon * coefficient; // multiply by the coefficient of the EraseColorBlocks
     }
 }

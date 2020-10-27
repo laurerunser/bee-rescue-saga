@@ -60,6 +60,8 @@ public class ColorBlock extends Piece {
                     if (toTest instanceof Bee && !toTest.isFree() && ((Bee) toTest).getColor().equals(this.color)) {
                         toTest.setFree(); // no points won from setting a Bee free
                         // Bees don't recursively set each other free : they have to be in direct contact with the Piece
+                    } else if (toTest instanceof EraseColorBlocks && !toTest.isFree() && ((EraseColorBlocks) toTest).getColor().equals(this.color)) {
+                        toTest.setFree(); // set free the EraseColorBlock
                     }
                 }
 
