@@ -4,9 +4,13 @@ import model.board.piece.*;
 
 
 public class Board {
-    /** The array representing the board of the level */
-    private Piece[][] board;
-    /** The array representing the visible portion of the board */
+    /**
+     * The array representing the board of the level
+     */
+    private final Piece[][] board;
+    /**
+     * The array representing the visible portion of the board
+     */
     private boolean[][] visible;
 
     /** @return the board */
@@ -90,8 +94,7 @@ public class Board {
         ColorBlock left = isAColorBlock(x - 1, y);
         if (left != null && current.getColor().equals(left.getColor())) return true;
         ColorBlock right = isAColorBlock(x + 1, y);
-        if (right != null && current.getColor().equals(right.getColor())) return true;
-        return false;
+        return right != null && current.getColor().equals(right.getColor());
     }
 
     /**

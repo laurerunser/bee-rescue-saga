@@ -33,17 +33,19 @@ public class NewPieceBuilder {
         this.probabilitiesPiece = probabilitiesPiece;
     }
 
-    /** @return a Piece based on the Level's restrictions and probabilities */
+    /**
+     * @return a Piece based on the Level's restrictions and probabilities. The Piece is always free
+     */
     public Piece getNewPiece() {
         String color = availableColors[getColor()];
         int indexPiece = getPiece();
         String piece = availablePieces[indexPiece][0];
         int points = Integer.parseInt(availablePieces[indexPiece][1]);
         return switch (piece) {
-            case "Bee" -> new Bee(points, "blue");
-            case "Bomb" -> new Bomb(points, false);
-            case "ColorBlock" -> new ColorBlock(points, false, color);
-            case "EraseColorBlocks" -> new EraseColorBlocks(points, false, color);
+            case "Bee" -> new Bee(points);
+            case "Bomb" -> new Bomb(points, true);
+            case "ColorBlock" -> new ColorBlock(points, true, color);
+            case "EraseColorBlocks" -> new EraseColorBlocks(points, true, color);
             default -> null;
         };
     }
