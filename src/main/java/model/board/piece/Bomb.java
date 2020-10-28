@@ -3,7 +3,7 @@ package model.board.piece;
 
 import model.board.Board;
 
-public class Bomb extends Piece implements PieceBonus {
+public class Bomb extends Piece {
     private final static String iconPath = "";
     private final static String trappedIconPath = "";
 

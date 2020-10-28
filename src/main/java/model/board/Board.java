@@ -2,7 +2,9 @@ package model.board;
 
 import model.board.piece.*;
 
-
+/**
+ * Represents the board that the Player is playing with
+ */
 public class Board {
     /**
      * The array representing the board of the level
@@ -13,13 +15,18 @@ public class Board {
      */
     private boolean[][] visible;
 
-    /** @return the board */
+    /**
+     * Getter for the board
+     *
+     * @return the board
+     */
     public Piece[][] getBoard() {
         return board;
     }
 
     /**
      * Constructs a Board
+     *
      * @param board the Piece[][] representing the board
      */
     public Board(Piece[][] board) {
@@ -50,11 +57,13 @@ public class Board {
     }
 
     /**
+     * Check if the field is empty
      * @param x The x-coordinate
      * @param y The y-coordinate
      * @return true if the place is empty, false otherwise
      */
     public boolean isEmpty(int x, int y) {
+        if (!isInsideBoard(x, y)) return false;
         return board[x][y] == null;
     }
 
@@ -65,12 +74,13 @@ public class Board {
      */
     public boolean hasMoveLeft() {
         for (int i = 0; i < board.length; i++) {
-            for (int j = 0; j < board[i].length; i++) {
+            for (int j = 0; j < board[i].length; j++) {
+                if (board[i][j] == null) continue;
                 if (board[i][j] instanceof Decor) continue; // not a Piece you can play
-                if (board[i][j] instanceof PieceBonus) return true; // a PieceBonus can always be played
-                if (board[i][j] instanceof ColorBlock) {
-                    if (isAColorMove(i, j))
-                        return true; // the block is part of a set of the same color that can be deleted
+                if (board[i][j] instanceof Bomb || board[i][j] instanceof EraseColorBlocks)
+                    return true; //they can always be played
+                if (board[i][j] instanceof ColorBlock && isAColorMove(i, j)) {
+                    return true; // the block is part of a set of the same color that can be deleted
                 }
             }
         }
@@ -84,17 +94,28 @@ public class Board {
      * @param y The y-coordinate of the current ColorBlock
      * @return true if there is a move, false otherwise
      */
-    private boolean isAColorMove(int x, int y) {
+    public boolean isAColorMove(int x, int y) {
         ColorBlock current = isAColorBlock(x, y);
-        if (current == null) return false; // the block is not a ColorBlock
-        ColorBlock up = isAColorBlock(x, y + 1);
-        if (up != null && current.getColor().equals(up.getColor())) return true;
-        ColorBlock down = isAColorBlock(x, y - 1);
-        if (down != null && current.getColor().equals(down.getColor())) return true;
-        ColorBlock left = isAColorBlock(x - 1, y);
-        if (left != null && current.getColor().equals(left.getColor())) return true;
-        ColorBlock right = isAColorBlock(x + 1, y);
-        return right != null && current.getColor().equals(right.getColor());
+        if (current == null) {
+            return false; // the block is not a ColorBlock
+        }
+        ColorBlock up = isAColorBlock(x - 1, y);
+        if (up != null && up.isFree() && current.getColor().equals(up.getColor())) {
+            return true;
+        }
+        ColorBlock down = isAColorBlock(x + 1, y);
+        if (down != null && down.isFree() && current.getColor().equals(down.getColor())) {
+            return true;
+        }
+        ColorBlock left = isAColorBlock(x, y - 1);
+        if (left != null && left.isFree() && current.getColor().equals(left.getColor())) {
+            return true;
+        }
+        ColorBlock right = isAColorBlock(x, y + 1);
+        if (right != null && right.isFree() && current.getColor().equals(right.getColor())) {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -130,17 +151,18 @@ public class Board {
      * Updates the board and moves the Pieces
      *
      * @return {a, b, c} :  a = the nb of Bee saved,
-     * b = 1 if change was made, 0 otherwise
-     * c = the nb of empty fields in the top row
+     *                      b = 1 if change was made, 0 otherwise
+     *                      c = the nb of empty fields in the top row
      */
     public int[] updateBoard() {
         int[] result = new int[3];
         result[0] = deleteBees();
         boolean change = fillEmptySpaces();
-        if (change) result[1] = 1;
-        else result[1] = 0;
-        // count how many empty fields in the top row
-        for (int j = 0; j < board[0].length; j++) {
+        if (change) {
+            result[1] = 1; // otherwise stays 0
+        }
+        while (change) { change = fillEmptySpaces(); } // do it over again until there is no more changes to do
+        for (int j = 0; j < board[0].length; j++) { // count how many empty fields in the top row TODO : make it count all empty fields deeper
             if (isEmpty(0, j)) result[2] += 1;
         }
         return result;
@@ -165,24 +187,27 @@ public class Board {
     /**
      * From the bottom, moves Pieces to fill the empty spaces.
      * An empty space can be filled with a Piece that is just above or in the above right corner.
-     * Decor elements can't move.
+     * Decor elements can't move. Trapped Bee can move, but other trapped Pieces can't.
+     *
      * @return true if a change was made, false otherwise
      */
     private boolean fillEmptySpaces() {
         boolean change = false;
         for (int i = board.length - 1; i >= 0; i--) {
-            for (int j = board[board.length - 1].length; j >= 0; j--) {
+            for (int j = 0; j <= board[i].length; j++) {
                 if (isEmpty(i, j)) {
-                    if (isInsideBoard(i - 1, j)  // the Piece just above
+                    if (emptyColumn(j)) { // column empty
+                        moveColumnsLeft(j);
+                    } else if (isInsideBoard(i - 1, j)  // the Piece just above
                             && !isEmpty(i - 1, j)
-                            && board[i - 1][j].isFree()
-                            && !(board[i - 1][j] instanceof Decor)) {
+                            && !(board[i - 1][j] instanceof Decor)
+                            && (board[i - 1][j].isFree() || board[i - 1][j] instanceof Bee)) { // either a free Piece or a trapped Bee
                         board[i][j] = board[i - 1][j];
                         board[i - 1][j] = null;
                         change = true;
                     } else if (isInsideBoard(i - 1, j + 1) // the Piece above and right
                             && !isEmpty(i - 1, j + 1)
-                            && board[i - 1][j + 1].isFree()
+                            && (board[i - 1][j + 1].isFree() || board[i - 1][j + 1] instanceof Bee) // either a free Piece or a trapped Bee
                             && !(board[i - 1][j + 1] instanceof Decor)) {
                         board[i][j] = board[i - 1][j + 1];
                         board[i - 1][j + 1] = null;
@@ -192,6 +217,31 @@ public class Board {
             }
         }
         return change;
+    }
+
+    /**
+     * @param y The y-coordinate of the column
+     * @return true if the column is empty, false otherwise
+     */
+    private boolean emptyColumn(int y) {
+        for (int i = 0; i < board.length; i++) {
+            if (!isEmpty(i, y)) return false;
+        }
+        return true;
+    }
+
+    /**
+     * Move all the columns at the right of y one column to the left
+     *
+     * @param y The y-coordinate of the empty column to move to
+     */
+    private void moveColumnsLeft(int y) {
+        for (int i = 0; i < board.length - 1; i++) {
+            for (int j = y; j < board[i].length - 1; j++) {
+                board[i][j] = board[i][j + 1];
+                board[i][j + 1] = null;
+            }
+        }
     }
 
     /**

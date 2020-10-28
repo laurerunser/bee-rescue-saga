@@ -2,8 +2,10 @@ package model.board.piece;
 
 import model.board.Board;
 
-public class EraseColorBlocks extends Piece implements PieceBonus {
-    /** The color of the blocks this Piece deletes. Can be : yellow, red, green, blue, orange, purple */
+public class EraseColorBlocks extends Piece {
+    /**
+     * The color of the blocks this Piece deletes. Can be : yellow, red, green, blue, orange, purple
+     */
     private final String color;
 
     private final static String iconPath = "";
@@ -44,7 +46,6 @@ public class EraseColorBlocks extends Piece implements PieceBonus {
                             pointsWon += c.delete(board, i, j);
                         } else {
                             c.setFree();
-                            System.out.println("ok");
                         }
                     }
                 }
