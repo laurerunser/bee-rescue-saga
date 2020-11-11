@@ -16,21 +16,22 @@ public class Board {
     private boolean[][] visible;
 
     /**
+     * Constructs a Board
+     *
+     * @param board the Piece[][] representing the board
+     */
+    public Board(Piece[][] board, boolean[][] visible) {
+        this.board = board;
+        this.visible = visible;
+    }
+
+    /**
      * Getter for the board
      *
      * @return the board
      */
     public Piece[][] getBoard() {
         return board;
-    }
-
-    /**
-     * Constructs a Board
-     *
-     * @param board the Piece[][] representing the board
-     */
-    public Board(Piece[][] board) {
-        this.board = board;
     }
 
     /**
@@ -155,6 +156,7 @@ public class Board {
      * c = 1 if change was made, 0 otherwise
      * d = the nb of empty fields in the top row
      */
+    //TODO : update the visible fitler to get down the level when needed
     public int[] updateBoard() {
         int[] result = new int[4];
         int[] tmp = deleteBees();

@@ -56,5 +56,7 @@ If ```none```, don't put a number afterwards. If ```infinite``` append without a
 Write each available Piece's name and the probability in percentages without a space. Write ```none``` if not applicable.   
 Ex : ```ColorBlock70 Bee20 Bomb10```
 
-12. the restrictions of colors, and their probabilities in percentages. Write ```none``` if not applicable.  
+12. the restrictions of points for each piece
+
+13. the restrictions of colors, and their probabilities in percentages. Write ```none``` if not applicable.  
 Ex : ```yellow10 red40 green50```

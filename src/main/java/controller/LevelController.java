@@ -19,16 +19,12 @@ public class LevelController {
     }
 
     /**
-     * Plays the Level
+     * When a Piece is clicked, checks if a move is possible or not, executes it if it is.
+     * Also update the view and launches the appropriate animations
      *
-     * @return true if won, false if lost
+     * @param x The x-coordinate the Player chose
+     * @param y The y-coordiante the Player chose
      */
-    public boolean play() {
-
-
-        return true;
-    }
-
     public void onPieceClicked(int x, int y) {
         if (level.getBoard().getBoard()[x][y] instanceof ColorBlock && !level.getBoard().isAColorMove(x, y)) {
             return;    //TODO : launch the view's animations for the different moves
@@ -36,12 +32,23 @@ public class LevelController {
         } else {
             //TODO : launch the view's animations for the different moves
 
+            // TODO : in level update freeBonus replenishing
             int pointsWon = level.getBoard().delete(x, y);
             level.addToScore(pointsWon);
-            view.drawLevel();
+            view.updateScore();
+            view.updateBoard();
+            view.updateBees();
         }
     }
 
+    /**
+     * When a freeBonus is chosen by the use, applies it on the Board then updates the view and launches animations.
+     * Also updates in Level the number of freeBonus available
+     *
+     * @param bonus The Bonus used
+     * @param x     The x-coordinate chosen by the user
+     * @param y     The y-coordinate chosen by the user
+     */
     public void onFreeBonusUsed(Bonus bonus, int x, int y) {
         if (level.getFreeBonusConditions()[0] == 0 || bonus != level.getFreeBonus()) {
             return;    //TODO : launch the view's animations for the different moves
@@ -50,12 +57,23 @@ public class LevelController {
             //TODO : launch the view's animations for the different moves
 
             //TODO : use the Bonus
+            // TODO : in level freeBonus -1 && update replenishing
             int pointsWon = 0;
             level.addToScore(pointsWon);
-            view.drawLevel();
+            view.updateBoard();
+            view.updateBees();
+            view.updateFreeBonus();
+            view.updateScore();
         }
     }
 
+    /**
+     * When the user uses a Bonus they possess : applies it on the Board and update the level and the view. Launches animations as necessary.
+     *
+     * @param bonus The Bonus used
+     * @param x     The x-coordinate chosen by the user
+     * @param y     The y-coordinate chosen by the user
+     */
     public void onAvailableBonusUsed(Bonus bonus, int x, int y) {
         // test if the bonus is part of the available ones
         Map<Bonus, Integer> availableBonus = level.getAvailableBonus();
@@ -66,10 +84,28 @@ public class LevelController {
             //TODO : launch the view's animations for the different moves
 
             //TODO use the Bonus
+            //TODO in level update available bonus + freeBonus replenishing -1
             int pointsWon = 0;
             level.addToScore(pointsWon);
-            view.drawLevel();
+            view.updateBees();
+            view.updateBoard();
+            view.updateScore();
+            view.updateAvailableBonus();
         }
+    }
+
+    /**
+     * When the player has won the Level
+     */
+    public void hasWon() {
+
+    }
+
+    /**
+     * When the Player has lost the Level
+     */
+    public void hasLost() {
+
     }
 
 }
