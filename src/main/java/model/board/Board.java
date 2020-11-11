@@ -150,20 +150,24 @@ public class Board {
     /**
      * Updates the board and moves the Pieces
      *
-     * @return {a, b, c} :  a = the nb of Bee saved,
-     *                      b = 1 if change was made, 0 otherwise
-     *                      c = the nb of empty fields in the top row
+     * @return {a, b, c, d} :  a = the nb of Bee saved,
+     * b = the number of points won from the Bees
+     * c = 1 if change was made, 0 otherwise
+     * d = the nb of empty fields in the top row
      */
     public int[] updateBoard() {
-        int[] result = new int[3];
-        result[0] = deleteBees();
+        int[] result = new int[4];
+        int[] tmp = deleteBees();
+        result[0] = tmp[0];
+        result[1] = tmp[1];
         boolean change = fillEmptySpaces();
         if (change) {
-            result[1] = 1; // otherwise stays 0
+            result[2] = 1; // otherwise stays 0
         }
         while (change) { change = fillEmptySpaces(); } // do it over again until there is no more changes to do
-        for (int j = 0; j < board[0].length; j++) { // count how many empty fields in the top row TODO : make it count all empty fields deeper
-            if (isEmpty(0, j)) result[2] += 1;
+        for (int j = 0; j < board[0].length; j++) { // count how many empty fields in the top row
+            // TODO : make it count all empty fields deeper (not just the top row)
+            if (isEmpty(0, j)) result[3] += 1;
         }
         return result;
     }
@@ -171,17 +175,19 @@ public class Board {
     /**
      * Deletes all the Bees that are on the lowest row if they are free
      *
-     * @return the number of deleted bees
+     * @return {the number of deleted bees, the number of points won}
      */
-    private int deleteBees() {
+    private int[] deleteBees() {
         int nbDeleted = 0;
+        int points = 0;
         for (int j = 0; j < board[board.length - 1].length; j++) {
             if (board[board.length - 1][j] instanceof Bee && board[board.length - 1][j].isFree()) {
+                points += board[board.length - 1][j].getPoints();
                 board[board.length - 1][j] = null;
                 nbDeleted += 1;
             }
         }
-        return nbDeleted;
+        return new int[]{nbDeleted, points};
     }
 
     /**

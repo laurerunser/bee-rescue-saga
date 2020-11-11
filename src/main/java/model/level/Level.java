@@ -162,13 +162,14 @@ public abstract class Level {
      */
     public int updateBoardNoFill() {
         int keepUpdating = 1;
-        int[] result = new int[3];
+        int[] result = new int[4];
         while (keepUpdating == 1) {
             result = board.updateBoard();
             beeSaved += result[0];
-            keepUpdating = result[1];
+            score += result[1];
+            keepUpdating = result[2];
         }
-        return result[2];
+        return result[3];
     }
 
     /**
