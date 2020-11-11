@@ -4,18 +4,15 @@ These files are human readable for testing and debugging purposes.
 This file is for reference when writing the parsing methods.  
 
 ## Name  
-Each file is called ```levelA-B```  where ```A``` is the first level contained in the file, and ```B``` the last one.  
+Each file is called "levelN" where N is the number of the level inside.  
 
 ## Content
 
-### Separation  
-Each level is enclosed in braces ```{}```.  
-
 ### On each line
 
-1. ```{``` then the number of the level, then the size of the board. Optional : the scope of the board that is visible at one time 
-Ex : ```{ 1 4 5``` for level 1, of size 4 by 5.   
-Ex : ```{ 1 6 30 6 10``` for level 1, of size 6 by 30, but only 6 by 10 is visible at one time
+1. The number of the level, then the size of the board. Optional : the scope of the board that is visible at one time 
+Ex : ```1 4 5``` for level 1, of size 4 by 5.   
+Ex : ```1 6 30 6 10``` for level 1, of size 6 by 30, but only 6 by 10 is visible at one time
 
 2. the type of the level : ```moves```, ```pieces```, ```time``` or ```unlimited``` respectively refer to a level with limited moves, 
 pieces or time.  After a space, write the value of the leftover piece/second/move.

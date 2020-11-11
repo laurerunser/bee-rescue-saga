@@ -1,0 +1,20 @@
+6 9 9
+unlimited
+none
+EraseColumn infinite5
+B6 P16000
+P18000
+P20000
+[
+(ColorBlock 20 true red) (ColorBlock 20 true yellow) (ColorBlock 20 true red) (ColorBlock 20 true yellow) (Bee 1000) (ColorBlock 20 true red) (ColorBlock 20 true green) (Decor path) (ColorBlock 20 true yellow)
+(ColorBlock 20 true red) (ColorBlock 20 true red) (ColorBlock 20 true red) (Bee 1000) (ColorBlock 20 true red) (ColorBlock 20 true red) (ColorBlock 20 true yellow) (Decor path) (ColorBlock 20 true yellow)
+(ColorBlock 20 true red) (ColorBlock 20 true red) (Bee 1000) (ColorBlock 20 true red) (ColorBlock 20 true red) (ColorBlock 20 true red) (Bee 1000) (Decor path) (ColorBlock 20 true yellow)
+(ColorBlock 20 true green) (Decor path) (Decor path) (Decor path) (Decor path) (Decor path) (Decor path) (Decor path) (ColorBlock 20 true yellow)
+(Bee 1000) (Decor path) visible (Decor path) (ColorBlock 20 true yellow) (ColorBlock 20 true purple) (ColorBlock 20 true purple) (ColorBlock 20 true purple) (ColorBlock 20 true purple)
+(ColorBlock 20 true red) (Decor path) visible (Decor path)  (ColorBlock 20 true purple) (ColorBlock 20 true yellow) (ColorBlock 20 true purple) (ColorBlock 20 true purple) (ColorBlock 20 true purple)
+(Bee 1000) (Decor path) visible (Decor path) (ColorBlock 20 true yellow) (ColorBlock 20 true purple) (ColorBlock 20 true yellow) (ColorBlock 20 true yellow) (ColorBlock 20 true yellow)
+(ColorBlock 20 true red) (Decor path) visible (Decor path)  (ColorBlock 20 true purple) (ColorBlock 20 true purple) (ColorBlock 20 true purple) (ColorBlock 20 true purple) (ColorBlock 20 true yellow)
+(ColorBlock 20 true green) (Decor path) visible (Decor path)  (ColorBlock 20 true yellow) (ColorBlock 20 true yellow) (ColorBlock 20 true purple) (ColorBlock 20 true purple) (ColorBlock 20 true purple)
+]
+ColorBlock100
+purple50 yellow50

@@ -1,0 +1,19 @@
+4 8 8
+pieces 40
+none
+none
+B4 P25000
+P30000
+P35000
+[
+none none none none (Bee 1000) (Bee 1000) (Bee 1000) (Bee 1000)
+none none none (ColorBlock 20 true blue) (ColorBlock 20 true blue) (ColorBlock 20 true purple) (ColorBlock 20 true blue) (ColorBlock 20 true yellow)
+none none (ColorBlock 20 true blue) (ColorBlock 20 true yellow) (ColorBlock 20 true blue) (ColorBlock 20 true purple) (ColorBlock 20 true blue) (ColorBlock 20 true yellow)
+none (ColorBlock 20 true blue) (ColorBlock 20 true blue) (ColorBlock 20 true yellow) (ColorBlock 20 true purple) (ColorBlock 20 true yellow) (ColorBlock 20 true purple) (ColorBlock 20 true purple)
+(ColorBlock 20 true yellow) (ColorBlock 20 true purple) (ColorBlock 20 true yellow) (ColorBlock 20 true purple) (ColorBlock 20 true purple) (ColorBlock 20 true yellow) (ColorBlock 20 true purple) (Decor path)
+(ColorBlock 20 true purple) (ColorBlock 20 true purple) (ColorBlock 20 true yellow) (ColorBlock 20 true purple) (ColorBlock 20 true blue) (ColorBlock 20 true yellow) (Decor path) (Decor path)
+(ColorBlock 20 true yellow) (ColorBlock 20 true yellow) (ColorBlock 20 true blue) (ColorBlock 20 true yellow) (ColorBlock 20 true blue) (Decor path) (Decor path) (Decor path)
+(ColorBlock 20 true blue) (ColorBlock 20 true yellow) (ColorBlock 20 true blue) (ColorBlock 20 true yellow) (Decor path) (Decor path) (Decor path) (Decor path)
+]
+none
+none

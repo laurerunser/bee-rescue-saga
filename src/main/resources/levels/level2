@@ -1,0 +1,18 @@
+2 5 8
+pieces 40
+none
+none
+B5 P27000
+P30000
+P35000
+[
+none (ColorBlock 20 true blue) (Bee 1000) (ColorBlock 20 true blue) none
+(Bee 1000) (ColorBlock 20 true blue) (Bee 1000) (ColorBlock 20 true blue) (Bee 1000)
+(ColorBlock 20 true red) (ColorBlock 20 true purple) (Bee 1000) (ColorBlock 20 true purple) (ColorBlock 20 true red)
+(ColorBlock 20 true red) (ColorBlock 20 true purple) (ColorBlock 20 true red) (ColorBlock 20 true purple) (ColorBlock 20 true red)
+(ColorBlock 20 true purple) (ColorBlock 20 true blue) (ColorBlock 20 true red) (ColorBlock 20 true blue) (ColorBlock 20 true purple)
+(ColorBlock 20 true purple) (ColorBlock 20 true blue) (ColorBlock 20 true red) (ColorBlock 20 true blue) (ColorBlock 20 true purple)
+(ColorBlock 20 true blue) (ColorBlock 20 true purple) (ColorBlock 20 true red) (ColorBlock 20 true purple) (ColorBlock 20 true blue)
+]
+none
+none

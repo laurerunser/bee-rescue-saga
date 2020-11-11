@@ -1,0 +1,25 @@
+10 9 14 9 9
+pieces 40
+none
+EraseColumn infinite5
+B5 P31000
+P32000
+P33000
+[
+none none (ColorBlock 20 true blue) (ColorBlock 20 true blue) (Bee 1000) (ColorBlock 20 true blue) (ColorBlock 20 true blue) none none
+none none (ColorBlock 20 true blue) (ColorBlock 20 true blue) (ColorBlock 20 true blue) (ColorBlock 20 true blue) (ColorBlock 20 true blue) none none
+(Bee 1000) (ColorBlock 20 true blue) (ColorBlock 20 true blue) (ColorBlock 20 true blue) (ColorBlock 20 true green) (ColorBlock 20 true blue) (ColorBlock 20 true blue) (ColorBlock 20 true blue) (Bee 1000)
+(ColorBlock 20 true yellow) (ColorBlock 20 true blue) (Bee 1000) (ColorBlock 20 true green) (Decor path) (ColorBlock 20 true yellow) (Bee 1000) (ColorBlock 20 true yellow) (ColorBlock 20 true blue)
+(ColorBlock 20 true yellow) (ColorBlock 20 true yellow) (Decor path) (ColorBlock 20 true blue) (Decor path) (ColorBlock 20 true yellow) (Decor path) (ColorBlock 20 true green) (ColorBlock 20 true yellow)
+(ColorBlock 20 true green) (ColorBlock 20 true green) (Decor path) (ColorBlock 20 true yellow) (Decor path) (ColorBlock 20 true green) (Decor path) (ColorBlock 20 true blue) (ColorBlock 20 true blue)
+(ColorBlock 20 true blue) (ColorBlock 20 true yellow) (Decor path) (ColorBlock 20 true green) (Decor path) (ColorBlock 20 true green) (Decor path) (ColorBlock 20 true green) (ColorBlock 20 true blue)
+(ColorBlock 20 true blue) (ColorBlock 20 true blue) (ColorBlock 20 true blue) (ColorBlock 20 true green) (ColorBlock 20 true green) (ColorBlock 20 true yellow) (ColorBlock 20 true yellow) (ColorBlock 20 true blue) (ColorBlock 20 true green)
+(ColorBlock 20 true green) (ColorBlock 20 true green) (ColorBlock 20 true blue) (ColorBlock 20 true yellow) (ColorBlock 20 true blue) (ColorBlock 20 true yellow) (ColorBlock 20 true blue) (ColorBlock 20 true green) (ColorBlock 20 true yellow)
+(ColorBlock 20 true green) (ColorBlock 20 true yellow) (ColorBlock 20 true yellow) (Decor path) (ColorBlock 20 true blue) (Decor path) (ColorBlock 20 true green) (ColorBlock 20 true blue) (ColorBlock 20 true yellow)
+(ColorBlock 20 true green) (ColorBlock 20 true yellow) (ColorBlock 20 true yellow) (Decor path) (ColorBlock 20 true blue) (Decor path) (ColorBlock 20 true green) (ColorBlock 20 true blue) (ColorBlock 20 true blue)
+(ColorBlock 20 true green) (ColorBlock 20 true blue) (ColorBlock 20 true blue) (ColorBlock 20 true yellow) (ColorBlock 20 true blue) (ColorBlock 20 true blue) (ColorBlock 20 true yellow) (ColorBlock 20 true blue) (ColorBlock 20 true green)
+(ColorBlock 20 true green) (ColorBlock 20 true yellow) (ColorBlock 20 true blue) (ColorBlock 20 true yellow) (ColorBlock 20 true yellow) (ColorBlock 20 true blue) (ColorBlock 20 true yellow) (ColorBlock 20 true green) (ColorBlock 20 true green)
+(ColorBlock 20 true blue) (ColorBlock 20 true green) (ColorBlock 20 true blue) (ColorBlock 20 true blue) (ColorBlock 20 true yellow) (ColorBlock 20 true blue) (ColorBlock 20 true blue) (ColorBlock 20 true yellow) (ColorBlock 20 true blue)
+]
+none
+none

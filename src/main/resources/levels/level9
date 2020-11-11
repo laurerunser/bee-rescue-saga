@@ -1,0 +1,40 @@
+9 9 29 9 9
+pieces 40
+none
+EraseColumn infinite5
+B4 P31000
+P32000
+P33000
+[
+none none visible (ColorBlock 20 true yellow) visible (ColorBlock 20 true yellow) visible
+none  (ColorBlock 20 true red) (Bee 1000) (ColorBlock 20 true red) (Bee 1000) (ColorBlock 20 true yellow) (Bee 1000) (ColorBlock 20 true red)
+(Bee 1000) (ColorBlock 20 true purple) (ColorBlock 20 true yellow) (ColorBlock 20 true purple) (ColorBlock 20 true yellow) (ColorBlock 20 true purple) (ColorBlock 20 true purple) (ColorBlock 20 true red) (Bee 1000)
+(ColorBlock 20 true yellow) (ColorBlock 20 true purple) (ColorBlock 20 true yellow) (ColorBlock 20 true red) (ColorBlock 20 true red) (ColorBlock 20 true purple) (ColorBlock 20 true red) (ColorBlock 20 true red) (ColorBlock 20 true purple)
+(ColorBlock 20 true purple) (ColorBlock 20 true purple) (ColorBlock 20 true red) (ColorBlock 20 true red) (ColorBlock 20 true red) (ColorBlock 20 true red) (ColorBlock 20 true red) (ColorBlock 20 true purple) (ColorBlock 20 true purple)
+(ColorBlock 20 true yellow) (ColorBlock 20 true red) (ColorBlock 20 true purple) (ColorBlock 20 true yellow) (ColorBlock 20 true purple) (ColorBlock 20 true red) (ColorBlock 20 true yellow) (ColorBlock 20 true red) (ColorBlock 20 true yellow)
+(ColorBlock 20 true red) (ColorBlock 20 true purple) (ColorBlock 20 true yellow) (ColorBlock 20 true purple) (ColorBlock 20 true purple) (ColorBlock 20 true yellow) (ColorBlock 20 true yellow) (ColorBlock 20 true red) (ColorBlock 20 true purple)
+(ColorBlock 20 true yellow) (ColorBlock 20 true yellow) (Decor path) (Decor path) (ColorBlock 20 true red) (Decor path) (Decor path) (ColorBlock 20 true yellow) (ColorBlock 20 true red)
+(ColorBlock 20 true red) (ColorBlock 20 true red) (Decor path) (Decor path) (ColorBlock 20 true red) (Decor path) (Decor path) (ColorBlock 20 true purple) (ColorBlock 20 true yellow)
+(ColorBlock 20 true red) (ColorBlock 20 true red) (Decor path) (Decor path) (ColorBlock 20 true yellow) (Decor path) (Decor path) (ColorBlock 20 true red) (ColorBlock 20 true red)
+(ColorBlock 20 true yellow) (ColorBlock 20 true yellow) (ColorBlock 20 true red) (ColorBlock 20 true yellow) (ColorBlock 20 true red) (ColorBlock 20 true yellow) (ColorBlock 20 true purple) (ColorBlock 20 true yellow) (ColorBlock 20 true red)
+(ColorBlock 20 true yellow) (ColorBlock 20 true yellow) (ColorBlock 20 true yellow) (ColorBlock 20 true purple) (ColorBlock 20 true yellow) (ColorBlock 20 true purple) (ColorBlock 20 true purple) (ColorBlock 20 true red) (ColorBlock 20 true purple)
+(ColorBlock 20 true red) (ColorBlock 20 true red) (ColorBlock 20 true red) (ColorBlock 20 true red) (Decor path) (ColorBlock 20 true purple) (ColorBlock 20 true yellow) (ColorBlock 20 true yellow) (ColorBlock 20 true purple)
+(ColorBlock 20 true purple) (ColorBlock 20 true purple) (ColorBlock 20 true purple) (ColorBlock 20 true purple) (Decor path) (ColorBlock 20 true yellow) (ColorBlock 20 true purple) (ColorBlock 20 true purple) (ColorBlock 20 true yellow)
+(ColorBlock 20 true red) (ColorBlock 20 true red) (ColorBlock 20 true red) (ColorBlock 20 true yellow) (Decor path) (ColorBlock 20 true red) (ColorBlock 20 true red) (ColorBlock 20 true purple) (ColorBlock 20 true purple)
+(ColorBlock 20 true purple) (Decor path) (ColorBlock 20 true purple) (ColorBlock 20 true red) (Decor path) (ColorBlock 20 true yellow) (ColorBlock 20 true yellow) (Decor path) (ColorBlock 20 true yellow)
+(ColorBlock 20 true red) (Decor path) (ColorBlock 20 true red) (ColorBlock 20 true red) (Decor path) (ColorBlock 20 true yellow) (ColorBlock 20 true yellow) (Decor path) (ColorBlock 20 true red)
+(ColorBlock 20 true yellow) (ColorBlock 20 true purple) (ColorBlock 20 true red) (ColorBlock 20 true red) (Decor path) (ColorBlock 20 true red) (ColorBlock 20 true yellow) (ColorBlock 20 true purple) (ColorBlock 20 true red)
+(ColorBlock 20 true yellow) (ColorBlock 20 true red) (ColorBlock 20 true purple) (ColorBlock 20 true red) (Decor path) (ColorBlock 20 true purple) (ColorBlock 20 true purple) (ColorBlock 20 true yellow) (ColorBlock 20 true red)
+(ColorBlock 20 true red) (ColorBlock 20 true purple) (ColorBlock 20 true red) (ColorBlock 20 true purple) (Decor path) (ColorBlock 20 true purple) (ColorBlock 20 true purple) (ColorBlock 20 true purple) (ColorBlock 20 true red)
+(ColorBlock 20 true purple) (ColorBlock 20 true yellow) (ColorBlock 20 true purple) (ColorBlock 20 true red) (ColorBlock 20 true red) (ColorBlock 20 true red) (ColorBlock 20 true yellow) (ColorBlock 20 true yellow) (ColorBlock 20 true red)
+(ColorBlock 20 true yellow) (ColorBlock 20 true red) (ColorBlock 20 true red) (ColorBlock 20 true red) (ColorBlock 20 true yellow) (ColorBlock 20 true yellow) (ColorBlock 20 true yellow) (ColorBlock 20 true yellow) (ColorBlock 20 true purple)
+(ColorBlock 20 true red) (ColorBlock 20 true red) (ColorBlock 20 true red) (ColorBlock 20 true purple) (ColorBlock 20 true yellow) (ColorBlock 20 true yellow) (ColorBlock 20 true yellow) (ColorBlock 20 true red) (ColorBlock 20 true purple)
+(ColorBlock 20 true red) (ColorBlock 20 true red) (ColorBlock 20 true yellow) (ColorBlock 20 true red) (ColorBlock 20 true purple) (ColorBlock 20 true purple) (ColorBlock 20 true red) (ColorBlock 20 true red) (ColorBlock 20 true purple)
+(ColorBlock 20 true purple) (ColorBlock 20 true red) (ColorBlock 20 true red) (ColorBlock 20 true red) (ColorBlock 20 true red) (ColorBlock 20 true red) (ColorBlock 20 true yellow) (Decor path) (Decor path)
+(ColorBlock 20 true purple) (ColorBlock 20 true red) (ColorBlock 20 true red) (ColorBlock 20 true red) (ColorBlock 20 true purple) (ColorBlock 20 true yellow) (ColorBlock 20 true purple) (Decor path) (Decor path)
+(ColorBlock 20 true purple) (ColorBlock 20 true purple) (ColorBlock 20 true red) (ColorBlock 20 true yellow) (ColorBlock 20 true yellow) (ColorBlock 20 true purple) (Decor path) (Decor path) (Decor path)
+(ColorBlock 20 true yellow) (ColorBlock 20 true yellow) (ColorBlock 20 true yellow) (ColorBlock 20 true purple) (ColorBlock 20 true purple) (ColorBlock 20 true red) (Decor path) (Decor path) (Decor path)
+(ColorBlock 20 true red) (ColorBlock 20 true red) (ColorBlock 20 true red) (ColorBlock 20 true yellow) (ColorBlock 20 true red) (ColorBlock 20 true purple) (Decor path) (Decor path) (Decor path)
+]
+none
+none

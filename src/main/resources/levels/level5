@@ -1,0 +1,20 @@
+5 5 9
+pieces 40
+none
+EraseColumn 1
+B2 P3000
+P4000
+P5000
+[
+none (Bee 1000) (Bee 1000) none none
+none none (ColorBlock 20 true blue) (ColorBlock 20 true green) none none
+none none (ColorBlock 20 true red) (ColorBlock 20 true green) none none
+none none (ColorBlock 20 true blue) (ColorBlock 20 true green) none none
+(ColorBlock 20 true green) (ColorBlock 20 true green) (ColorBlock 20 true green) (ColorBlock 20 true green) (ColorBlock 20 true green)
+(ColorBlock 20 true green) (ColorBlock 20 true green) (ColorBlock 20 true green) (ColorBlock 20 true green) (ColorBlock 20 true green)
+(ColorBlock 20 true green) (ColorBlock 20 true green) (ColorBlock 20 true green) (ColorBlock 20 true green) (ColorBlock 20 true green)
+(ColorBlock 20 true green) (ColorBlock 20 true green) (ColorBlock 20 true green) (ColorBlock 20 true green) (ColorBlock 20 true green)
+(ColorBlock 20 true green) (ColorBlock 20 true green) (ColorBlock 20 true green) (ColorBlock 20 true green) (ColorBlock 20 true green)
+]
+none
+none

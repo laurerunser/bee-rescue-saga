@@ -1,0 +1,19 @@
+7 7 8
+pieces 40
+none
+none
+B2 P7500
+P8000
+P9000
+[
+none none (ColorBlock 20 true purple) (ColorBlock 20 true red) (ColorBlock 20 true purple) (ColorBlock 20 true green) none
+none (ColorBlock 20 true green) (ColorBlock 20 true purple) (ColorBlock 20 true blue) (ColorBlock 20 true purple) (ColorBlock 20 true green) (ColorBlock 20 true green)
+(ColorBlock 20 true green) (ColorBlock 20 true purple)  (ColorBlock 20 true purple) (ColorBlock 20 true yellow) (ColorBlock 20 true green) (ColorBlock 20 true purple)  (ColorBlock 20 true purple)
+(ColorBlock 20 true green) (ColorBlock 20 true green)  (ColorBlock 20 true purple) (ColorBlock 20 true red) (ColorBlock 20 true green) (ColorBlock 20 true purple)  (ColorBlock 20 true purple)
+(ColorBlock 20 true green) (ColorBlock 20 true green)  (ColorBlock 20 true purple) (ColorBlock 20 true blue) (ColorBlock 20 true purple) (ColorBlock 20 true green)  (ColorBlock 20 true green)
+(ColorBlock 20 true green) (ColorBlock 20 true green) (ColorBlock 20 true green) (ColorBlock 20 true yellow) (ColorBlock 20 true green) (ColorBlock 20 true green) (ColorBlock 20 true green)
+(Bee 1000) (ColorBlock 20 true green) (ColorBlock 20 true green) (ColorBlock 20 true red) (ColorBlock 20 true green) (ColorBlock 20 true green) (Bee 1000)
+(ColorBlock 20 true red) (ColorBlock 20 true green) (ColorBlock 20 true green) (ColorBlock 20 true blue) (ColorBlock 20 true purple) (ColorBlock 20 true purple) (ColorBlock 20 true red)
+]
+none
+none
