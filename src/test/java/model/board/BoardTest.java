@@ -126,14 +126,14 @@ public class BoardTest extends TestCase {
         }
         Board b = new Board(p);
         int[] result = b.updateBoard();
-        int[] expected = {0, 0, 0};
-        assertTrue(result[0] == expected[0] && result[1] == expected[1] && result[2] == expected[2]);
+        int[] expected = {0, 0, 0, 0};
+        assertTrue(result[0] == expected[0] && result[1] == expected[1] && result[2] == expected[2] && result[3] == expected[3]);
 
         p[0][0] = null;
         p[0][2] = null;
-        expected = new int[]{0, 0, 2};
+        expected = new int[]{0, 0, 0, 2};
         result = b.updateBoard();
-        assertTrue(result[0] == expected[0] && result[1] == expected[1] && result[2] == expected[2]);
+        assertTrue(result[0] == expected[0] && result[1] == expected[1] && result[2] == expected[2] && result[3] == expected[3]);
     }
 
     // test deleting bees and moving Pieces down
@@ -152,8 +152,8 @@ public class BoardTest extends TestCase {
         p[2][2] = a;
         Board board = new Board(p);
         int[] result = board.updateBoard();
-        int[] expected = {2, 1, 2};
-        assertTrue(result[0] == expected[0] && result[1] == expected[1] && result[2] == expected[2]);
+        int[] expected = {2, 4, 1, 2};
+        assertTrue(result[0] == expected[0] && result[1] == expected[1] && result[2] == expected[2] && result[3] == expected[3]);
         assertSame(r, p[2][0]);
         assertSame(b, p[1][0]);
         assertNull(p[0][0]);
@@ -178,10 +178,11 @@ public class BoardTest extends TestCase {
         p[2][2] = a;
         Board board = new Board(p);
         int[] result = board.updateBoard();
-        int[] expected = {2, 1, 3};
+        int[] expected = {2, 4, 1, 3};
         assertEquals(expected[0], result[0]);
         assertEquals(expected[1], result[1]);
         assertEquals(expected[2], result[2]);
+        assertEquals(expected[3], result[3]);
         assertSame(r, p[2][0]);
         assertSame(b, p[1][0]);
         assertNull(p[0][0]);
@@ -207,10 +208,11 @@ public class BoardTest extends TestCase {
         p[1][2] = y;
         Board board = new Board(p);
         int[] result = board.updateBoard();
-        int[] expected = {2, 1, 2};
+        int[] expected = {2, 4, 1, 2};
         assertEquals(expected[0], result[0]);
         assertEquals(expected[1], result[1]);
         assertEquals(expected[2], result[2]);
+        assertEquals(expected[3], result[3]);
         assertNull(p[0][0]);
         assertNull(p[0][2]);
         assertSame(r, p[1][0]);
