@@ -25,4 +25,12 @@ public class Decor extends Piece {
     public int delete(Board board, int x, int y) {
         return 0;
     }
+
+    public String toString() {
+        return "Decor";
+    }
+
+    public String charForCli() {
+        return "   D  ";
+    }
 }

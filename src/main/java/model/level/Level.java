@@ -108,6 +108,21 @@ public abstract class Level {
         return obj;
     }
 
+    public Map<Bonus, Integer> getAvailableBonus() { return availableBonus; }
+
+    public Bonus getFreeBonus() { return freeBonus; }
+
+    public Board getBoard() { return board; }
+
+    /**
+     * Getter for the conditions of the freeBonus
+     *
+     * @return an array of {the number of freeBonus, the number of moves to replenish the freeBonus}
+     */
+    public int[] getFreeBonusConditions() {
+        return new int[]{nbFreeBonus, movesReplenishFreeBonus};
+    }
+
     /**
      * @return true of the Player won, false otherwise
      */

@@ -36,6 +36,8 @@ public class LevelLimitedMoves extends Level {
         this.pointsPerMoveLeft = pointsPerMoveLeft;
     }
 
+    public int getMoves() { return moves; }
+
     /**
      * {@inheritDoc}
      */

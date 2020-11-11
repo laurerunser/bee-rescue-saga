@@ -11,4 +11,13 @@ public class LevelController {
         this.level = level;
         this.view = view;
     }
+
+    /**
+     * Plays the Level
+     *
+     * @return true if won, false if lost
+     */
+    public boolean play() {
+
+    }
 }

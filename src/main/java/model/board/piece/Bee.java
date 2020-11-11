@@ -51,4 +51,16 @@ public class Bee extends Piece {
     public int delete(Board board, int x, int y) {
         return 0;
     }
+
+    public String toString() {
+        return "Bee";
+    }
+
+    public String charForCli() {
+        if (isFree()) {
+            return "   B  ";
+        } else {
+            return " x " + color.toLowerCase().charAt(0) + "B ";
+        }
+    }
 }

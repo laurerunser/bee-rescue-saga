@@ -53,4 +53,16 @@ public class EraseColorBlocks extends Piece {
         }
         return pointsWon * coefficient; // multiply by the coefficient of the EraseColorBlocks
     }
+
+    public String toString() {
+        return color + " color balloun : pop it to delete all the color blocks of that color";
+    }
+
+    public String charForCli() {
+        if (isFree()) {
+            return " " + color.toLowerCase().charAt(0) + "ECB ";
+        } else {
+            return "x" + color.toLowerCase().charAt(0) + "ECB ";
+        }
+    }
 }

@@ -118,4 +118,16 @@ public class Bomb extends Piece {
         board[x][y] = null;
         return pointsPiece;
     }
+
+    public String toString() {
+        return "Bomb : deletes or frees the 8 surrounding pieces";
+    }
+
+    public String charForCli() {
+        if (isFree()) {
+            return " bomb ";
+        } else {
+            return "x bomb";
+        }
+    }
 }

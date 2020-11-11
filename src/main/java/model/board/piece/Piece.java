@@ -59,4 +59,11 @@ public abstract class Piece {
      */
     public abstract int delete(Board board, int x, int y);
 
+    public abstract String toString();
+
+    /**
+     * @return a String of length 6 that represents the Piece
+     */
+    public abstract String charForCli();
+
 }

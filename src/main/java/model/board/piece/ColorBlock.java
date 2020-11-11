@@ -70,4 +70,16 @@ public class ColorBlock extends Piece {
         return pointsWon;
     }
 
+    public String toString() {
+        return color + " block";
+    }
+
+    public String charForCli() {
+        if (isFree()) {
+            return " " + color.toLowerCase().charAt(0) + "Blk ";
+        } else {
+            return " x" + color.toLowerCase().charAt(0) + "Blk";
+        }
+    }
+
 }
