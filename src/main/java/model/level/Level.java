@@ -139,7 +139,8 @@ public class Level {
         return false; // can't lose an unlimited level
     }
 
-    /** Computes how many stars the Player got in the Level, depending on the 3 score objectives
+    /**
+     * Computes how many stars the Player got in the Level, depending on the 3 score objectives
      *
      * @return the number of stars the Player got in that level
      */
@@ -163,6 +164,7 @@ public class Level {
         if (currentCountReplenishingBonus >= 1) {
             currentCountReplenishingBonus -= 1;
         }
+
     }
 
     /**

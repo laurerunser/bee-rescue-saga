@@ -22,23 +22,20 @@ public class LevelMovesController extends LevelController {
     }
 
     @Override
-    public void onFreeBonusUsed(Bonus bonus, int x, int y) {
-        super.onFreeBonusUsed(bonus, x, y);
+    public void onUseFreeBonus(Bonus bonus, int x, int y) {
+        super.onUseFreeBonus(bonus, x, y);
         level.updateBoard();
         testHasWon();
     }
 
     @Override
-    public void onAvailableBonusUsed(Bonus bonus, int x, int y) {
-        super.onAvailableBonusUsed(bonus, x, y);
+    public void onUseAvailableBonus(char bonus, int x, int y) {
+        super.onUseAvailableBonus(bonus, x, y);
         level.updateBoard();
         testHasWon();
     }
 
-    /**
-     * Tests if the Player has won or lost the Level. If so, launches the appropriate actions.
-     * If not, does nothing.
-     */
+    @Override
     public void testHasWon() {
         if (level.hasWon()) {
             hasWon();
