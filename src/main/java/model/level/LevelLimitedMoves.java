@@ -40,6 +40,16 @@ public class LevelLimitedMoves extends Level {
 
     /**
      * {@inheritDoc}
+     * Updates the Board and decreases the amount of moves left.
+     */
+    @Override
+    public void updateBoard() {
+        super.updateBoard();
+        moves -= 1;
+    }
+
+    /**
+     * {@inheritDoc}
      */
     @Override
     public boolean hasWon() {

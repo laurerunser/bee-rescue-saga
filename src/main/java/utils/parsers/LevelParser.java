@@ -18,7 +18,7 @@ import java.util.regex.Pattern;
  * See level-structure.md in resources directory to see how such a file is written.
  */
 public class LevelParser {
-    //TODO : test the parser !!
+    //TODO : test the parser
 
     /**
      * Parses the level in a file named "levelN"
@@ -69,7 +69,8 @@ public class LevelParser {
                 return new LevelLimitedTime(levelAndDimensions[0], board, availableBonus, freeBonus, freeBonusAmount[0], freeBonusAmount[1],
                                             builder, objectives[0], scoreObj, amountLimited, typeAndValueLeft[1]);
             case 4:
-                // TODO : constructor for unlimited Level
+                new Level(levelAndDimensions[0], board, availableBonus, freeBonus, freeBonusAmount[0], freeBonusAmount[1],
+                          builder, objectives[0], scoreObj);
         }
         return null; // unreachable
     }
@@ -142,13 +143,14 @@ public class LevelParser {
      * @return a Bonus corresponding to the name in the String
      */
     private Bonus readBonus(String value) {
+        // TODO : update the String for the iconPath
         return switch (value) {
-            case "ChangeBlockColor" -> new ChangeBlockColor();
-            case "EraseBlock" -> new EraseBlock();
-            case "EraseColor" -> new EraseColor();
-            case "EraseColumn" -> new EraseColumn();
-            case "FreeBee" -> new FreeBee();
-            case "FreeBlock" -> new FreeBlock();
+            case "ChangeBlockColor" -> new ChangeBlockColor("AAAA");
+            case "EraseBlock" -> new EraseBlock("BBBB", 2);
+            case "EraseColor" -> new EraseColor("CCCC", 5);
+            case "EraseColumn" -> new EraseColumn("DDDD", 2);
+            case "FreeBee" -> new FreeBee("EEEE");
+            case "FreeBlock" -> new FreeBlock("FFFF");
             default -> null;
         };
     }

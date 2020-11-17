@@ -15,7 +15,8 @@ public class BombTest extends TestCase {
             }
         }
         p[3][3] = a;
-        Board board = new Board(p);
+        boolean[][] visible = new boolean[4][4];
+        Board board = new Board(p, visible);
         int result = p[3][3].delete(board, 3, 3);
         assertEquals(8 * 2, result); // 8 ColorBlock, 1 point each, multiplied by 2 (the Bomb points)
         for (int i = 2; i < 5; i++) {
@@ -47,7 +48,8 @@ public class BombTest extends TestCase {
         }
         p[3][3] = a;
         p[2][2] = b;
-        Board board = new Board(p);
+        boolean[][] visible = new boolean[5][5];
+        Board board = new Board(p, visible);
         int result = p[3][3].delete(board, 3, 3);
         assertEquals((7 + 5 * 2) * 2, result);
         for (int i = 2; i < 5; i++) {
@@ -79,7 +81,8 @@ public class BombTest extends TestCase {
         p[1][1] = a;
         p[1][0] = new Decor();
         p[1][2] = new Decor();
-        Board board = new Board(p);
+        boolean[][] visible = new boolean[3][3];
+        Board board = new Board(p, visible);
         p[1][1].delete(board, 1, 1);
         assertNotNull(p[1][0]);
         assertNotNull(p[1][2]);
@@ -95,7 +98,8 @@ public class BombTest extends TestCase {
             }
         }
         p[1][1] = a;
-        Board board = new Board(p);
+        boolean[][] visible = new boolean[3][3];
+        Board board = new Board(p, visible);
         p[1][1].delete(board, 1, 1);
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
@@ -119,7 +123,8 @@ public class BombTest extends TestCase {
         p[1][1] = a;
         p[0][1] = new Bee(12, "blue");
         p[0][2] = new Bee(12);
-        Board board = new Board(p);
+        boolean[][] visible = new boolean[3][3];
+        Board board = new Board(p, visible);
         p[1][1].delete(board, 1, 1);
         assertNotNull(p[0][1]);
         assertNotNull(p[0][2]);
@@ -136,7 +141,8 @@ public class BombTest extends TestCase {
             }
         }
         p[0][0] = a;
-        Board board = new Board(p);
+        boolean[][] visible = new boolean[3][3];
+        Board board = new Board(p, visible);
         p[0][0].delete(board, 0, 0);
         assertNull(p[0][0]);
         assertNull(p[0][1]);
@@ -162,7 +168,8 @@ public class BombTest extends TestCase {
         }
         p[1][1] = a;
         p[2][2] = b;
-        Board board = new Board(p);
+        boolean[][] visible = new boolean[4][4];
+        Board board = new Board(p, visible);
         p[1][1].delete(board, 1, 1);
         // the Pieces not touched by the bombs stay trapped
         assertFalse(p[0][3].isFree());

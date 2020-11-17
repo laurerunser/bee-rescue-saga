@@ -2,6 +2,8 @@ package model.level;
 
 import model.board.Board;
 import model.board.NewPieceBuilder;
+import model.board.piece.Bee;
+import model.board.piece.Piece;
 import model.bonus.Bonus;
 
 import java.util.Map;
@@ -49,9 +51,27 @@ public class LevelLimitedPieces extends Level {
         return !board.hasMoveLeft();
     }
 
-    /** Only updates the board, without filling the empty spaces */
+    /**
+     * Only updates the board, without filling the empty spaces.
+     * Also update the number of Pieces left on the Board.
+     */
     @Override
     public void updateBoard() {
         updateBoardNoFill();
+        nbPieces = countNumberPieces();
+    }
+
+    /**
+     * @return the number of Pieces on the Board minus the Bees
+     */
+    private int countNumberPieces() {
+        int p = 0;
+        Piece[][] b = getBoard().getBoard();
+        for (int i = 0; i < b.length; i++) {
+            for (int j = 0; j < b[i].length; i++) {
+                if (b[i][j] != null && !(b[i][j] instanceof Bee)) p += 1;
+            }
+        }
+        return p;
     }
 }

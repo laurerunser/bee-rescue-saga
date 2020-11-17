@@ -13,7 +13,8 @@ public class EraseColorBlocksTest extends TestCase {
         p[3][1] = new ColorBlock(3, false, "red");
         p[1][3] = new Bee(3, "red");
         p[3][0] = new ColorBlock(2, true, "blue");
-        Board b = new Board(p);
+        boolean[][] visible = new boolean[4][4];
+        Board b = new Board(p, visible);
         int result = p[0][0].delete(b, 0, 0);
         assertEquals(result, 9);
         assertNull(p[2][2]);

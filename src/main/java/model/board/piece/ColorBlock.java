@@ -3,8 +3,10 @@ package model.board.piece;
 import model.board.Board;
 
 public class ColorBlock extends Piece {
-    /** The color of the block : yellow, red, green, blue, orange, purple */
-    private final String color;
+    /**
+     * The color of the block : yellow, red, green, blue, orange, purple
+     */
+    private String color;
 
     private final static String iconPath = "";
     private final static String trappedIconPath = "";
@@ -25,6 +27,15 @@ public class ColorBlock extends Piece {
      */
     public String getColor() {
         return color;
+    }
+
+    /**
+     * Sets the color to the new value
+     *
+     * @param color The new color
+     */
+    public void setColor(String color) {
+        this.color = color;
     }
 
     /**

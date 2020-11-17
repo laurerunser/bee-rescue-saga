@@ -14,9 +14,11 @@ public class LevelMovesController extends LevelController {
 
     @Override
     public void onPieceClicked(int x, int y) {
-        super.onPieceClicked(x, y);
-        level.updateBoard();
-        testHasWon();
+        if (level.getBoard().isAValidMove(x, y)) {
+            super.onPieceClicked(x, y);
+            level.updateBoard();
+            testHasWon();
+        }
     }
 
     @Override
