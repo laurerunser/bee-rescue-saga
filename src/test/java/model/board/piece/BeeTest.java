@@ -11,7 +11,8 @@ public class BeeTest extends TestCase {
         Bee a = new Bee(4, "blue");
         p[0][0] = a;
         p[0][1] = new Bee(5, "blue");
-        Board b = new Board(p);
+        boolean[][] visible = new boolean[1][2];
+        Board b = new Board(p, visible);
         int res = p[0][0].delete(b, 0, 0);
         assertEquals(0, res);
         assertEquals(p[0][0], a);

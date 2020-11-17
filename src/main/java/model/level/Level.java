@@ -8,7 +8,7 @@ import model.bonus.Bonus;
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class Level {
+public class Level {
     /**
      * The number of the Level
      */
@@ -44,6 +44,7 @@ public abstract class Level {
      * -1 : another freeBonus is immediately accessible.
      */
     protected int movesReplenishFreeBonus;
+    protected int currentCountReplenishingBonus;
 
     /**
      * The builder used to create new Pieces, based on the Level restrictions
@@ -85,6 +86,7 @@ public abstract class Level {
         this.freeBonus = freeBonus;
         this.nbFreeBonus = nbFreeBonus;
         this.movesReplenishFreeBonus = movesReplenishFreeBonus;
+        this.currentCountReplenishingBonus = movesReplenishFreeBonus;
         this.builder = builder;
         this.objBees = objBees;
         this.objScore1 = objScore[0];
@@ -148,12 +150,18 @@ public abstract class Level {
         else return 0;
     }
 
-    /** Updates the board and fills all empty spaces at the top with new Pieces */
+    /**
+     * Updates the board and fills all empty spaces at the top with new Pieces
+     * Also update the replenishing count for the free bonus
+     */
     public void updateBoard() {
         int empty = updateBoardNoFill();
         for (int i = 0; i < empty; i++) {
             Piece newPiece = builder.getNewPiece();
             board.addOnTop(newPiece);
+        }
+        if (currentCountReplenishingBonus >= 1) {
+            currentCountReplenishingBonus -= 1;
         }
     }
 
@@ -175,6 +183,22 @@ public abstract class Level {
         }
         return result[3];
     }
+
+    /**
+     * Uses the Bonus on the Board
+     *
+     * @param bonus The bonus to use
+     * @param x     The x-coordinate
+     * @param y     The y-coordinate
+     * @return the number of points won, or -1 if the Bonus can't be used
+     */
+    public int useBonus(Bonus bonus, int x, int y) {
+        if (bonus != freeBonus) { // -1 in the available bonus map
+            availableBonus.put(bonus, availableBonus.getOrDefault(bonus, 1) - 1);
+        }
+        return bonus.use(getBoard(), x, y);
+    }
+
 
     /**
      * Sets the bonus that the Player owns
@@ -201,5 +225,15 @@ public abstract class Level {
         return beeSaved == objBees;
     }
 
+    /**
+     * Resets the number of moves to replenish the freeBonus to the default value.
+     */
+    public void resetFreeBonusMoves() {
+        if (nbFreeBonus != -1) {
+            nbFreeBonus -= 1;
+            currentCountReplenishingBonus = movesReplenishFreeBonus;
+        }
+        currentCountReplenishingBonus = movesReplenishFreeBonus;
+    }
 
 }

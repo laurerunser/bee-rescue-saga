@@ -13,7 +13,8 @@ public class ColorBlockTest extends TestCase {
                 p[i][j] = new ColorBlock(2, true, "red");
             }
         }
-        Board board = new Board(p);
+        boolean[][] visible = new boolean[3][3];
+        Board board = new Board(p, visible);
         int result = p[1][1].delete(board, 1, 1);
         assertEquals(result, 18);
         for (int i = 0; i < 3; i++) {
@@ -33,7 +34,8 @@ public class ColorBlockTest extends TestCase {
         }
         p[1][2] = new ColorBlock(2, true, "blue");
         p[0][1] = new ColorBlock(2, true, "blue");
-        Board board = new Board(p);
+        boolean[][] visible = new boolean[3][3];
+        Board board = new Board(p, visible);
         int result = p[1][1].delete(board, 1, 1);
         assertEquals(result, 12);
         assertNotNull(p[0][2]);
@@ -54,7 +56,8 @@ public class ColorBlockTest extends TestCase {
         p[2][0] = new ColorBlock(2, true, "red");
         p[2][1] = new ColorBlock(2, true, "blue");
         p[2][2] = new ColorBlock(2, true, "red");
-        Board board = new Board(p);
+        boolean[][] visible = new boolean[3][3];
+        Board board = new Board(p, visible);
         int result = p[1][1].delete(board, 1, 1);
         assertEquals(result, 6);
         assertNotNull(p[0][2]);
@@ -74,7 +77,8 @@ public class ColorBlockTest extends TestCase {
         p[1][1] = new ColorBlock(2, true, "red");
         p[2][1] = new EraseColorBlocks(2, false, "red");
         p[2][2] = new Bee(2);
-        Board board = new Board(p);
+        boolean[][] visible = new boolean[3][3];
+        Board board = new Board(p, visible);
         int result = p[1][1].delete(board, 1, 1);
         assertEquals(result, 2);
         assertTrue(p[0][1].isFree());

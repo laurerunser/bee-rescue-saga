@@ -13,7 +13,7 @@ public class Board {
     /**
      * The array representing the visible portion of the board
      */
-    private boolean[][] visible;
+    private final boolean[][] visible;
 
     /**
      * Constructs a Board
@@ -76,16 +76,29 @@ public class Board {
     public boolean hasMoveLeft() {
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[i].length; j++) {
-                if (board[i][j] == null) continue;
-                if (board[i][j] instanceof Decor) continue; // not a Piece you can play
-                if (board[i][j] instanceof Bomb || board[i][j] instanceof EraseColorBlocks)
-                    return true; //they can always be played
-                if (board[i][j] instanceof ColorBlock && isAColorMove(i, j)) {
-                    return true; // the block is part of a set of the same color that can be deleted
-                }
+                if (isAValidMove(i, j)) return true;
             }
         }
         return false;
+    }
+
+    /**
+     * Returns true if the Piece at (x,y) is a valid move
+     *
+     * @param x The x-coordinate
+     * @param y The y-coordinate
+     * @return true if the Piece is a valid move, false otherwise
+     */
+    public boolean isAValidMove(int x, int y) {
+        if (board[x][y] == null) return false;
+        else if (board[x][y] instanceof Decor) return false;
+        else if (board[x][y] instanceof Bomb || board[x][y] instanceof EraseColorBlocks)
+            return true; //they can always be played
+        else if (board[x][y] instanceof ColorBlock && isAColorMove(x, y)) {
+            return true; // the block is part of a set of the same color that can be deleted
+        } else {
+            return false;
+        }
     }
 
     /**

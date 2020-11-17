@@ -12,7 +12,8 @@ public class BoardTest extends TestCase {
         p[0][1] = new Bee(2);
         p[1][0] = new EraseColorBlocks(2, true, "red");
         p[1][1] = new Bomb(4, true);
-        Board b = new Board(p);
+        boolean[][] visible = new boolean[2][2];
+        Board b = new Board(p, visible);
         assertTrue(b.hasMoveLeft());
     }
 
@@ -21,7 +22,8 @@ public class BoardTest extends TestCase {
         Piece[][] p = new Piece[2][2];
         p[0][0] = new ColorBlock(2, true, "red");
         p[0][1] = new ColorBlock(2, true, "red");
-        Board b = new Board(p);
+        boolean[][] visible = new boolean[2][2];
+        Board b = new Board(p, visible);
         assertTrue(b.hasMoveLeft());
     }
 
@@ -30,7 +32,8 @@ public class BoardTest extends TestCase {
         Piece[][] p = new Piece[2][2];
         p[0][0] = new ColorBlock(2, false, "red");
         p[0][1] = new ColorBlock(2, false, "red");
-        Board b = new Board(p);
+        boolean[][] visible = new boolean[2][2];
+        Board b = new Board(p, visible);
         assertFalse(b.hasMoveLeft());
     }
 
@@ -41,7 +44,8 @@ public class BoardTest extends TestCase {
         p[0][1] = new Bee(2);
         p[1][0] = new Decor();
         p[1][1] = new Bee(2);
-        Board b = new Board(p);
+        boolean[][] visible = new boolean[2][2];
+        Board b = new Board(p, visible);
         assertFalse(b.isAColorMove(0, 0));
         assertFalse(b.hasMoveLeft());
     }
@@ -52,7 +56,8 @@ public class BoardTest extends TestCase {
         p[0][1] = new Bee(2);
         p[1][0] = new EraseColorBlocks(2, true, "red");
         p[1][1] = new Bomb(4, true);
-        Board b = new Board(p);
+        boolean[][] visible = new boolean[2][2];
+        Board b = new Board(p, visible);
         assertNotNull(b.isAColorBlock(0, 0));
         assertNull(b.isAColorBlock(0, 1));
         assertNull(b.isAColorBlock(1, 0));
@@ -61,7 +66,8 @@ public class BoardTest extends TestCase {
 
     public void testIsInsideBoard() {
         Piece[][] p = new Piece[4][5];
-        Board b = new Board(p);
+        boolean[][] visible = new boolean[4][5];
+        Board b = new Board(p, visible);
         assertTrue(b.isInsideBoard(1, 1));
         assertFalse(b.isInsideBoard(6, 6));
     }
@@ -73,7 +79,8 @@ public class BoardTest extends TestCase {
         p[0][1] = new Bee(2);
         p[1][0] = new EraseColorBlocks(2, true, "red");
         p[1][1] = new Bomb(4, true);
-        Board b = new Board(p);
+        boolean[][] visible = new boolean[2][2];
+        Board b = new Board(p, visible);
         b.addOnTop(bee);
         assertSame(b.getBoard()[0][0], bee);
 
@@ -86,7 +93,8 @@ public class BoardTest extends TestCase {
         }
         p2[2][2] = null;
         Bomb bomb = new Bomb(2, true);
-        Board b2 = new Board(p2);
+        boolean[][] visible2 = new boolean[3][3];
+        Board b2 = new Board(p2, visible2);
         b2.addOnTop(bomb);
         assertSame(b2.getBoard()[2][2], bomb);
 
@@ -98,7 +106,8 @@ public class BoardTest extends TestCase {
         p3[0][1] = new Bee(2);
         p3[1][0] = new EraseColorBlocks(2, true, "red");
         p3[1][1] = new Bomb(4, true);
-        Board b3 = new Board(p3);
+        boolean[][] visible3 = new boolean[2][2];
+        Board b3 = new Board(p3, visible3);
         b3.addOnTop(bee3);
         assertSame(b3.getBoard()[0][0], bomb3);
     }
@@ -107,12 +116,14 @@ public class BoardTest extends TestCase {
         Piece[][] p = new Piece[2][2];
         p[0][0] = new ColorBlock(2, true, "red");
         p[0][1] = new ColorBlock(2, true, "red");
-        Board b = new Board(p);
+        boolean[][] visible = new boolean[2][2];
+        Board b = new Board(p, visible);
         assertTrue(b.isAColorMove(0, 0));
 
         p[0][0] = new ColorBlock(2, false, "red");
         p[0][1] = new ColorBlock(2, false, "red");
-        Board b2 = new Board(p);
+        boolean[][] visible2 = new boolean[2][2];
+        Board b2 = new Board(p, visible2);
         assertFalse(b2.isAColorMove(0, 0));
     }
 
@@ -124,7 +135,8 @@ public class BoardTest extends TestCase {
                 p[i][j] = new ColorBlock(2, true, "red");
             }
         }
-        Board b = new Board(p);
+        boolean[][] visible = new boolean[3][3];
+        Board b = new Board(p, visible);
         int[] result = b.updateBoard();
         int[] expected = {0, 0, 0, 0};
         assertTrue(result[0] == expected[0] && result[1] == expected[1] && result[2] == expected[2] && result[3] == expected[3]);
@@ -150,7 +162,8 @@ public class BoardTest extends TestCase {
         p[2][0] = a;
         p[2][1] = r;
         p[2][2] = a;
-        Board board = new Board(p);
+        boolean[][] visible = new boolean[3][3];
+        Board board = new Board(p, visible);
         int[] result = board.updateBoard();
         int[] expected = {2, 4, 1, 2};
         assertTrue(result[0] == expected[0] && result[1] == expected[1] && result[2] == expected[2] && result[3] == expected[3]);
@@ -176,7 +189,8 @@ public class BoardTest extends TestCase {
         p[1][2] = b;
         p[2][0] = a;
         p[2][2] = a;
-        Board board = new Board(p);
+        boolean[][] visible = new boolean[3][3];
+        Board board = new Board(p, visible);
         int[] result = board.updateBoard();
         int[] expected = {2, 4, 1, 3};
         assertEquals(expected[0], result[0]);
@@ -206,7 +220,8 @@ public class BoardTest extends TestCase {
         p[1][0] = a;
         p[1][1] = a;
         p[1][2] = y;
-        Board board = new Board(p);
+        boolean[][] visible = new boolean[3][3];
+        Board board = new Board(p, visible);
         int[] result = board.updateBoard();
         int[] expected = {2, 4, 1, 2};
         assertEquals(expected[0], result[0]);
@@ -266,7 +281,8 @@ public class BoardTest extends TestCase {
         p[0][2] = y3;
         p[0][0] = g1;
         p[0][4] = g2;
-        Board board = new Board(p);
+        boolean[][] visible = new boolean[5][5];
+        Board board = new Board(p, visible);
         board.updateBoard();
 
         // didn't move
