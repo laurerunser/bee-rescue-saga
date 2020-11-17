@@ -29,6 +29,9 @@ public class CliLevelView {
 
     public void updateFreeBonus() { drawLevel(); }
 
+    /**
+     * Prompt the user for their next move and fires the appropriate events.
+     */
     public void promptNextMove() {
         Scanner sc = new Scanner(System.in);
         String move = "";
@@ -45,16 +48,31 @@ public class CliLevelView {
         sc.close();
     }
 
+    /**
+     * Asks the user which piece they want to click on, then fires the appropriate event.
+     *
+     * @param sc
+     */
     public void askWhichPiece(Scanner sc) {
         int[] coordinates = askCoordinates(sc);
         playerMovesListeners.onPieceClicked(coordinates[0], coordinates[1]);
     }
 
+    /**
+     * Asks the user on which coordinates they want to use their free Bonus, then fires the appropriate event.
+     *
+     * @param sc The Scanner to asks the user with
+     */
     public void askFreeBonusCoordinates(Scanner sc) {
         int[] coordinates = askCoordinates(sc);
         playerMovesListeners.onUseFreeBonus(level.getFreeBonus(), coordinates[0], coordinates[1]);
     }
 
+    /**
+     * Asks the user which Bonus they want to use, and on which coordianates. Then fires the appropriate event.
+     *
+     * @param sc The Scanner to ask to user with
+     */
     public void askWhichBonus(Scanner sc) {
         char b;
         do {
@@ -66,7 +84,13 @@ public class CliLevelView {
         playerMovesListeners.onUseAvailableBonus(b, coordinates[0], coordinates[1]);
     }
 
-    public int[] askCoordinates(Scanner sc) {
+    /**
+     * Asks the user for coordinates and returns them
+     *
+     * @param sc The Scanner to asks the user with
+     * @return an array containing the two coordinates
+     */
+    private int[] askCoordinates(Scanner sc) {
         int[] coordinates = {-1, -1};
         String a;
         while (coordinates[0] < 0 && coordinates[1] < 0) {

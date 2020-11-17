@@ -8,6 +8,4 @@ public interface PlayerMovesListener {
     void onUseFreeBonus(Bonus bonus, int x, int y);
 
     void onUseAvailableBonus(char bonus, int x, int y);
-
-
 }
