@@ -12,7 +12,7 @@ public abstract class Level {
     /**
      * The number of the Level
      */
-    private int level;
+    private final int level;
     /**
      * The number of Bees that were saved
      */
@@ -48,24 +48,24 @@ public abstract class Level {
     /**
      * The builder used to create new Pieces, based on the Level restrictions
      */
-    private NewPieceBuilder builder;
+    private final NewPieceBuilder builder;
 
     /**
      * The number of Bees the Player must save to win the Level
      */
-    private int objBees;
+    private final int objBees;
     /**
      * The number of points the Player must have to get 1 star
      */
-    private int objScore1;
+    private final int objScore1;
     /**
      * The number of points the Player must have to get 2 stars
      */
-    private int objScore2;
+    private final int objScore2;
     /**
      * The number of points the Player must have to get 3 stars
      */
-    private int objScore3;
+    private final int objScore3;
 
     /**
      * Constructs a Level
@@ -126,12 +126,16 @@ public abstract class Level {
     /**
      * @return true of the Player won, false otherwise
      */
-    public abstract boolean hasWon();
+    public boolean hasWon() {
+        return allBeesSaved();
+    }
 
     /**
      * @return true if the Player lost, false otherwise
      */
-    public abstract boolean hasLost();
+    public boolean hasLost() {
+        return false; // can't lose an unlimited level
+    }
 
     /** Computes how many stars the Player got in the Level, depending on the 3 score objectives
      *

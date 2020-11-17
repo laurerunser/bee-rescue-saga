@@ -156,7 +156,7 @@ public class Board {
      * c = 1 if change was made, 0 otherwise
      * d = the nb of empty fields in the top row
      */
-    //TODO : update the visible fitler to get down the level when needed
+    //TODO : update the visible filter to get down the level when needed
     public int[] updateBoard() {
         int[] result = new int[4];
         int[] tmp = deleteBees();
