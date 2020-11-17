@@ -106,6 +106,18 @@ public class LevelController {
     }
 
     /**
+     * Tests if the Player has won or lost the Level. If so, launches the appropriate actions.
+     * If not, does nothing.
+     */
+    public void testHasWon() {
+        if (level.hasWon()) {
+            hasWon();
+        } else if (level.hasLost()) {
+            hasLost();
+        }
+    }
+
+    /**
      * Finds the Bonus corresponding to the char in the availableBonus map
      *
      * @param b The char to look up
@@ -125,16 +137,5 @@ public class LevelController {
         return null;
     }
 
-    /**
-     * Tests if the Player has won or lost the Level. If so, launches the appropriate actions.
-     * If not, does nothing.
-     */
-    public void testHasWon() {
-        if (level.hasWon()) {
-            hasWon();
-        } else if (level.hasLost()) {
-            hasLost();
-        }
-    }
 
 }

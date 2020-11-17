@@ -4,6 +4,8 @@ import controller.listeners.PlayerMovesListeners;
 import model.board.piece.Piece;
 import model.bonus.Bonus;
 import model.level.Level;
+import model.level.LevelLimitedMoves;
+import model.level.LevelLimitedPieces;
 
 import java.util.Map;
 import java.util.Scanner;
@@ -113,9 +115,16 @@ public class CliLevelView {
     }
 
     /**
-     * Prints the rest of the header depending on what type of Level it is
+     * Prints the goal of the Level depending on what type of Level it is.
      */
-    public void drawEndHeader() {}
+    public void drawEndHeader() {
+        if (level instanceof LevelLimitedPieces) {
+            System.out.println("To win the level, you must erase all the pieces on the board");
+        } else if (level instanceof LevelLimitedMoves) {
+            System.out.println("To win the level, you must save" + level.getObjBees() + " Bees before you run out of moves");
+            System.out.println("You have " + ((LevelLimitedMoves) level).getMoves() + " left");
+        }
+    }
 
     /**
      * Prints the number of Bonus available, and their effects
