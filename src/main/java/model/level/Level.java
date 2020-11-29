@@ -44,6 +44,9 @@ public class Level {
      * -1 : another freeBonus is immediately accessible.
      */
     protected int movesReplenishFreeBonus;
+    /**
+     * The number of moves left before the next freeBonus is accessible (0 if always accessible)
+     */
     protected int currentCountReplenishingBonus;
 
     /**

@@ -6,17 +6,20 @@ import model.bonus.Bonus;
 import model.level.Level;
 import model.level.LevelLimitedMoves;
 import model.level.LevelLimitedPieces;
+import view.LevelView;
 
 import java.util.Map;
 import java.util.Scanner;
 
-public class CliLevelView {
+public class CliLevelView implements LevelView {
     private Level level;
 
-    protected PlayerMovesListeners playerMovesListeners = new PlayerMovesListeners();
+    protected PlayerMovesListeners playerMovesListeners;
 
-    public CliLevelView(Level level) {
+    public CliLevelView(Level level, PlayerMovesListeners playerMovesListeners) {
+
         this.level = level;
+        this.playerMovesListeners = playerMovesListeners;
     }
 
     public void updateBoard() { drawLevel(); }

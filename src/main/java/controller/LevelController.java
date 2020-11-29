@@ -1,5 +1,8 @@
 package controller;
 
+import controller.listeners.LevelListener;
+import controller.listeners.LevelListeners;
+import controller.listeners.PlayerMovesListener;
 import model.board.piece.ColorBlock;
 import model.bonus.*;
 import model.level.Level;
@@ -7,13 +10,16 @@ import view.LevelView;
 
 import java.util.Map;
 
-public class LevelController {
+public class LevelController implements LevelListener, PlayerMovesListener {
     protected final Level level;
     protected final LevelView view;
 
-    public LevelController(Level level, LevelView view) {
+    private LevelListeners levelListeners;
+
+    public LevelController(Level level, LevelView view, LevelListeners levelListeners) {
         this.level = level;
         this.view = view;
+        this.levelListeners = levelListeners;
     }
 
     /**
@@ -21,7 +27,7 @@ public class LevelController {
      * Also update the view and launches the appropriate animations
      *
      * @param x The x-coordinate the Player chose
-     * @param y The y-coordiante the Player chose
+     * @param y The y-coordinate the Player chose
      */
     public void onPieceClicked(int x, int y) {
         if (level.getBoard().getBoard()[x][y] instanceof ColorBlock && !level.getBoard().isAColorMove(x, y)) {
@@ -36,6 +42,7 @@ public class LevelController {
             view.updateBoard();
             view.updateBees();
         }
+        testHasWon();
     }
 
     /**
@@ -64,6 +71,7 @@ public class LevelController {
                 view.updateScore();
             }
         }
+        testHasWon();
     }
 
     /**
@@ -89,31 +97,18 @@ public class LevelController {
             view.updateScore();
             view.updateAvailableBonus();
         }
-    }
-
-    /**
-     * When the player has won the Level
-     */
-    public void hasWon() {
-
-    }
-
-    /**
-     * When the Player has lost the Level
-     */
-    public void hasLost() {
-
+        testHasWon();
     }
 
     /**
      * Tests if the Player has won or lost the Level. If so, launches the appropriate actions.
-     * If not, does nothing.
+     * If the Player has neither won nor lost, does nothing.
      */
     public void testHasWon() {
         if (level.hasWon()) {
-            hasWon();
+            levelListeners.onHasWon(level.getStars(), level.getScore(), level.getLevel());
         } else if (level.hasLost()) {
-            hasLost();
+            levelListeners.onHasLost();
         }
     }
 
@@ -138,4 +133,13 @@ public class LevelController {
     }
 
 
+    @Override
+    public void onHasWon(int stars, int score, int level) {
+        // TODO implement
+    }
+
+    @Override
+    public void onHasLost() {
+        // TODO implement
+    }
 }

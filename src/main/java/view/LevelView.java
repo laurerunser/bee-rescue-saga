@@ -1,6 +1,10 @@
 package view;
 
-public interface LevelView {
+public interface LevelView extends Vue {
+
+    default void draw() {
+        drawLevel();
+    }
 
     void drawLevel();
 
