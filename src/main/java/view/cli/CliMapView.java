@@ -99,28 +99,23 @@ public class CliMapView implements MapView {
     private boolean askPlayerMapChoice() {
         Scanner sc = new Scanner(System.in);
         String choice = sc.nextLine().toUpperCase();
+        sc.close();
         if (choice.equals("R")) {
             mapNavigationListeners.onGoToRaffle();
-            sc.close();
-            return true;
         } else if (choice.equals("S")) {
             mapNavigationListeners.onGoToShop();
-            sc.close();
-            return true;
         } else if (choice.startsWith("I")) {
+            choice = choice.substring(1);
             int level = Integer.parseInt(choice);
             if (level >= 0 && level <= map.getLastLevelVisible()) {
                 mapNavigationListeners.onShowLevelDetails(level);
-                sc.close();
-                return true;
             } else {
-                sc.close();
                 return false;
             }
         } else {
-            sc.close();
             return false;
         }
+        return true;
     }
 
 
@@ -129,7 +124,7 @@ public class CliMapView implements MapView {
      *
      * @param n The number of the level to display.
      */
-    public void onShowLevelDetails(int n) {
+    public void showLevelDetails(int n) {
         Level l = map.getLevels()[n];
         int[] objScore = l.getObjScore();
         System.out.println("Here are the details of level number " + n);

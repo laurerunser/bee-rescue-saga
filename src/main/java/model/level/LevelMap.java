@@ -2,7 +2,12 @@ package model.level;
 
 import controller.listeners.LevelListener;
 
-public class LevelMap implements LevelListener {
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.Serializable;
+
+public class LevelMap implements Serializable, LevelListener {
     /**
      * The number of the current Level
      */
@@ -21,8 +26,27 @@ public class LevelMap implements LevelListener {
      */
     private int levelVisible;
 
+    public LevelMap() {
+        currentLevel = 0;
+        levels = new Level[10];
+        levelsCompleted = new int[10][2];
+        levelVisible = 0;
 
-    // TODO : initialize the levels
+        // fill the map with the serialized levels
+        for (int i = 0; i < 10; i++) {
+            Level l;
+            try {
+                String name = "resources/levels/level" + i + ".ser";
+                FileInputStream fileIn = new FileInputStream(name);
+                ObjectInputStream in = new ObjectInputStream(fileIn);
+                l = (Level) in.readObject();
+                in.close();
+                fileIn.close();
+            } catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
     public Level[] getLevels() { return levels; }
 
@@ -56,6 +80,10 @@ public class LevelMap implements LevelListener {
         }
         if (score > levelsCompleted[level][1]) {
             levelsCompleted[level][1] = score;
+        }
+        if (level == levelVisible) {
+            uncoverMap();
+            // TODO : launch animations & reward for uncovering levels
         }
     }
 

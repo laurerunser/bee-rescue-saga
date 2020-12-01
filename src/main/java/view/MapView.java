@@ -10,7 +10,7 @@ public interface MapView extends Vue {
 
     void onGoBackToMap();
 
-    void onShowLevelDetails(int n);
+    void showLevelDetails(int n);
 
     void onGoToShop();
 

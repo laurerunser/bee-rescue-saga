@@ -2,7 +2,9 @@ package model.bonus;
 
 import model.board.Board;
 
-public abstract class Bonus {
+import java.io.Serializable;
+
+public abstract class Bonus implements Serializable {
     /**
      * If the name of the Bonus is in the array, then the Bonus is unlocked for the Player
      */

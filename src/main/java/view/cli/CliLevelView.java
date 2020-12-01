@@ -116,6 +116,7 @@ public class CliLevelView implements LevelView {
         drawEndHeader();
         drawBonus();
         drawBoard();
+        promptNextMove();
     }
 
     /**

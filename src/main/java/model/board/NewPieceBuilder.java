@@ -2,8 +2,12 @@ package model.board;
 
 import model.board.piece.*;
 
-/** Builds a Piece based on the Level's restrictions */
-public class NewPieceBuilder {
+import java.io.Serializable;
+
+/**
+ * Builds a Piece based on the Level's restrictions
+ */
+public class NewPieceBuilder implements Serializable {
     /** The available colors for the ColorBlock in the Level */
     private final String[] availableColors;
     /** The probabilities for each color : must be natural integers that add up to 100 */

@@ -32,7 +32,7 @@ public class LevelMapController implements MapNavigationListener, LevelListener 
      */
     private MapView mapView;
 
-    private MapNavigationListeners mapNavigationListeners;
+    private final MapNavigationListeners mapNavigationListeners;
 
     /**
      * Constructs a LevelMapController, the appropriate views and makes them visible
@@ -44,6 +44,7 @@ public class LevelMapController implements MapNavigationListener, LevelListener 
         this.player = player;
         this.gui = gui;
         this.mapNavigationListeners = mapNavigationListeners;
+        mapNavigationListeners.add(this);
         init();
     }
 
@@ -59,7 +60,14 @@ public class LevelMapController implements MapNavigationListener, LevelListener 
 
     @Override
     public void onShowLevelDetails(int i) {
-        // TODO : implement
+        boolean canPlay = canPlay(i);
+        mapView.showLevelDetails(i);
+        if (canPlay) {
+            mapNavigationListeners.onPlayLevel(i);
+        } else {
+            // TODO : implement
+            System.out.println("Can't play the level yet !");
+        }
     }
 
     public void onGoBackToMap() {
@@ -90,6 +98,7 @@ public class LevelMapController implements MapNavigationListener, LevelListener 
                 currentView = new GuiLevelView(toPlay, playerMovesListeners);
             } else {
                 currentView = new CliLevelView(toPlay, playerMovesListeners);
+                currentView.draw();
             }
 
             LevelListeners levelListeners = new LevelListeners();
@@ -98,6 +107,19 @@ public class LevelMapController implements MapNavigationListener, LevelListener 
             LevelController levelController = new LevelController(toPlay, (LevelView) currentView, levelListeners);
             levelListeners.add(levelController);
             playerMovesListeners.add(levelController);
+        }
+    }
+
+    /**
+     * Tests if the player can play and parses the level if they can
+     *
+     * @param n The number of the level
+     */
+    private boolean canPlay(int n) {
+        if (n - 1 >= 0 && player.getMap().getLevelsCompleted()[n - 1][0] == 0) {
+            return false;
+        } else {
+            return true;
         }
     }
 

@@ -27,10 +27,17 @@ public class LevelParser {
      * @param N   The number of the level to parse
      */
     public void parseLevel(LevelMap map, int N, Map<Bonus, Integer> availableBonus) {
+        N++;
         String name = "levels/level" + N;
-        InputStream is = getClass().getClassLoader().getResourceAsStream(name);
+        InputStream is = null;
+        try {
+            is = Class.forName("Main").getClassLoader().getResourceAsStream(name);
+        } catch (Exception e) {
+            System.out.println("Problem locating the ressource");
+            e.printStackTrace();
+        }
         if (is == null) {
-            System.out.println("Erreur lors de l'ouverture du fichier");
+            System.out.println("Error while opening the file");
             System.exit(1);
         }
         Scanner sc = new Scanner(is);
@@ -45,9 +52,9 @@ public class LevelParser {
      * @param availableBonus A Map of the Bonus the Player has
      */
     private Level createLevel(Scanner sc, Map<Bonus, Integer> availableBonus) {
-        int[] levelAndDimensions = readDim(sc.next());
-        int[] typeAndValueLeft = readType(sc.next());
-        int amountLimited = readAmount(sc.next());
+        int[] levelAndDimensions = readDim(sc.nextLine());
+        int[] typeAndValueLeft = readType(sc.nextLine());
+        int amountLimited = readAmount(sc.nextLine());
         // parse freeBonus
         String[] tmp = sc.nextLine().split(" ");
         Bonus freeBonus = readBonus(tmp[0]);
@@ -87,7 +94,6 @@ public class LevelParser {
      */
     private int[] readDim(String line) {
         String[] str = line.split(" ");
-
         if (str.length == 3) {
             return new int[]{Integer.parseInt(str[0]), Integer.parseInt(str[1]), Integer.parseInt(str[2])};
         } else if (str.length == 5) {
@@ -178,11 +184,14 @@ public class LevelParser {
      */
     private int[] readObjectives(Scanner sc) {
         int[] objectives = new int[4];
-        String[] tmp = sc.next().split(" ");
+        String[] tmp = sc.nextLine().split(" ");
+        for (int i = 0; i < tmp.length; i++) { // get rid of the letter in front of the number
+            tmp[i] = tmp[i].substring(1);
+        }
         objectives[0] = Integer.parseInt(tmp[0]);
         objectives[1] = Integer.parseInt(tmp[1]);
-        objectives[2] = Integer.parseInt(sc.next());
-        objectives[3] = Integer.parseInt(sc.next());
+        objectives[2] = Integer.parseInt(sc.nextLine().substring(1));
+        objectives[3] = Integer.parseInt(sc.nextLine().substring(1));
         return objectives;
     }
 
@@ -196,7 +205,7 @@ public class LevelParser {
     private Board readBoard(Scanner sc, int[] dimensions) {
         int width = dimensions[1];
         int height = dimensions[2];
-        if (!sc.next().equals("[")) {
+        if (!sc.nextLine().equals("[")) {
             System.out.println("ERROR WHILE PARSING");
             System.exit(1);
         }
@@ -288,6 +297,10 @@ public class LevelParser {
                 return new Decor();
             case "EraseColorBlock":
                 return new EraseColorBlocks(Integer.parseInt(args[1]), args[2].equals("true"), args[3]);
+            case "none":
+                return null;
+            case "visible":
+                return null; // TODO : fix this so that it makes a visible piece
             default:
                 System.out.println("ERROR");
                 System.exit(1);

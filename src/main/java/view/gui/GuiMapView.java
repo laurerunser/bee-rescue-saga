@@ -24,7 +24,7 @@ public class GuiMapView implements MapView {
     }
 
     @Override
-    public void onShowLevelDetails(int n) {
+    public void showLevelDetails(int n) {
 
     }
 

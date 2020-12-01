@@ -2,18 +2,30 @@ package model.board.piece;
 
 import model.board.Board;
 
+import java.io.Serializable;
+
 //TODO : fill all the iconPath and trappedIconPath
-public abstract class Piece {
-    /** The path to the icon */
+public abstract class Piece implements Serializable {
+    /**
+     * The path to the icon
+     */
     private final static String iconPath = "";
-    /** The path to the icon when the Piece is trapped/not free */
+    /**
+     * The path to the icon when the Piece is trapped/not free
+     */
     private final static String trappedIconPath = "";
-    /** The path to the current icon */
+    /**
+     * The path to the current icon
+     */
     private String currentIconPath;
 
-    /** The number of points the Player gets hen deleting the Piece, without the multiplicators or extra points*/
+    /**
+     * The number of points the Player gets hen deleting the Piece, without the multiplicators or extra points
+     */
     private final int points;
-    /** True if the Piece is free, false otherwise */
+    /**
+     * True if the Piece is free, false otherwise
+     */
     private boolean isFree;
 
     /**

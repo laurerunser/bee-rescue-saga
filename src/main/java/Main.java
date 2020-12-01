@@ -26,7 +26,7 @@ public class Main {
             System.out.println("You need to specify whether you want a [CLI] or [GUI] view.");
             System.exit(1);
         } else {
-            gui = args[0].toUpperCase().equals("CLI");
+            gui = args[0].toUpperCase().equals("GUI");
         }
         welcome();
     }
@@ -44,11 +44,11 @@ public class Main {
         }
         view.welcome();
         String name = view.askName();
+        System.out.println(name);
 
         Player p = new Player(name);
 
         MapNavigationListeners mapNavigationListeners = new MapNavigationListeners();
         LevelMapController controller = new LevelMapController(p, gui, mapNavigationListeners);
-        mapNavigationListeners.add(controller);
     }
 }

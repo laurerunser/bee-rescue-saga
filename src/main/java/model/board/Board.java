@@ -2,10 +2,12 @@ package model.board;
 
 import model.board.piece.*;
 
+import java.io.Serializable;
+
 /**
  * Represents the board that the Player is playing with
  */
-public class Board {
+public class Board implements Serializable {
     /**
      * The array representing the board of the level
      */
@@ -18,7 +20,8 @@ public class Board {
     /**
      * Constructs a Board
      *
-     * @param board the Piece[][] representing the board
+     * @param board   the Piece[][] representing the board
+     * @param visible a boolean[][] representing the visible portion of the board
      */
     public Board(Piece[][] board, boolean[][] visible) {
         this.board = board;

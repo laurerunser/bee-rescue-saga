@@ -5,10 +5,11 @@ import model.board.NewPieceBuilder;
 import model.board.piece.Piece;
 import model.bonus.Bonus;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Level {
+public class Level implements Serializable {
     /**
      * The number of the Level
      */

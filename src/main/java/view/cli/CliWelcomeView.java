@@ -40,7 +40,7 @@ public class CliWelcomeView implements WelcomeView {
 
     @Override
     public String askName() {
-        System.out.println("What is your name ?");
+        System.out.print("What is your name ? ");
         Scanner sc = new Scanner(System.in);
         return sc.nextLine();
     }

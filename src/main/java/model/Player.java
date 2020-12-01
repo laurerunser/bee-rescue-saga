@@ -3,17 +3,18 @@ package model;
 import model.bonus.Bonus;
 import model.level.LevelMap;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Player {
+public class Player implements Serializable {
     private final LevelMap map;
-    private int nbLives = 0;
+    private int nbLives;
     private int maxLives = 3;
     private long score = 0;
-    private long gold = 0;
+    private long gold;
     private Map<Bonus, Integer> bonus = new HashMap<>();
-    private int raffleTurns = 0;
+    private int raffleTurns;
     String name;
 
 
