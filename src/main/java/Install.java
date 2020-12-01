@@ -27,6 +27,26 @@ public class Install {
 //        }
     }
 
+    /**
+     * Serialize the level. Places the file in the resources/levelsSER from main.
+     * Each file will be named levelN.ser where N is the number of the level.
+     *
+     * @param l The level
+     * @param n The number of the level
+     */
+    public static void writeOut(Level l, int n) {
+        String name = "src/main/resources/levelsSER/level" + n + ".ser";
+        try {
+            FileOutputStream fileOut = new FileOutputStream(name);
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeObject(l);
+            out.close();
+            fileOut.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static LevelLimitedPieces level0() {
         Piece[][] p = new Piece[7][7];
         p[0][1] = new Bee(1000);
@@ -90,19 +110,7 @@ public class Install {
     public static Level level1() {
 
 
-        return new Level();
+        return null;
     }
 
-    public static void writeOut(Level l, int n) {
-        String name = "src/main/resources/levelsSER/level" + n + ".ser";
-        try {
-            FileOutputStream fileOut = new FileOutputStream(name);
-            ObjectOutputStream out = new ObjectOutputStream(fileOut);
-            out.writeObject(l);
-            out.close();
-            fileOut.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 }
