@@ -29,7 +29,7 @@ public class Level implements Serializable {
     /**
      * The Bonus the Player already had (can be null)
      */
-    protected Map<Bonus, Integer> availableBonus;
+    protected HashMap<Bonus, Integer> availableBonus;
     /**
      * The free Bonus given to the Player for that Level (can be null)
      */
@@ -83,7 +83,7 @@ public class Level implements Serializable {
      * @param objBees        The number of Bees necessary to win the level
      * @param objScore       An int array of size 3 that contains the amounts of points to get 1, 2 or 3 stars
      */
-    public Level(int level, Board board, Map<Bonus, Integer> availableBonus, Bonus freeBonus, int nbFreeBonus, int movesReplenishFreeBonus, NewPieceBuilder builder, int objBees, int[] objScore) {
+    public Level(int level, Board board, HashMap<Bonus, Integer> availableBonus, Bonus freeBonus, int nbFreeBonus, int movesReplenishFreeBonus, NewPieceBuilder builder, int objBees, int[] objScore) {
         this.level = level;
         this.board = board;
         this.availableBonus = availableBonus;
@@ -156,6 +156,19 @@ public class Level implements Serializable {
     }
 
     /**
+     * Deletes the piece at coordinates {x,y}, and other if possible. Then updates the board.
+     *
+     * @param x The x-coordinate
+     * @param y The y-coordinate
+     * @return the number of points won from deleting the piece(s)
+     */
+    public int delete(int x, int y) {
+        int points = board.delete(x, y);
+        updateBoard();
+        return points;
+    }
+
+    /**
      * Updates the board and fills all empty spaces at the top with new Pieces
      * Also update the replenishing count for the free bonus
      */
@@ -168,7 +181,6 @@ public class Level implements Serializable {
         if (currentCountReplenishingBonus >= 1) {
             currentCountReplenishingBonus -= 1;
         }
-
     }
 
     /**

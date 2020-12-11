@@ -4,7 +4,7 @@ import model.board.Board;
 import model.board.NewPieceBuilder;
 import model.bonus.Bonus;
 
-import java.util.Map;
+import java.util.HashMap;
 
 public class LevelLimitedMoves extends Level {
     /**
@@ -30,7 +30,7 @@ public class LevelLimitedMoves extends Level {
      * @param moves                   The number of moves available to play this Level
      * @param pointsPerMoveLeft       The number of points the Player gets for each move left when they have won
      */
-    public LevelLimitedMoves(int level, Board board, Map<Bonus, Integer> availableBonus, Bonus freeBonus, int nbFreeBonus, int movesReplenishFreeBonus, NewPieceBuilder builder, int objBees, int[] objScore, int moves, int pointsPerMoveLeft) {
+    public LevelLimitedMoves(int level, Board board, HashMap<Bonus, Integer> availableBonus, Bonus freeBonus, int nbFreeBonus, int movesReplenishFreeBonus, NewPieceBuilder builder, int objBees, int[] objScore, int moves, int pointsPerMoveLeft) {
         super(level, board, availableBonus, freeBonus, nbFreeBonus, movesReplenishFreeBonus, builder, objBees, objScore);
         this.moves = moves;
         this.pointsPerMoveLeft = pointsPerMoveLeft;

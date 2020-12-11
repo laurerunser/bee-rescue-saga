@@ -87,9 +87,9 @@ public class ColorBlock extends Piece {
 
     public String charForCli() {
         if (isFree()) {
-            return " " + color.toLowerCase().charAt(0) + "Blk ";
+            return "_" + color.toLowerCase().charAt(0) + "Blk_";
         } else {
-            return " x" + color.toLowerCase().charAt(0) + "Blk";
+            return "_x" + color.toLowerCase().charAt(0) + "Blk";
         }
     }
 

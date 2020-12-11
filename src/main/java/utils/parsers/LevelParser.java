@@ -4,7 +4,8 @@ import model.board.Board;
 import model.board.NewPieceBuilder;
 import model.board.piece.*;
 import model.bonus.*;
-import model.level.*;
+import model.level.Level;
+import model.level.LevelMap;
 
 import java.io.InputStream;
 import java.util.Map;
@@ -65,20 +66,20 @@ public class LevelParser {
         Board board = readBoard(sc, levelAndDimensions);
         NewPieceBuilder builder = readPieceBuilder(sc.next(), sc.next(), sc.next());
 
-        switch (typeAndValueLeft[0]) {
-            case 1:
-                return new LevelLimitedMoves(levelAndDimensions[0], board, availableBonus, freeBonus, freeBonusAmount[0], freeBonusAmount[1],
-                                             builder, objectives[0], scoreObj, amountLimited, typeAndValueLeft[1]);
-            case 2:
-                return new LevelLimitedPieces(levelAndDimensions[0], board, availableBonus, freeBonus, freeBonusAmount[0], freeBonusAmount[1],
-                                              builder, objectives[0], scoreObj, amountLimited);
-            case 3:
-                return new LevelLimitedTime(levelAndDimensions[0], board, availableBonus, freeBonus, freeBonusAmount[0], freeBonusAmount[1],
-                                            builder, objectives[0], scoreObj, amountLimited, typeAndValueLeft[1]);
-            case 4:
-                new Level(levelAndDimensions[0], board, availableBonus, freeBonus, freeBonusAmount[0], freeBonusAmount[1],
-                          builder, objectives[0], scoreObj);
-        }
+//        switch (typeAndValueLeft[0]) {
+//            case 1:
+//                return new LevelLimitedMoves(levelAndDimensions[0], board, availableBonus, freeBonus, freeBonusAmount[0], freeBonusAmount[1],
+//                                             builder, objectives[0], scoreObj, amountLimited, typeAndValueLeft[1]);
+//            case 2:
+//                return new LevelLimitedPieces(levelAndDimensions[0], board, availableBonus, freeBonus, freeBonusAmount[0], freeBonusAmount[1],
+//                                              builder, objectives[0], scoreObj, amountLimited);
+//            case 3:
+//                return new LevelLimitedTime(levelAndDimensions[0], board, availableBonus, freeBonus, freeBonusAmount[0], freeBonusAmount[1],
+//                                            builder, objectives[0], scoreObj, amountLimited, typeAndValueLeft[1]);
+//            case 4:
+//                new Level(levelAndDimensions[0], board, availableBonus, freeBonus, freeBonusAmount[0], freeBonusAmount[1],
+//                          builder, objectives[0], scoreObj);
+//        }
         return null; // unreachable
     }
 

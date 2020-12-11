@@ -72,6 +72,7 @@ public class LevelMapController implements MapNavigationListener, LevelListener 
 
     public void onGoBackToMap() {
         currentView = mapView;
+        currentView.draw();
     }
 
     public void onGoToShop() {
@@ -104,9 +105,7 @@ public class LevelMapController implements MapNavigationListener, LevelListener 
             LevelListeners levelListeners = new LevelListeners();
             levelListeners.add(this);
             levelListeners.add(player.getMap());
-            LevelController levelController = new LevelController(toPlay, (LevelView) currentView, levelListeners);
-            levelListeners.add(levelController);
-            playerMovesListeners.add(levelController);
+            LevelController levelController = new LevelController(toPlay, (LevelView) currentView, levelListeners, playerMovesListeners);
         }
     }
 

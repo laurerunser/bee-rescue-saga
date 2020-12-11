@@ -3,6 +3,7 @@ package controller;
 import controller.listeners.LevelListener;
 import controller.listeners.LevelListeners;
 import controller.listeners.PlayerMovesListener;
+import controller.listeners.PlayerMovesListeners;
 import model.board.piece.ColorBlock;
 import model.bonus.*;
 import model.level.Level;
@@ -14,12 +15,14 @@ public class LevelController implements LevelListener, PlayerMovesListener {
     protected final Level level;
     protected final LevelView view;
 
-    private LevelListeners levelListeners;
+    private final LevelListeners levelListeners;
 
-    public LevelController(Level level, LevelView view, LevelListeners levelListeners) {
+    public LevelController(Level level, LevelView view, LevelListeners levelListeners, PlayerMovesListeners playerMovesListeners) {
         this.level = level;
         this.view = view;
         this.levelListeners = levelListeners;
+        levelListeners.add(this);
+        playerMovesListeners.add(this);
     }
 
     /**
@@ -30,13 +33,12 @@ public class LevelController implements LevelListener, PlayerMovesListener {
      * @param y The y-coordinate the Player chose
      */
     public void onPieceClicked(int x, int y) {
+        System.out.println("ok");
         if (level.getBoard().getBoard()[x][y] instanceof ColorBlock && !level.getBoard().isAColorMove(x, y)) {
             return;    //TODO : launch the view's animations for the different moves
         } else {
             //TODO : launch the view's animations for the different moves
-
-            // TODO : in level update freeBonus replenishing
-            int pointsWon = level.getBoard().delete(x, y);
+            int pointsWon = level.delete(x, y);
             level.addToScore(pointsWon);
             view.updateScore();
             view.updateBoard();

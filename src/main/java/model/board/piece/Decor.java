@@ -31,6 +31,6 @@ public class Decor extends Piece {
     }
 
     public String charForCli() {
-        return "   D  ";
+        return "___D__";
     }
 }

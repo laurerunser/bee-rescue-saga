@@ -60,9 +60,9 @@ public class EraseColorBlocks extends Piece {
 
     public String charForCli() {
         if (isFree()) {
-            return " " + color.toLowerCase().charAt(0) + "ECB ";
+            return "_" + color.toLowerCase().charAt(0) + "ECB_";
         } else {
-            return "x" + color.toLowerCase().charAt(0) + "ECB ";
+            return "x" + color.toLowerCase().charAt(0) + "ECB_";
         }
     }
 }

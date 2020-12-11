@@ -48,7 +48,6 @@ public class CliLevelView implements LevelView {
             case "F" -> askFreeBonusCoordinates(sc);
             case "B" -> askWhichBonus(sc);
         }
-        sc.close();
     }
 
     /**
@@ -58,7 +57,27 @@ public class CliLevelView implements LevelView {
      */
     public void askWhichPiece(Scanner sc) {
         int[] coordinates = askCoordinates(sc);
-        playerMovesListeners.onPieceClicked(coordinates[0], coordinates[1]);
+        playerMovesListeners.onPieceClicked(coordinates[1], coordinates[0]);
+    }
+
+    /**
+     * Asks the user for coordinates and returns them
+     * Note : the letter (=y) is first, and the the number (=x)
+     *
+     * @param sc The Scanner to asks the user with
+     * @return an array containing the two coordinates {y , x}
+     */
+    private int[] askCoordinates(Scanner sc) {
+        int[] coordinates = {-1, -1};
+        String a;
+        while (coordinates[0] < 0 && coordinates[1] < 0) {
+            System.out.print("Please give your first coordinate (the letter) :");
+            coordinates[1] = sc.next().toLowerCase().charAt(0) - 97; // 'a' is 97
+            System.out.print("Please give your second coordinate (the number) :");
+            coordinates[0] = Integer.parseInt(sc.next());
+        }
+        System.out.println();
+        return coordinates;
     }
 
     /**
@@ -68,11 +87,11 @@ public class CliLevelView implements LevelView {
      */
     public void askFreeBonusCoordinates(Scanner sc) {
         int[] coordinates = askCoordinates(sc);
-        playerMovesListeners.onUseFreeBonus(level.getFreeBonus(), coordinates[0], coordinates[1]);
+        playerMovesListeners.onUseFreeBonus(level.getFreeBonus(), coordinates[1], coordinates[0]);
     }
 
     /**
-     * Asks the user which Bonus they want to use, and on which coordianates. Then fires the appropriate event.
+     * Asks the user which Bonus they want to use, and on which coordinates. Then fires the appropriate event.
      *
      * @param sc The Scanner to ask to user with
      */
@@ -84,25 +103,7 @@ public class CliLevelView implements LevelView {
             System.out.println();
         } while (b != 'C' && b != 'B' && b != 'A' && b != 'D' & b != 'F' && b != 'K');
         int[] coordinates = askCoordinates(sc);
-        playerMovesListeners.onUseAvailableBonus(b, coordinates[0], coordinates[1]);
-    }
-
-    /**
-     * Asks the user for coordinates and returns them
-     *
-     * @param sc The Scanner to asks the user with
-     * @return an array containing the two coordinates
-     */
-    private int[] askCoordinates(Scanner sc) {
-        int[] coordinates = {-1, -1};
-        String a;
-        while (coordinates[0] < 0 && coordinates[1] < 0) {
-            System.out.print("Please give your first coordinate (the number) :");
-            coordinates[0] = Integer.parseInt(sc.next());
-            System.out.print("Please give your second coordinate (the letter) :");
-            coordinates[1] = sc.next().toLowerCase().charAt(0) - 97; // 'a' is 97
-        }
-        return coordinates;
+        playerMovesListeners.onUseAvailableBonus(b, coordinates[1], coordinates[0]);
     }
 
 
@@ -160,8 +161,12 @@ public class CliLevelView implements LevelView {
     public void drawBonus() {
         Map<Bonus, Integer> availableBonus = level.getAvailableBonus();
         System.out.println("You currently have the following bonus : ");
-        for (Map.Entry<Bonus, Integer> bonus : availableBonus.entrySet()) {
-            System.out.println(bonus.getValue() + " " + bonus.getKey().toString());
+        if (availableBonus == null) {
+            System.out.println("You don't have any bonuses at the moment : get some in the shop !");
+        } else {
+            for (Map.Entry<Bonus, Integer> bonus : availableBonus.entrySet()) {
+                System.out.println(bonus.getValue() + " " + bonus.getKey().toString());
+            }
         }
         Bonus freeBonus = level.getFreeBonus();
         if (freeBonus != null) {
@@ -187,22 +192,24 @@ public class CliLevelView implements LevelView {
      */
     public void drawBoard() {
         Piece[][] board = level.getBoard().getBoard();
+        System.out.print("  ");
         for (int i = 0; i < board.length; i++) {
             // print the numbers at the top
-            System.out.println("     " + i + "  ");
+            System.out.print("     " + i + "  ");
         }
+        System.out.println();
         char letter = 'A';
         for (Piece[] pieces : board) {
-            // print the letter at the left
-            System.out.println(letter);
+            // print the letter on the left
+            System.out.print(letter);
             letter++;
 
             // print the Pieces
-            for (Piece p : pieces) {
-                if (p == null) {
-                    System.out.println("      ");
+            for (int i = 0; i < pieces.length; i++) {
+                if (pieces[i] == null) {
+                    System.out.print("         ");
                 } else {
-                    System.out.print("   " + p.charForCli());
+                    System.out.print("   " + pieces[i].charForCli());
                 }
             }
             System.out.println();

@@ -6,7 +6,7 @@ import model.board.piece.Bee;
 import model.board.piece.Piece;
 import model.bonus.Bonus;
 
-import java.util.Map;
+import java.util.HashMap;
 
 public class LevelLimitedPieces extends Level {
     /**
@@ -28,7 +28,7 @@ public class LevelLimitedPieces extends Level {
      * @param objScore                An int array of size 3 that contains the amounts of points to get 1, 2 or 3 stars
      * @param nbPieces                The number of Pieces available in the Level
      */
-    public LevelLimitedPieces(int level, Board board, Map<Bonus, Integer> availableBonus, Bonus freeBonus, int nbFreeBonus,
+    public LevelLimitedPieces(int level, Board board, HashMap<Bonus, Integer> availableBonus, Bonus freeBonus, int nbFreeBonus,
                               int movesReplenishFreeBonus, NewPieceBuilder builder, int objBees, int[] objScore, int nbPieces) {
         super(level, board, availableBonus, freeBonus, nbFreeBonus, movesReplenishFreeBonus, builder, objBees, objScore);
         this.nbPieces = nbPieces;

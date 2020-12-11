@@ -58,9 +58,9 @@ public class Bee extends Piece {
 
     public String charForCli() {
         if (isFree()) {
-            return "   B  ";
+            return "___B__";
         } else {
-            return " x " + color.toLowerCase().charAt(0) + "B ";
+            return "_x_" + color.toLowerCase().charAt(0) + "B_";
         }
     }
 }

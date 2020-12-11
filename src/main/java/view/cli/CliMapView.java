@@ -54,7 +54,7 @@ public class CliMapView implements MapView {
     /**
      * Redraws the Map.
      */
-    public void onGoBackToMap() { drawMap(); }
+    public void onGoBackToMap() { }
 
 
     /**
@@ -92,34 +92,6 @@ public class CliMapView implements MapView {
     }
 
     /**
-     * Interprets the player's choice.
-     *
-     * @return true if the choice was interpreted, false if it didn't make sense.
-     */
-    private boolean askPlayerMapChoice() {
-        Scanner sc = new Scanner(System.in);
-        String choice = sc.nextLine().toUpperCase();
-        sc.close();
-        if (choice.equals("R")) {
-            mapNavigationListeners.onGoToRaffle();
-        } else if (choice.equals("S")) {
-            mapNavigationListeners.onGoToShop();
-        } else if (choice.startsWith("I")) {
-            choice = choice.substring(1);
-            int level = Integer.parseInt(choice);
-            if (level >= 0 && level <= map.getLastLevelVisible()) {
-                mapNavigationListeners.onShowLevelDetails(level);
-            } else {
-                return false;
-            }
-        } else {
-            return false;
-        }
-        return true;
-    }
-
-
-    /**
      * Prints the level's details and prompts the user for their choice : playing the level or going back to the map.
      *
      * @param n The number of the level to display.
@@ -136,16 +108,47 @@ public class CliMapView implements MapView {
         System.out.println("If you want to play the level, type P");
         System.out.println("If you want to go back to the map, type B");
         Scanner sc = new Scanner(System.in);
-        String choice;
-        do {
-            choice = sc.nextLine().toUpperCase();
-        } while (!choice.equals("P") && !choice.equals("B"));
+        String choice = " ";
+        while (!choice.equals("P") && !choice.equals("B")) {
+            choice = sc.next();
+            choice = choice.toUpperCase();
+        }
         if (choice.equals("B")) {
             mapNavigationListeners.onGoBackToMap();
         } else {
             mapNavigationListeners.onPlayLevel(n);
         }
-        sc.close();
+    }
+
+    /**
+     * Interprets the player's choice.
+     *
+     * @return true if the choice was interpreted, false if it didn't make sense.
+     */
+    private boolean askPlayerMapChoice() {
+        Scanner sc = new Scanner(System.in);
+        String choice = sc.nextLine().toUpperCase();
+        if (choice.equals("R")) {
+            mapNavigationListeners.onGoToRaffle();
+        } else if (choice.equals("S")) {
+            mapNavigationListeners.onGoToShop();
+        } else if (choice.startsWith("I")) {
+            choice = choice.substring(1);
+            int level;
+            try {
+                level = Integer.parseInt(choice);
+            } catch (NumberFormatException e) {
+                return false;
+            }
+            if (level >= 0 && level <= map.getLastLevelVisible()) {
+                mapNavigationListeners.onShowLevelDetails(level);
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+        return true;
     }
 
     public void onGoToShop() {

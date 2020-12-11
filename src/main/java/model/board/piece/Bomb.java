@@ -125,9 +125,9 @@ public class Bomb extends Piece {
 
     public String charForCli() {
         if (isFree()) {
-            return " bomb ";
+            return "_bomb_";
         } else {
-            return "x bomb";
+            return "x_bomb";
         }
     }
 }

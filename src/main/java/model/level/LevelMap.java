@@ -6,7 +6,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
-import java.nio.file.FileSystems;
 
 public class LevelMap implements Serializable, LevelListener {
     /**
@@ -29,14 +28,13 @@ public class LevelMap implements Serializable, LevelListener {
 
     public LevelMap() {
         currentLevel = 0;
-        levels = new Level[10];
-        levelsCompleted = new int[10][2];
+        levels = new Level[4];
+        levelsCompleted = new int[4][2];
         levelVisible = 0;
 
-        System.out.println(FileSystems.getDefault().getPath(".").toAbsolutePath());
         // fill the map with the serialized levels
-        for (int i = 0; i < 10; i++) {
-            Level l;
+        for (int i = 0; i < 4; i++) {
+            Level l = null;
             try {
                 String name = "src/main/resources/levelsSER/level" + i + ".ser";
                 FileInputStream fileIn = new FileInputStream(name);
@@ -44,6 +42,7 @@ public class LevelMap implements Serializable, LevelListener {
                 l = (Level) in.readObject();
                 in.close();
                 fileIn.close();
+                levels[i] = l;
             } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
             }

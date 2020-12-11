@@ -4,7 +4,7 @@ import model.board.Board;
 import model.board.NewPieceBuilder;
 import model.bonus.Bonus;
 
-import java.util.Map;
+import java.util.HashMap;
 
 public class LevelLimitedTime extends Level {
     /**
@@ -30,7 +30,7 @@ public class LevelLimitedTime extends Level {
      * @param seconds                 The number of seconds available to play the Level
      * @param pointsPerSecondLeft     The amount of points the Player gets for each second left when they have won the Level
      */
-    public LevelLimitedTime(int level, Board board, Map<Bonus, Integer> availableBonus, Bonus freeBonus, int nbFreeBonus,
+    public LevelLimitedTime(int level, Board board, HashMap<Bonus, Integer> availableBonus, Bonus freeBonus, int nbFreeBonus,
                             int movesReplenishFreeBonus, NewPieceBuilder builder, int objBees, int[] objScore, int seconds,
                             int pointsPerSecondLeft) {
         super(level, board, availableBonus, freeBonus, nbFreeBonus, movesReplenishFreeBonus, builder, objBees, objScore);
