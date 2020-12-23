@@ -53,6 +53,8 @@ public class LevelMap implements Serializable, LevelListener {
 
     public int[][] getLevelsCompleted() { return levelsCompleted; }
 
+    public int getCurrentLevel() { return currentLevel; }
+
     public int getLastLevelVisible() { return levelVisible; }
 
     /**
@@ -88,7 +90,5 @@ public class LevelMap implements Serializable, LevelListener {
     }
 
     @Override
-    public void onHasLost() {
-        // TODO : on has lost
-    }
+    public void onHasLost() {} // nothing happens
 }

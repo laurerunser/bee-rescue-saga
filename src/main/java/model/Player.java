@@ -48,5 +48,4 @@ public class Player implements Serializable {
 
     public void decreaseLives() { nbLives--; }
 
-
 }

@@ -109,12 +109,12 @@ public class LevelMapController implements MapNavigationListener, LevelListener 
     }
 
     /**
-     * Tests if the player can play and parses the level if they can
+     * Tests if the player can play the level (= they have completed all the previous ones)
      *
      * @param n The number of the level
      */
     private boolean canPlay(int n) {
-        return n - 1 < 0 || player.getMap().getLevelsCompleted()[n - 1][0] != 0;
+        return n - 1 < 0 || player.getMap().getCurrentLevel() >= n;
     }
 
     @Override
@@ -123,6 +123,7 @@ public class LevelMapController implements MapNavigationListener, LevelListener 
         player.addGold(10);
     }
 
+    @Override
     public void onHasLost() {
         player.decreaseLives();
     }
