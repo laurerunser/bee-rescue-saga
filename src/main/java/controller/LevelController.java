@@ -1,6 +1,5 @@
 package controller;
 
-import controller.listeners.LevelListener;
 import controller.listeners.LevelListeners;
 import controller.listeners.PlayerMovesListener;
 import controller.listeners.PlayerMovesListeners;
@@ -12,7 +11,7 @@ import view.cli.CliLevelView;
 
 import java.util.Map;
 
-public class LevelController implements LevelListener, PlayerMovesListener {
+public class LevelController implements PlayerMovesListener {
     protected final Level level;
     protected final LevelView view;
 
@@ -22,7 +21,6 @@ public class LevelController implements LevelListener, PlayerMovesListener {
         this.level = level;
         this.view = view;
         this.levelListeners = levelListeners;
-        levelListeners.add(this);
         playerMovesListeners.add(this);
     }
 
@@ -129,25 +127,15 @@ public class LevelController implements LevelListener, PlayerMovesListener {
     private Bonus getBonusFromChar(char b) {
         Map<Bonus, Integer> availableBonus = level.getAvailableBonus();
         for (Map.Entry<Bonus, Integer> m : availableBonus.entrySet()) {
-            if (m.getKey() instanceof ChangeBlockColor && b == 'C' && m.getValue() > 0
-                    || m.getKey() instanceof EraseBlock && b == 'B' && m.getValue() > 0
-                    || m.getKey() instanceof EraseColor && b == 'A' && m.getValue() > 0
-                    || m.getKey() instanceof EraseColumn && b == 'D' && m.getValue() > 0
-                    || m.getKey() instanceof FreeBee && b == 'F' && m.getValue() > 0
-                    || m.getKey() instanceof FreeBlock && b == 'K' && m.getValue() > 0
+            if ((m.getKey() instanceof ChangeBlockColor && b == 'C' && m.getValue() > 0)
+                    || (m.getKey() instanceof EraseBlock && b == 'B' && m.getValue() > 0)
+                    || (m.getKey() instanceof EraseColor && b == 'A' && m.getValue() > 0)
+                    || (m.getKey() instanceof EraseColumn && b == 'D' && m.getValue() > 0)
+                    || (m.getKey() instanceof FreeBee && b == 'F' && m.getValue() > 0)
+                    || (m.getKey() instanceof FreeBlock && b == 'K' && m.getValue() > 0)
             ) return m.getKey();
         }
         return null;
     }
 
-
-    @Override
-    public void onHasWon(int stars, int score, int level) {
-        // TODO implement
-    }
-
-    @Override
-    public void onHasLost() {
-        // TODO implement
-    }
 }

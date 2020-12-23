@@ -114,16 +114,13 @@ public class LevelMapController implements MapNavigationListener, LevelListener 
      * @param n The number of the level
      */
     private boolean canPlay(int n) {
-        if (n - 1 >= 0 && player.getMap().getLevelsCompleted()[n - 1][0] == 0) {
-            return false;
-        } else {
-            return true;
-        }
+        return n - 1 < 0 || player.getMap().getLevelsCompleted()[n - 1][0] != 0;
     }
 
     @Override
     public void onHasWon(int stars, int score, int level) {
         player.addToScore(score);
+        player.addGold(10);
     }
 
     public void onHasLost() {

@@ -44,6 +44,9 @@ public class Player implements Serializable {
         this.score += s;
     }
 
+    public void addGold(int s) { this.gold += s; }
+
     public void decreaseLives() { nbLives--; }
+
 
 }

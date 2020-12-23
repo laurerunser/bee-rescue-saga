@@ -15,12 +15,12 @@ public class LevelMap implements Serializable, LevelListener {
     /**
      * All of the levels
      */
-    private Level[] levels;
+    private final Level[] levels;
     /**
      * For each level, levelsCompleted[i][0] = the number of stars won
      * levelsCompleted[i][1] = the max score made playing the Level
      */
-    private int[][] levelsCompleted;
+    private final int[][] levelsCompleted;
     /**
      * The number of the last Level visible on the Map
      */
@@ -34,7 +34,7 @@ public class LevelMap implements Serializable, LevelListener {
 
         // fill the map with the serialized levels
         for (int i = 0; i < 4; i++) {
-            Level l = null;
+            Level l;
             try {
                 String name = "src/main/resources/levelsSER/level" + i + ".ser";
                 FileInputStream fileIn = new FileInputStream(name);
@@ -50,8 +50,6 @@ public class LevelMap implements Serializable, LevelListener {
     }
 
     public Level[] getLevels() { return levels; }
-
-    public int currentLevel() { return currentLevel; }
 
     public int[][] getLevelsCompleted() { return levelsCompleted; }
 
@@ -76,6 +74,7 @@ public class LevelMap implements Serializable, LevelListener {
 
     @Override
     public void onHasWon(int stars, int score, int level) {
+        currentLevel += 1;
         if (stars > levelsCompleted[level][0]) {
             levelsCompleted[level][0] = stars;
         }
