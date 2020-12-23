@@ -99,13 +99,12 @@ public class LevelMapController implements MapNavigationListener, LevelListener 
                 currentView = new GuiLevelView(toPlay, playerMovesListeners);
             } else {
                 currentView = new CliLevelView(toPlay, playerMovesListeners);
-                currentView.draw();
             }
-
             LevelListeners levelListeners = new LevelListeners();
             levelListeners.add(this);
             levelListeners.add(player.getMap());
             LevelController levelController = new LevelController(toPlay, (LevelView) currentView, levelListeners, playerMovesListeners);
+            currentView.draw();
         }
     }
 

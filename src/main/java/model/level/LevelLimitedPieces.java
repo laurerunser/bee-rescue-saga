@@ -68,7 +68,7 @@ public class LevelLimitedPieces extends Level {
         int p = 0;
         Piece[][] b = getBoard().getBoard();
         for (int i = 0; i < b.length; i++) {
-            for (int j = 0; j < b[i].length; i++) {
+            for (int j = 0; j < b[i].length; j++) {
                 if (b[i][j] != null && !(b[i][j] instanceof Bee)) p += 1;
             }
         }

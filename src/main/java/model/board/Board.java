@@ -167,12 +167,12 @@ public class Board implements Serializable {
     /**
      * Updates the board and moves the Pieces
      *
-     * @return {a, b, c, d} :  a = the nb of Bee saved,
+     * @return {a, b, c, d} where :
+     * a = the nb of Bee saved,
      * b = the number of points won from the Bees
      * c = 1 if change was made, 0 otherwise
      * d = the nb of empty fields in the top row
      */
-    //TODO : update the visible filter to get down the level when needed
     public int[] updateBoard() {
         int[] result = new int[4];
         int[] tmp = deleteBees();
@@ -184,7 +184,6 @@ public class Board implements Serializable {
         }
         while (change) { change = fillEmptySpaces(); } // do it over again until there is no more changes to do
         for (int j = 0; j < board[0].length; j++) { // count how many empty fields in the top row
-            // TODO : make it count all empty fields deeper (not just the top row)
             if (isEmpty(0, j)) result[3] += 1;
         }
         return result;
@@ -217,12 +216,18 @@ public class Board implements Serializable {
      */
     private boolean fillEmptySpaces() {
         boolean change = false;
+        // move the empty columns
+        for (int j = 0; j < board[0].length - 1; j++) {
+            if (emptyColumn(j)) { // column empty
+                moveColumnsLeft(j);
+                change = true;
+            }
+        }
+        // move the pieces
         for (int i = board.length - 1; i >= 0; i--) {
             for (int j = 0; j <= board[i].length; j++) {
                 if (isEmpty(i, j)) {
-                    if (emptyColumn(j)) { // column empty
-                        moveColumnsLeft(j);
-                    } else if (isInsideBoard(i - 1, j)  // the Piece just above
+                    if (isInsideBoard(i - 1, j)  // the Piece just above
                             && !isEmpty(i - 1, j)
                             && !(board[i - 1][j] instanceof Decor)
                             && (board[i - 1][j].isFree() || board[i - 1][j] instanceof Bee)) { // either a free Piece or a trapped Bee
