@@ -217,5 +217,20 @@ public class CliLevelView implements LevelView {
         System.out.println();
     }
 
+    // TODO : make it so that the user can only try to use bonus they possess
+    public void noAvailableBonus() {
+        System.out.println();
+        System.out.println();
+        System.out.println("You don't have any of this bonus !");
+        System.out.println("Go to the shop to buy more !");
+    }
+
+    // TODO : make it so that the user can't try to use the free bonus if there is none available
+    public void noFreeBonus() {
+        System.out.println();
+        System.out.println();
+        System.out.println("There is no free bonus for this level !");
+    }
+
 
 }

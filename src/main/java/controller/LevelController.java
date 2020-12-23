@@ -8,6 +8,7 @@ import model.board.piece.ColorBlock;
 import model.bonus.*;
 import model.level.Level;
 import view.LevelView;
+import view.cli.CliLevelView;
 
 import java.util.Map;
 
@@ -33,7 +34,6 @@ public class LevelController implements LevelListener, PlayerMovesListener {
      * @param y The y-coordinate the Player chose
      */
     public void onPieceClicked(int x, int y) {
-        System.out.println("ok");
         if (level.getBoard().getBoard()[x][y] instanceof ColorBlock && !level.getBoard().isAColorMove(x, y)) {
             return;    //TODO : launch the view's animations for the different moves
         } else {
@@ -58,6 +58,9 @@ public class LevelController implements LevelListener, PlayerMovesListener {
     public void onUseFreeBonus(Bonus bonus, int x, int y) {
         if (level.getFreeBonusConditions()[0] == 0 || level.getFreeBonusConditions()[1] != 0 || bonus != level.getFreeBonus()) {
             // can't use the bonus
+            if (view instanceof CliLevelView) {
+                ((CliLevelView) view).noFreeBonus();
+            }
             // TODO animations
         } else {
             // TODO : launch the view's animations for the different moves
@@ -88,7 +91,10 @@ public class LevelController implements LevelListener, PlayerMovesListener {
         // test if the bonus is part of the available ones
         Map<Bonus, Integer> availableBonus = level.getAvailableBonus();
         if (availableBonus.getOrDefault(bonus, 0) == 0) {
-            return;    //TODO : launch the view's animations for the different moves
+            if (view instanceof CliLevelView) {
+                ((CliLevelView) view).noAvailableBonus();
+            }
+            return;
         } else {
             //TODO : launch the view's animations for the different moves
             int pointsWon = level.useBonus(bonus, x, y);
