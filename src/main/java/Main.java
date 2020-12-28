@@ -5,6 +5,9 @@ import view.WelcomeView;
 import view.cli.CliWelcomeView;
 import view.gui.GuiWelcomeView;
 
+import java.io.*;
+import java.util.ArrayList;
+
 /**
  * Launches the game.
  * Deals with loading savegames, asking the player's name,...
@@ -42,13 +45,60 @@ public class Main {
         } else {
             view = new CliWelcomeView();
         }
-        view.welcome();
-        String name = view.askName();
-        System.out.println(name);
+        ArrayList<String> savedNames = getSavedNames();
 
-        Player p = new Player(name);
+        view.welcome();
+        String name = view.askName(savedNames);
+
+        Player p;
+        if (savedNames.contains(name)) {
+            p = deserialize(name);
+            if (p == null) {
+                // TODO : make a nice exception instead of a lame error message
+                System.out.println("The saved game couldn't be opened");
+                System.exit(0);
+            }
+        } else {
+            p = new Player(name);
+        }
 
         MapNavigationListeners mapNavigationListeners = new MapNavigationListeners();
         LevelMapController controller = new LevelMapController(p, gui, mapNavigationListeners);
     }
+
+    /**
+     * Parses the resources/savedGames directory and returns the names of the players who have a saved game
+     *
+     * @return the names of the players with a game saved on the disk
+     */
+    public static ArrayList<String> getSavedNames() {
+        ArrayList<String> names = new ArrayList<>();
+        InputStream in = Thread.currentThread().getContextClassLoader().getResourceAsStream("savedGames");
+        BufferedReader br = new BufferedReader(new InputStreamReader(in));
+        try {
+            String resource;
+            while ((resource = br.readLine()) != null) {
+                names.add(resource);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        names.replaceAll(n -> n.substring(0, n.length() - 4));
+        return names;
+    }
+
+    public static Player deserialize(String name) {
+        name = name + ".ser";
+        try {
+            File f = new File(Thread.currentThread().getContextClassLoader().getResource(name).getPath().toString());
+            FileInputStream file = new FileInputStream(f);
+            ObjectInputStream in = new ObjectInputStream(file);
+            return (Player) in.readObject();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
 }

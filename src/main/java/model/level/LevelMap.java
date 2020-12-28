@@ -33,7 +33,8 @@ public class LevelMap implements Serializable, LevelListener {
         levelVisible = 0;
 
         // fill the map with the serialized levels
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i <= 3; i++) {
+            //TODO : find a way to automatically input the number of levels (3) so that I don't have to go back to it if I add levels
             Level l;
             try {
                 String name = "src/main/resources/levelsSER/level" + i + ".ser";

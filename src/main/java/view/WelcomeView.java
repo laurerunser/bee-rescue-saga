@@ -1,5 +1,7 @@
 package view;
 
+import java.util.ArrayList;
+
 /**
  * The first view that appears when the game is launched.
  * Allows to choose the player's name, which savegame to use (if any), the langage, ...
@@ -13,5 +15,5 @@ public interface WelcomeView {
     /**
      * @return the name of the Player
      */
-    String askName();
+    String askName(ArrayList<String> savedNames);
 }
