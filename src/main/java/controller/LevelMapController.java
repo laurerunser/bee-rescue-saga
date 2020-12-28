@@ -138,10 +138,11 @@ public class LevelMapController implements MapNavigationListener, LevelListener 
         player.decreaseLives();
     }
 
-
     @Override
     public void onSave() {
         player.save();
+        //TODO a screen/message that says everything has been saved correctly
+        currentView.draw();
     }
 
 }

@@ -13,11 +13,11 @@ public class CliMapView implements MapView {
     /**
      * The current Player
      */
-    private Player player;
+    private final Player player;
     /**
      * The LevelMap of the Player
      */
-    private LevelMap map;
+    private final LevelMap map;
 
     public CliMapView(Player p, MapNavigationListeners mapNavigationListeners) {
         player = p;
@@ -45,8 +45,9 @@ public class CliMapView implements MapView {
         System.out.println("To see more informations on a Level and play it, type I, then the number of the level");
         System.out.println("To go in the shop to buy lives or bonuses, type S");
         System.out.println("To play the raffle, type R");
-        System.out.println("To save and exit the game, type SAVE");
-        boolean ok = false;
+        System.out.println("To save the game, type SAVE");
+        System.out.println("To leave the game, type EXIT. Be careful this won't save your progress !");
+        boolean ok;
         do { // ask the player for their choice until it can be interpreted correctly.
             ok = askPlayerMapChoice();
         } while (!ok);
@@ -131,6 +132,8 @@ public class CliMapView implements MapView {
             } else {
                 mapNavigationListeners.onGoToShop();
             }
+        } else if (choice.equals("EXIT")) {
+            System.exit(0);
         } else if (choice.startsWith("I")) {
             choice = choice.substring(1);
             int level;
