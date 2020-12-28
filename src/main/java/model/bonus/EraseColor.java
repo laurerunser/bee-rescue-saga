@@ -9,6 +9,8 @@ import model.board.piece.Piece;
  * Gives points : basePoints * the number of points won from deleting the Pieces
  */
 public class EraseColor extends Bonus {
+    private static final long serialVersionUID = 123L;
+
     private String color;
 
     public EraseColor(String iconPath, int basePoints) {

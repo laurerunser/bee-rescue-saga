@@ -5,6 +5,8 @@ import model.board.Board;
 import java.io.Serializable;
 
 public abstract class Bonus implements Serializable {
+    private static final long serialVersionUID = 123L;
+
     /**
      * If the name of the Bonus is in the array, then the Bonus is unlocked for the Player
      */

@@ -6,6 +6,8 @@ import java.io.Serializable;
 
 //TODO : fill all the iconPath and trappedIconPath
 public abstract class Piece implements Serializable {
+    private static final long serialVersionUID = 123L;
+
     /**
      * The path to the icon
      */

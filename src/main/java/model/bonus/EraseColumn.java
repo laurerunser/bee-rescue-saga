@@ -8,6 +8,7 @@ import model.board.piece.Piece;
  * Gives points : basePoints * the number of points won from deleting the Pieces
  */
 public class EraseColumn extends Bonus {
+    private static final long serialVersionUID = 123L;
 
     public EraseColumn(String iconPath, int basePoints) {
         super(iconPath, basePoints);

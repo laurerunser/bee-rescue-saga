@@ -6,6 +6,8 @@ import java.io.ObjectInputStream;
 import java.io.Serializable;
 
 public class LevelMap implements Serializable {
+    private static final long serialVersionUID = 123L;
+
     /**
      * The number of the current Level
      */

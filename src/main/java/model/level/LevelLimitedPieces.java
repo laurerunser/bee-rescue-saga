@@ -9,6 +9,8 @@ import model.bonus.Bonus;
 import java.util.HashMap;
 
 public class LevelLimitedPieces extends Level {
+    private static final long serialVersionUID = 123L;
+
     /**
      * The number of Pieces on that Level excluding Bees
      */

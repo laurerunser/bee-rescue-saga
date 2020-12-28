@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Player implements Serializable {
+    private static final long serialVersionUID = 123L;
+
     private final LevelMap map;
     private int nbLives;
     private int maxLives = 3;

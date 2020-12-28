@@ -7,6 +7,8 @@ import model.bonus.Bonus;
 import java.util.HashMap;
 
 public class LevelLimitedMoves extends Level {
+    private static final long serialVersionUID = 123L;
+
     /**
      * The number of moves available to the Player
      */

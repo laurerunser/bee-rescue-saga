@@ -8,6 +8,8 @@ import model.board.piece.Piece;
  * Gives points : basePoints * the points of the Piece
  */
 public class EraseBlock extends Bonus {
+    private static final long serialVersionUID = 123L;
+
 
     public EraseBlock(String iconPath, int basePoints) {
         super(iconPath, basePoints);

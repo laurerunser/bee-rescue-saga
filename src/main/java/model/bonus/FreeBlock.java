@@ -8,6 +8,7 @@ import model.board.piece.Piece;
  * Frees a Piece, except if it is a Bee. Doesn't give any points.
  */
 public class FreeBlock extends Bonus {
+    private static final long serialVersionUID = 123L;
 
     public FreeBlock(String iconPath) {
         super(iconPath, 0);

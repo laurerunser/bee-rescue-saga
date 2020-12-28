@@ -10,6 +10,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Level implements Serializable {
+    private static final long serialVersionUID = 123L;
+
     /**
      * The number of the Level
      */

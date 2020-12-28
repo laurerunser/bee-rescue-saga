@@ -7,6 +7,8 @@ import model.bonus.Bonus;
 import java.util.HashMap;
 
 public class LevelLimitedTime extends Level {
+    private static final long serialVersionUID = 123L;
+
     /**
      * The number of seconds available to do the Level
      */

@@ -8,9 +8,15 @@ import java.io.Serializable;
  * Builds a Piece based on the Level's restrictions
  */
 public class NewPieceBuilder implements Serializable {
-    /** The available colors for the ColorBlock in the Level */
+    private static final long serialVersionUID = 123L;
+
+    /**
+     * The available colors for the ColorBlock in the Level
+     */
     private final String[] availableColors;
-    /** The probabilities for each color : must be natural integers that add up to 100 */
+    /**
+     * The probabilities for each color : must be natural integers that add up to 100
+     */
     private final int[] probabilitiesColors;
     /**
      * The available Pieces in this Level

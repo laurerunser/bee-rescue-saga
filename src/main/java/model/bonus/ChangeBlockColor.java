@@ -11,6 +11,8 @@ import model.board.piece.Piece;
  * Doesn't give any points.
  */
 public class ChangeBlockColor extends Bonus {
+    private static final long serialVersionUID = 123L;
+
     /**
      * The old color
      */

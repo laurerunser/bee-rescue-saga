@@ -4,6 +4,8 @@ package model.board.piece;
 import model.board.Board;
 
 public class Bomb extends Piece {
+    private static final long serialVersionUID = 123L;
+
     private final static String iconPath = "";
     private final static String trappedIconPath = "";
 

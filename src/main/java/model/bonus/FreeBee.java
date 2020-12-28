@@ -8,6 +8,7 @@ import model.board.piece.Piece;
  * Frees a Bee. Doesn't give any points.
  */
 public class FreeBee extends Bonus {
+    private static final long serialVersionUID = 123L;
 
     public FreeBee(String iconPath) {
         super(iconPath, 0);

@@ -3,13 +3,15 @@ package model.board.piece;
 import model.board.Board;
 
 public class EraseColorBlocks extends Piece {
+    private static final long serialVersionUID = 123L;
+
+    private final static String iconPath = "";
+    private final static String trappedIconPath = "";
+
     /**
      * The color of the blocks this Piece deletes. Can be : yellow, red, green, blue, orange, purple
      */
     private final String color;
-
-    private final static String iconPath = "";
-    private final static String trappedIconPath = "";
 
     /**
      * Constructs a EraseColorBlocks

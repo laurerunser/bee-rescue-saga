@@ -8,6 +8,8 @@ import java.io.Serializable;
  * Represents the board that the Player is playing with
  */
 public class Board implements Serializable {
+    private static final long serialVersionUID = 123L;
+
     /**
      * The array representing the board of the level
      */
