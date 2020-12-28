@@ -17,7 +17,6 @@ public class CliLevelView implements LevelView {
     protected PlayerMovesListeners playerMovesListeners;
 
     public CliLevelView(Level level, PlayerMovesListeners playerMovesListeners) {
-
         this.level = level;
         this.playerMovesListeners = playerMovesListeners;
     }
@@ -39,14 +38,15 @@ public class CliLevelView implements LevelView {
         Scanner sc = new Scanner(System.in);
         String move = "";
         do {
-            System.out.print("Do you want to [C]lick on a piece on the board, use your [F]ree bonus, or use a [B]onus ? ");
+            System.out.print("Do you want to [C]lick on a piece on the board, use your [F]ree bonus, use a [B]onus, or save and [R]eturn to the map ? ");
             move = sc.nextLine();
             System.out.println();
-        } while (!move.toUpperCase().equals("C") && !move.toUpperCase().equals("F") && !move.toUpperCase().equals("B"));
+        } while (!move.toUpperCase().equals("C") && !move.toUpperCase().equals("F") && !move.toUpperCase().equals("B") && !move.toUpperCase().equals("R"));
         switch (move) {
             case "C" -> askWhichPiece(sc);
             case "F" -> askFreeBonusCoordinates(sc);
             case "B" -> askWhichBonus(sc);
+            case "R" -> playerMovesListeners.onReturnToMap();
         }
     }
 

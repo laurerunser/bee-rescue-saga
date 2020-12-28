@@ -106,6 +106,11 @@ public class LevelController implements PlayerMovesListener {
         testHasWon();
     }
 
+    @Override
+    public void onReturnToMap() {
+        levelListeners.onReturnToMap();
+    }
+
     /**
      * Tests if the Player has won or lost the Level. If so, launches the appropriate actions.
      * If the Player has neither won nor lost, does nothing.

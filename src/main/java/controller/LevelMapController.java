@@ -17,6 +17,7 @@ public class LevelMapController implements MapNavigationListener, LevelListener 
      * The current player
      */
     private final Player player;
+
     /**
      * True if the views should be GUI, false for CLI
      */
@@ -70,7 +71,16 @@ public class LevelMapController implements MapNavigationListener, LevelListener 
         }
     }
 
+    @Override
     public void onGoBackToMap() {
+        // fired from the MapNavigationListeners in the Views
+        currentView = mapView;
+        currentView.draw();
+    }
+
+    @Override
+    public void onReturnToMap() {
+        // fired from the LevelListeners in LevelController
         currentView = mapView;
         currentView.draw();
     }
@@ -102,7 +112,6 @@ public class LevelMapController implements MapNavigationListener, LevelListener 
             }
             LevelListeners levelListeners = new LevelListeners();
             levelListeners.add(this);
-            levelListeners.add(player.getMap());
             LevelController levelController = new LevelController(toPlay, (LevelView) currentView, levelListeners, playerMovesListeners);
             currentView.draw();
         }
@@ -121,12 +130,14 @@ public class LevelMapController implements MapNavigationListener, LevelListener 
     public void onHasWon(int stars, int score, int level) {
         player.addToScore(score);
         player.addGold(10);
+        player.getMap().hasWon(stars, score, level);
     }
 
     @Override
     public void onHasLost() {
         player.decreaseLives();
     }
+
 
     @Override
     public void onSave() {

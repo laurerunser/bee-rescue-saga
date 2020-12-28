@@ -4,6 +4,10 @@ import model.bonus.Bonus;
 import utils.ListOfListeners;
 
 public class PlayerMovesListeners extends ListOfListeners<PlayerMovesListener> implements PlayerMovesListener {
+    private final Function<PlayerMovesListener> onReturnToMap = new Function<PlayerMovesListener>() {
+        @Override
+        public void call(PlayerMovesListener listener) { listener.onReturnToMap(); }
+    };
     private final Function2<PlayerMovesListener, Integer, Integer> onPieceClicked = new Function2<PlayerMovesListener, Integer, Integer>() {
         @Override
         public void call(PlayerMovesListener listener, Integer x, Integer y) { listener.onPieceClicked(x, y); }
@@ -30,5 +34,9 @@ public class PlayerMovesListeners extends ListOfListeners<PlayerMovesListener> i
     @Override
     public void onUseAvailableBonus(char bonus, int x, int y) {
         callAllListeners(this.onUseAvailableBonus, bonus, x, y);
+    }
+
+    public void onReturnToMap() {
+        callAllListeners(this.onReturnToMap);
     }
 }

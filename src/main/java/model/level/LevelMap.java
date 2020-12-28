@@ -1,13 +1,11 @@
 package model.level;
 
-import controller.listeners.LevelListener;
-
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
 
-public class LevelMap implements Serializable, LevelListener {
+public class LevelMap implements Serializable {
     /**
      * The number of the current Level
      */
@@ -75,8 +73,7 @@ public class LevelMap implements Serializable, LevelListener {
         levels[level.getLevel() - 1] = level;
     }
 
-    @Override
-    public void onHasWon(int stars, int score, int level) {
+    public void hasWon(int stars, int score, int level) {
         currentLevel += 1;
         if (stars > levelsCompleted[level][0]) {
             levelsCompleted[level][0] = stars;
@@ -89,7 +86,4 @@ public class LevelMap implements Serializable, LevelListener {
             // TODO : launch animations & reward for uncovering levels
         }
     }
-
-    @Override
-    public void onHasLost() {} // nothing happens
 }
