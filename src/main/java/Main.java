@@ -5,7 +5,10 @@ import view.WelcomeView;
 import view.cli.CliWelcomeView;
 import view.gui.GuiWelcomeView;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 /**
@@ -52,7 +55,7 @@ public class Main {
 
         Player p;
         if (savedNames.contains(name)) {
-            p = deserialize(name);
+            p = Player.deserialize(name);
             if (p == null) {
                 // TODO : make a nice exception instead of a lame error message
                 System.out.println("The saved game couldn't be opened");
@@ -71,7 +74,7 @@ public class Main {
      *
      * @return the names of the players with a game saved on the disk
      */
-    public static ArrayList<String> getSavedNames() {
+    private static ArrayList<String> getSavedNames() {
         ArrayList<String> names = new ArrayList<>();
         InputStream in = Thread.currentThread().getContextClassLoader().getResourceAsStream("savedGames");
         BufferedReader br = new BufferedReader(new InputStreamReader(in));
@@ -86,19 +89,5 @@ public class Main {
         names.replaceAll(n -> n.substring(0, n.length() - 4));
         return names;
     }
-
-    public static Player deserialize(String name) {
-        name = name + ".ser";
-        try {
-            File f = new File(Thread.currentThread().getContextClassLoader().getResource(name).getPath().toString());
-            FileInputStream file = new FileInputStream(f);
-            ObjectInputStream in = new ObjectInputStream(file);
-            return (Player) in.readObject();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
 
 }

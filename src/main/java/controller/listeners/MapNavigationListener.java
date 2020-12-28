@@ -10,4 +10,7 @@ public interface MapNavigationListener {
     void onGoToRaffle();
 
     void onPlayLevel(int n);
+
+    void onSave();
+
 }

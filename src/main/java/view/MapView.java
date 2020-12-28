@@ -8,12 +8,5 @@ public interface MapView extends Vue {
 
     void drawMap();
 
-    void onGoBackToMap();
-
     void showLevelDetails(int n);
-
-    void onGoToShop();
-
-    void onGoToRaffle();
-
 }

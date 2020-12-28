@@ -39,7 +39,7 @@ public class CliLevelView implements LevelView {
         Scanner sc = new Scanner(System.in);
         String move = "";
         do {
-            System.out.print("Do you want to [C]lick on a piece on the board, use your [F]ree bonus, or use one of your [B]onuses ? ");
+            System.out.print("Do you want to [C]lick on a piece on the board, use your [F]ree bonus, or use a [B]onus ? ");
             move = sc.nextLine();
             System.out.println();
         } while (!move.toUpperCase().equals("C") && !move.toUpperCase().equals("F") && !move.toUpperCase().equals("B"));
@@ -195,7 +195,7 @@ public class CliLevelView implements LevelView {
         System.out.print("  ");
         for (int i = 0; i < board.length; i++) {
             // print the numbers at the top
-            System.out.print("     " + i + "  ");
+            System.out.print("     " + i + "      ");
         }
         System.out.println();
         char letter = 'A';

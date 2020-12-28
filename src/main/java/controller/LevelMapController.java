@@ -128,4 +128,9 @@ public class LevelMapController implements MapNavigationListener, LevelListener 
         player.decreaseLives();
     }
 
+    @Override
+    public void onSave() {
+        player.save();
+    }
+
 }

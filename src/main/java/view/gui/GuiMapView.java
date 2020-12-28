@@ -19,22 +19,8 @@ public class GuiMapView implements MapView {
     }
 
     @Override
-    public void onGoBackToMap() {
-
-    }
-
-    @Override
     public void showLevelDetails(int n) {
 
     }
 
-    @Override
-    public void onGoToShop() {
-
-    }
-
-    @Override
-    public void onGoToRaffle() {
-
-    }
 }

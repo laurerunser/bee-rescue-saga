@@ -4,6 +4,11 @@ import utils.ListOfListeners;
 
 public class MapNavigationListeners extends ListOfListeners<MapNavigationListener> implements MapNavigationListener {
 
+    private final Function<MapNavigationListener> onSave = new Function<MapNavigationListener>() {
+        @Override
+        public void call(MapNavigationListener listener) { listener.onSave(); }
+    };
+
     private final Function1<MapNavigationListener, Integer> onShowLevelDetails = new Function1<MapNavigationListener, Integer>() {
         @Override
         public void call(MapNavigationListener listener, Integer i) { listener.onShowLevelDetails(i); }
@@ -54,5 +59,8 @@ public class MapNavigationListeners extends ListOfListeners<MapNavigationListene
         callAllListeners(this.onPlayLevel, n);
     }
 
-
+    @Override
+    public void onSave() {
+        callAllListeners(this.onSave);
+    }
 }

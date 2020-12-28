@@ -45,17 +45,12 @@ public class CliMapView implements MapView {
         System.out.println("To see more informations on a Level and play it, type I, then the number of the level");
         System.out.println("To go in the shop to buy lives or bonuses, type S");
         System.out.println("To play the raffle, type R");
+        System.out.println("To save and exit the game, type SAVE");
         boolean ok = false;
         do { // ask the player for their choice until it can be interpreted correctly.
             ok = askPlayerMapChoice();
         } while (!ok);
     }
-
-    /**
-     * Redraws the Map.
-     */
-    public void onGoBackToMap() { }
-
 
     /**
      * Prints all of the player's stats
@@ -130,8 +125,12 @@ public class CliMapView implements MapView {
         String choice = sc.nextLine().toUpperCase();
         if (choice.equals("R")) {
             mapNavigationListeners.onGoToRaffle();
-        } else if (choice.equals("S")) {
-            mapNavigationListeners.onGoToShop();
+        } else if (choice.startsWith("S")) {
+            if (choice.equals("SAVE")) {
+                mapNavigationListeners.onSave();
+            } else {
+                mapNavigationListeners.onGoToShop();
+            }
         } else if (choice.startsWith("I")) {
             choice = choice.substring(1);
             int level;
@@ -149,14 +148,6 @@ public class CliMapView implements MapView {
             return false;
         }
         return true;
-    }
-
-    public void onGoToShop() {
-        // TODO implement the shop
-    }
-
-    public void onGoToRaffle() {
-        // TODO implement the raffle
     }
 
 }
