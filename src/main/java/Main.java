@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 /**
  * Launches the game.
- * Deals with loading savegames, asking the player's name,...
+ * Deals with loading savegames, asking the player's name, and starting the LevelMap.
  * Constructs the corresponding Player and LevelMapController to launch the game.
  */
 public class Main {
@@ -50,23 +50,23 @@ public class Main {
         }
         ArrayList<String> savedNames = getSavedNames();
 
+        savedNames.forEach(System.out::println);
+        System.out.println();
+
         view.welcome();
+
+        savedNames.forEach(System.out::println);
+        System.out.println();
+
         String name = view.askName(savedNames);
 
-        Player p;
-        if (savedNames.contains(name)) {
-            p = Player.deserialize(name);
-            if (p == null) {
-                // TODO : make a nice exception instead of a lame error message
-                System.out.println("The saved game couldn't be opened");
-                System.exit(0);
-            }
+        if (view instanceof CliWelcomeView) {
+            startGame(name); // Cli answers the name of the player directly
         } else {
-            p = new Player(name);
-        }
+            //GuiWelcomeView g = (GuiWelcomeView)view;
 
-        MapNavigationListeners mapNavigationListeners = new MapNavigationListeners();
-        LevelMapController controller = new LevelMapController(p, gui, mapNavigationListeners);
+            //startGame(g.getName());
+        }
     }
 
     /**
@@ -88,6 +88,29 @@ public class Main {
         }
         names.replaceAll(n -> n.substring(0, n.length() - 4));
         return names;
+    }
+
+    /**
+     * Starts the game once the player's name has been acquired
+     *
+     * @param name The name of the player
+     */
+    private static void startGame(String name) {
+        ArrayList<String> savedNames = getSavedNames();
+        Player p;
+        if (savedNames.contains(name)) {
+            p = Player.deserialize(name);
+            if (p == null) {
+                // TODO : make a nice exception instead of a lame error message
+                System.out.println("The saved game couldn't be opened");
+                System.exit(0);
+            }
+        } else {
+            p = new Player(name);
+        }
+
+        MapNavigationListeners mapNavigationListeners = new MapNavigationListeners();
+        LevelMapController controller = new LevelMapController(p, gui, mapNavigationListeners);
     }
 
 }
