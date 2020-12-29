@@ -55,6 +55,7 @@ public class Install {
         p[0][1] = new Bee(1000);
         p[0][5] = new Bee(1000);
         p[1][0] = new ColorBlock(20, true, "yellow");
+        p[1][1] = new ColorBlock(20, true, "yellow");
         p[1][2] = new ColorBlock(20, true, "yellow");
         p[2][0] = new ColorBlock(20, true, "yellow");
         p[2][1] = new ColorBlock(20, true, "yellow");
@@ -80,6 +81,7 @@ public class Install {
         p[1][6] = new ColorBlock(20, true, "green");
         p[2][5] = new ColorBlock(20, true, "green");
         p[2][6] = new ColorBlock(20, true, "green");
+        p[3][1] = new ColorBlock(20, true, "green");
         p[3][2] = new ColorBlock(20, true, "green");
         p[5][1] = new ColorBlock(20, true, "green");
         p[5][2] = new ColorBlock(20, true, "green");
