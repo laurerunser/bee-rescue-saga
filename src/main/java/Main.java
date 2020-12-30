@@ -28,13 +28,20 @@ public class Main {
     private static WelcomeView view;
 
     public static void main(String[] args) {
-        if (args.length != 1) {
-            System.out.println("You need to specify whether you want a [CLI] or [GUI] view.");
-            System.exit(1);
-        } else {
+        if (args.length == 0) {
+            Install.main(args);
+            System.exit(0);
+        } else if (args.length == 1) {
             gui = args[0].toUpperCase().equals("GUI");
+            welcome();
+        } else {
+            System.out.println("If you haven't already, don't forget to install the game by typing : ./gradlew run");
+            System.out.println();
+            System.out.println("You need to specify whether you want a [CLI] or [GUI] view.");
+            System.out.println("For a [CLI] view : ./gradlew run --args='cli'");
+            System.out.println("For a [GUI] view : ./gradlew run --args='gui'");
+            System.exit(1);
         }
-        welcome();
     }
 
     /**
@@ -63,9 +70,8 @@ public class Main {
         if (view instanceof CliWelcomeView) {
             startGame(name); // Cli answers the name of the player directly
         } else {
-            //GuiWelcomeView g = (GuiWelcomeView)view;
-
-            //startGame(g.getName());
+            GuiWelcomeView g = (GuiWelcomeView) view;
+            startGame(g.getName());
         }
     }
 

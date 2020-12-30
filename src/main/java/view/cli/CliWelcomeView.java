@@ -48,7 +48,7 @@ public class CliWelcomeView implements WelcomeView {
         System.out.println();
         System.out.print("What is your name ? ");
         Scanner sc = new Scanner(System.in);
-        return sc.nextLine();
+        return sc.next();
     }
 }
 

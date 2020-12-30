@@ -14,5 +14,5 @@ dependencies {
 }
 
 application {
-    mainClassName = 'Install'
+    mainClassName = 'Main'
 }
