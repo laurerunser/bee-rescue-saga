@@ -61,7 +61,7 @@ public class Player implements Serializable {
         n = "savedGames/" + n + ".ser";
         try {
             System.out.println(n);
-            File f = new File(Thread.currentThread().getContextClassLoader().getResource(n).getPath().toString());
+            File f = new File(Thread.currentThread().getContextClassLoader().getResource(n).getPath());
             FileInputStream file = new FileInputStream(f);
             ObjectInputStream in = new ObjectInputStream(file);
             return (Player) in.readObject();

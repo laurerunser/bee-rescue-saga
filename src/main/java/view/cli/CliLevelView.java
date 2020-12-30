@@ -73,8 +73,13 @@ public class CliLevelView implements LevelView {
         while (coordinates[0] < 0 && coordinates[1] < 0) {
             System.out.print("Please give your first coordinate (the letter) :");
             coordinates[1] = sc.next().toLowerCase().charAt(0) - 97; // 'a' is 97
-            System.out.print("Please give your second coordinate (the number) :");
-            coordinates[0] = Integer.parseInt(sc.next());
+            try {
+                System.out.print("Please give your second coordinate (the number) :");
+                coordinates[0] = Integer.parseInt(sc.next());
+            } catch (NumberFormatException e) {
+                int[] c = askCoordinates(sc); // if the user doesn't input a number, try again
+                coordinates[0] = c[0];
+            }
         }
         System.out.println();
         return coordinates;
