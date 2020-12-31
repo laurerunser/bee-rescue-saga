@@ -217,6 +217,10 @@ public class Board implements Serializable {
      * @return true if a change was made, false otherwise
      */
     private boolean fillEmptySpaces() {
+        //TODO : fix it so that the Pieces fall if :
+        // - no Piece to fall on the empty space from directly above
+        // - but the Piece right of the empty space is a Decor/trapped Piece
+        // - then the Piece above the Decor/trapped Piece falls (if it can)
         boolean change = false;
         // move the empty columns
         for (int j = 0; j < board[0].length - 1; j++) {
