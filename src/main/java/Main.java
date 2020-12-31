@@ -5,6 +5,8 @@ import view.WelcomeView;
 import view.cli.CliWelcomeView;
 import view.gui.GuiWelcomeView;
 
+import javax.swing.*;
+import java.awt.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -33,7 +35,7 @@ public class Main {
             System.exit(0);
         } else if (args.length == 1) {
             gui = args[0].toUpperCase().equals("GUI");
-            welcome();
+            EventQueue.invokeLater(Main::welcome); // to make it thread-safe
         } else {
             System.out.println("If you haven't already, don't forget to install the game by typing : ./gradlew run");
             System.out.println();
@@ -116,7 +118,7 @@ public class Main {
         }
 
         MapNavigationListeners mapNavigationListeners = new MapNavigationListeners();
-        LevelMapController controller = new LevelMapController(p, gui, mapNavigationListeners);
+        LevelMapController controller = new LevelMapController(p, gui, mapNavigationListeners, (JFrame) view);
     }
 
 }
