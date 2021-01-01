@@ -17,7 +17,8 @@ public class GuiLevelView extends JPanel implements LevelView {
     private final JLabel pointsLeftTo2stars = new JLabel();
     private final JLabel pointsLeftTo3stars = new JLabel();
 
-    private final JLabel petsToSave = new JLabel();
+    private final JLabel beesToSave = new JLabel();
+
 
     /**
      * Constructs the view of the level
@@ -30,7 +31,6 @@ public class GuiLevelView extends JPanel implements LevelView {
         this.level = level;
         this.playerMovesListeners = playerMovesListeners;
         this.frame = frame;
-        System.out.println("OK");
     }
 
     @Override
@@ -42,6 +42,9 @@ public class GuiLevelView extends JPanel implements LevelView {
         // add elements
         this.setLayout(new BorderLayout());
         initStats();
+        initBoard();
+        initBonus();
+        initGoal();
 
         // update the view and redraw it
         this.setVisible(true);
@@ -62,13 +65,7 @@ public class GuiLevelView extends JPanel implements LevelView {
         panel.add(score);
 
         // score objectives to get stars
-        int[] obj = level.getObjScore();
-        int o1 = obj[0] - level.getScore();
-        int o2 = obj[1] - level.getScore();
-        int o3 = obj[2] - level.getScore();
-        pointsLeftTo1star.setText("Points lefts to 1 star : " + o1);
-        pointsLeftTo2stars.setText("Points lefts to 2 stars : " + o2);
-        pointsLeftTo3stars.setText("Points lefts to 3 stars : " + o3);
+        updateScore();
         JPanel pObjScore = new JPanel();
         pObjScore.setLayout(new BoxLayout(pObjScore, BoxLayout.PAGE_AXIS));
         pObjScore.add(pointsLeftTo1star);
@@ -77,37 +74,55 @@ public class GuiLevelView extends JPanel implements LevelView {
         panel.add(pObjScore);
 
         // nb of pets to save
-        petsToSave.setText(level.getBeeSaved() + " / " + level.getObjBees() + "bees saved !");
-        panel.add(petsToSave);
+        updateBees();
+        panel.add(beesToSave);
 
         this.add(panel, BorderLayout.NORTH);
     }
 
-    @Override
-    public void updateScore() {
-        score.setText("SCORE : " + level.getScore());
-    }
 
     private void initBoard() {
 
+    }
+
+    /**
+     * Add a sentence saying the goal of the level at the bottom of the screen
+     */
+    private void initGoal() {
+        JLabel goal = new JLabel(level.getGoal());
+        this.add(goal, BorderLayout.SOUTH);
     }
 
     private void initBonus() {
 
     }
 
-
     @Override
-    public void updateBoard() {
-
-    }
-
-    private void initFreeBonus() {
-
+    public void updateScore() {
+        int[] obj = level.getObjScore();
+        int o1 = obj[0] - level.getScore();
+        int o2 = obj[1] - level.getScore();
+        int o3 = obj[2] - level.getScore();
+        score.setText("SCORE : " + level.getScore());
+        pointsLeftTo1star.setText("Points lefts to 1 star : " + o1);
+        pointsLeftTo2stars.setText("Points lefts to 2 stars : " + o2);
+        pointsLeftTo3stars.setText("Points lefts to 3 stars : " + o3);
     }
 
     @Override
     public void updateBees() {
+        beesToSave.setText(level.getBeeSaved() + " / " + level.getObjBees() + " bees saved !");
+    }
+
+    private void initAvailableBonus() {
+
+    }
+
+    @Override
+    public void updateBoard() {
+    }
+
+    private void initFreeBonus() {
 
     }
 

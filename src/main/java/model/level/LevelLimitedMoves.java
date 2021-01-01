@@ -18,9 +18,6 @@ public class LevelLimitedMoves extends Level {
      */
     private int pointsPerMoveLeft;
 
-    public static String goal = "You need to save the Bees before you run out of moves !";
-
-
     /**
      * Constructs a Level with a limited amount of moves
      *
@@ -53,21 +50,19 @@ public class LevelLimitedMoves extends Level {
         moves -= 1;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public boolean hasWon() {
         return (moves >= 0) && allBeesSaved();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public boolean hasLost() {
         return !allBeesSaved() && (moves == 0);
     }
 
+    @Override
+    public String getGoal() {
+        return "You need to save the Bees before you run out of moves !";
+    }
 
 }

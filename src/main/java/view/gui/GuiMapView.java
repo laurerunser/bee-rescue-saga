@@ -123,7 +123,7 @@ public class GuiMapView extends JPanel implements MapView {
         StringBuilder str = new StringBuilder();
         str.append("Level : " + l.getLevel() + "\n");
         str.append("You need to save " + l.getObjBees() + " bees to win the level.\n");
-        str.append(l.goal + "\n");
+        str.append(l.getGoal() + "\n");
 
 
         int[] s = map.getLevelsCompleted()[n];
