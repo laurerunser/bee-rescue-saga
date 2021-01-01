@@ -22,6 +22,8 @@ public class LevelController implements PlayerMovesListener {
         this.view = view;
         this.levelListeners = levelListeners;
         playerMovesListeners.add(this);
+
+
     }
 
     /**

@@ -116,27 +116,22 @@ public class LevelMapController implements MapNavigationListener, LevelListener 
     }
 
     /**
-     * If the Player can play, switches the view to a LevelView of the correct Level, then draws the view.
-     * Otherwise ??
+     * Switches the view to a LevelView of the correct Level, then draws the view.
      *
      * @param n The number of the Level to play
      */
     public void onPlayLevel(int n) {
         Level toPlay = player.getMap().getLevels()[n];
-        if (player.getNbLives() < 0 || n > player.getMap().getLastLevelVisible()) { // can't play
-            // todo define what to do otherwise
-        } else { // can play
-            PlayerMovesListeners playerMovesListeners = new PlayerMovesListeners();
-            if (gui) {
-                currentView = new GuiLevelView(toPlay, playerMovesListeners, frame);
-            } else {
-                currentView = new CliLevelView(toPlay, playerMovesListeners);
-            }
-            LevelListeners levelListeners = new LevelListeners();
-            levelListeners.add(this);
-            LevelController levelController = new LevelController(toPlay, (LevelView) currentView, levelListeners, playerMovesListeners);
-            currentView.draw();
+        PlayerMovesListeners playerMovesListeners = new PlayerMovesListeners();
+        if (gui) {
+            currentView = new GuiLevelView(toPlay, playerMovesListeners, frame);
+        } else {
+            currentView = new CliLevelView(toPlay, playerMovesListeners);
         }
+        LevelListeners levelListeners = new LevelListeners();
+        levelListeners.add(this);
+        LevelController levelController = new LevelController(toPlay, (LevelView) currentView, levelListeners, playerMovesListeners);
+        currentView.draw();
     }
 
     /**
