@@ -28,6 +28,8 @@ public class Player implements Serializable {
         this.raffleTurns = 3;
     }
 
+    public String getName() { return name; }
+
     public int getNbLives() { return nbLives; }
 
     public int getMaxLives() { return maxLives; }
@@ -60,7 +62,6 @@ public class Player implements Serializable {
     public static Player deserialize(String n) {
         n = "savedGames/" + n + ".ser";
         try {
-            System.out.println(n);
             File f = new File(Thread.currentThread().getContextClassLoader().getResource(n).getPath());
             FileInputStream file = new FileInputStream(f);
             ObjectInputStream in = new ObjectInputStream(file);

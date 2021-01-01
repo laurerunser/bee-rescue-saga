@@ -18,6 +18,10 @@ public class LevelLimitedTime extends Level {
      */
     private int pointsPerSecondLeft;
 
+
+    public static String goal = "You need to save the Bees before you run out of time !";
+
+
     /**
      * Constructs a Level with a limited amount of time
      *

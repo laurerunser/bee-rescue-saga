@@ -74,6 +74,8 @@ public class Level implements Serializable {
      */
     private final int objScore3;
 
+    public static String goal = "You need to save all the bees !";
+
     /**
      * Constructs a Level
      *

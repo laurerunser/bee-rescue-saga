@@ -32,7 +32,7 @@ public class LevelParser {
         String name = "levels/level" + N;
         InputStream is = null;
         try {
-            is = Class.forName("Main").getClassLoader().getResourceAsStream(name);
+            is = Class.forName("main.Main").getClassLoader().getResourceAsStream(name);
         } catch (Exception e) {
             System.out.println("Problem locating the ressource");
             e.printStackTrace();

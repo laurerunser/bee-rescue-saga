@@ -1,3 +1,5 @@
+package main;
+
 import model.board.Board;
 import model.board.piece.Bee;
 import model.board.piece.ColorBlock;

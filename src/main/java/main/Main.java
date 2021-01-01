@@ -1,3 +1,5 @@
+package main;
+
 import controller.LevelMapController;
 import controller.listeners.MapNavigationListeners;
 import model.Player;
@@ -59,22 +61,8 @@ public class Main {
         }
         ArrayList<String> savedNames = getSavedNames();
 
-        savedNames.forEach(System.out::println);
-        System.out.println();
-
         view.welcome();
-
-        savedNames.forEach(System.out::println);
-        System.out.println();
-
-        String name = view.askName(savedNames);
-
-        if (view instanceof CliWelcomeView) {
-            startGame(name); // Cli answers the name of the player directly
-        } else {
-            GuiWelcomeView g = (GuiWelcomeView) view;
-            startGame(g.getName());
-        }
+        view.askName(savedNames);
     }
 
     /**
@@ -103,8 +91,12 @@ public class Main {
      *
      * @param name The name of the player
      */
-    private static void startGame(String name) {
+    public static void startGame(String name) {
         ArrayList<String> savedNames = getSavedNames();
+        name = name.trim();
+        if (name.equals("")) {
+            view.askName(savedNames); // the player entered an empty name
+        }
         Player p;
         if (savedNames.contains(name)) {
             p = Player.deserialize(name);
@@ -116,9 +108,12 @@ public class Main {
         } else {
             p = new Player(name);
         }
-
         MapNavigationListeners mapNavigationListeners = new MapNavigationListeners();
-        LevelMapController controller = new LevelMapController(p, gui, mapNavigationListeners, (JFrame) view);
+        if (gui) {
+            LevelMapController controller = new LevelMapController(p, gui, mapNavigationListeners, (JFrame) view);
+        } else {
+            LevelMapController controller = new LevelMapController(p, gui, mapNavigationListeners, null);
+        }
     }
 
 }

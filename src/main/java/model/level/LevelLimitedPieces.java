@@ -16,6 +16,9 @@ public class LevelLimitedPieces extends Level {
      */
     private int nbPieces;
 
+    public static String goal = "You need to erase all the pieces off the board, and save the bees !";
+
+
     /**
      * Constructs a Level with a limited amount of pieces
      *

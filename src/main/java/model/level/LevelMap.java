@@ -54,8 +54,6 @@ public class LevelMap implements Serializable {
 
     public int[][] getLevelsCompleted() { return levelsCompleted; }
 
-    public int getCurrentLevel() { return currentLevel; }
-
     public int getLastLevelVisible() { return levelVisible; }
 
     /**
@@ -87,5 +85,15 @@ public class LevelMap implements Serializable {
             uncoverMap();
             // TODO : launch animations & reward for uncovering levels
         }
+    }
+
+    /**
+     * Returns whether or not the level can be played = if all the previous ones have been won
+     *
+     * @param n The number of the level to test
+     * @return true if the level can be played, false otherwise
+     */
+    public boolean canPlay(int n) {
+        return currentLevel >= n - 1;
     }
 }

@@ -4,9 +4,18 @@ import controller.listeners.PlayerMovesListeners;
 import model.level.Level;
 import view.LevelView;
 
-public class GuiLevelView implements LevelView {
+import javax.swing.*;
 
-    public GuiLevelView(Level level, PlayerMovesListeners playerMovesListeners) {
+public class GuiLevelView extends JPanel implements LevelView {
+
+    /**
+     * Constructs the view of the level
+     *
+     * @param level                The level to display
+     * @param playerMovesListeners The list of listeners to listen on the player's actions
+     * @param frame                The JFrame of the app
+     */
+    public GuiLevelView(Level level, PlayerMovesListeners playerMovesListeners, JFrame frame) {
 
     }
 
