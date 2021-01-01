@@ -34,7 +34,6 @@ public class GuiWelcomeView extends JFrame implements WelcomeView {
             JButton b = new JButton(s);
             b.addActionListener(actionEvent -> {
                 JButton b1 = (JButton) actionEvent.getSource();
-                System.out.println(b1.getText());
                 Main.startGame(b1.getText());
             });
             panel.add(b);
