@@ -5,9 +5,6 @@ import model.board.Board;
 public class EraseColorBlocks extends Piece {
     private static final long serialVersionUID = 123L;
 
-    private final static String iconPath = "";
-    private final static String trappedIconPath = "";
-
     /**
      * The color of the blocks this Piece deletes. Can be : yellow, red, green, blue, orange, purple
      */
@@ -23,6 +20,13 @@ public class EraseColorBlocks extends Piece {
     public EraseColorBlocks(int points, boolean isFree, String color) {
         super(points, isFree);
         this.color = color;
+        setCurrentIconPath("pictures/EraseColor" + color.charAt(0) + ".png");
+        setTrappedIconPath("pictures/tEraseColor" + color.charAt(0) + ".png");
+        if (isFree) {
+            setCurrentIconPath(getIconPath());
+        } else {
+            setCurrentIconPath(getTrappedIconPath());
+        }
     }
 
     public String getColor() { return color; }

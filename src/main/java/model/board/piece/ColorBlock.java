@@ -5,9 +5,6 @@ import model.board.Board;
 public class ColorBlock extends Piece {
     private static final long serialVersionUID = 123L;
 
-    private final static String iconPath = "";
-    private final static String trappedIconPath = "";
-
     /**
      * The color of the block : yellow, red, green, blue, orange, purple
      */
@@ -23,6 +20,23 @@ public class ColorBlock extends Piece {
     public ColorBlock(int points, boolean isFree, String color) {
         super(points, isFree);
         this.color = color;
+        setIconPath("pictures/" + color.charAt(0) + random() + ".png");
+        setTrappedIconPath("pictures/t" + color.charAt(0) + random() + ".png");
+        if (isFree) {
+            setCurrentIconPath(getIconPath());
+        } else {
+            setCurrentIconPath(getTrappedIconPath());
+        }
+    }
+
+    /**
+     * Returns a number between 1 and 3 (both included)
+     *
+     * @return an int between 1 and 3 (both included)
+     */
+    private String random() {
+        int a = (int) (Math.random() * (4 - 1 + 1) + 1);
+        return String.valueOf(a);
     }
 
     /**
@@ -95,5 +109,6 @@ public class ColorBlock extends Piece {
             return "_x" + color.toLowerCase().charAt(0) + "Blk";
         }
     }
+
 
 }

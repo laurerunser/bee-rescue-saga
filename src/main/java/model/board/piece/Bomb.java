@@ -6,9 +6,6 @@ import model.board.Board;
 public class Bomb extends Piece {
     private static final long serialVersionUID = 123L;
 
-    private final static String iconPath = "";
-    private final static String trappedIconPath = "";
-
     /**
      * Constructs a Bomb
      *
@@ -17,6 +14,13 @@ public class Bomb extends Piece {
      */
     public Bomb(int points, boolean isFree) {
         super(points, isFree);
+        setCurrentIconPath("pictures/Bomb.png");
+        setTrappedIconPath("pictures/tBomb.png");
+        if (isFree) {
+            setCurrentIconPath(getIconPath());
+        } else {
+            setCurrentIconPath(getTrappedIconPath());
+        }
     }
 
     /**

@@ -11,11 +11,13 @@ public abstract class Piece implements Serializable {
     /**
      * The path to the icon
      */
-    private final static String iconPath = "";
+    private String iconPath = "";
+
     /**
      * The path to the icon when the Piece is trapped/not free
      */
-    private final static String trappedIconPath = "";
+    private String trappedIconPath = "";
+
     /**
      * The path to the current icon
      */
@@ -79,5 +81,18 @@ public abstract class Piece implements Serializable {
      * @return a String of length 6 that represents the Piece
      */
     public abstract String charForCli();
+
+    public String getIconPath() { return iconPath; }
+
+    public void setIconPath(String path) { iconPath = path; }
+
+    public String getTrappedIconPath() { return trappedIconPath; }
+
+    public void setTrappedIconPath(String path) { trappedIconPath = path; }
+
+    public String getCurrentIconPath() { return currentIconPath; }
+
+    public void setCurrentIconPath(String path) { currentIconPath = path; }
+
 
 }
