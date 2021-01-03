@@ -123,10 +123,13 @@ public class GuiLevelView extends JPanel implements LevelView {
 
     @Override
     public void updateBoard() {
+        board.removeAll();
+        board.setVisible(false);
         board = new JPanel();
         int x = level.getBoard().getBoard().length;
         int y = level.getBoard().getBoard()[0].length;
         board.setLayout(new GridLayout(x, y));
+        board.setPreferredSize(new Dimension(x * 60, y * 60));
 
         Piece[][] p = level.getBoard().getBoard();
         for (int i = p.length - 1; i >= 0; i--) {
@@ -138,12 +141,16 @@ public class GuiLevelView extends JPanel implements LevelView {
                     // if the icon is null, there is no Piece to display
                     // so I add an invisible JPanel to fill the space
                     JPanel panel = new JPanel();
-                    panel.setPreferredSize(new Dimension(60, 60));
+                    panel.setPreferredSize(new Dimension(65, 65));
                     board.add(panel, p.length - 1 - i, p[i].length - 1 - j);
                 }
             }
         }
+//        JPanel panel = new JPanel(); // need an extra Panel to honor setPreferredSize because GridLayout doesn't on its own
+//        panel.setPreferredSize(new Dimension(x*65, y*65));
+//        panel.add(board);
         this.add(board, BorderLayout.CENTER);
+        board.setVisible(true);
     }
 
 

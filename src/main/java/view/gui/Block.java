@@ -19,17 +19,18 @@ public class Block extends JButton {
      */
     public Block(int x, int y, PlayerMovesListeners playerMovesListeners, Piece piece) {
         this.addActionListener(actionEvent -> {
+            this.setVisible(false);
             playerMovesListeners.onPieceClicked(x, y);
         });
 
         initIcon(piece);
-        this.setText(x + " " + y);
 
         //TODO add animation for the Bee (from Bee-happy.png to Bee-sad).png
 
         // other cosmetic stuff
-        this.setPreferredSize(new Dimension(60, 60));
+        this.setPreferredSize(new Dimension(65, 65));
         this.setBackground(new Color(237, 198, 63));
+        this.setBorder(null);// empty border
     }
 
     private void initIcon(Piece piece) {
@@ -71,7 +72,6 @@ public class Block extends JButton {
             path = null;
         }
 
-        System.out.println(path);
         if (path != null) {
             ImageIcon i = new ImageIcon(getClass().getClassLoader().getResource(path));
             this.setIcon(i);
