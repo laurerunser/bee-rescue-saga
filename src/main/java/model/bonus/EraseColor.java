@@ -13,8 +13,8 @@ public class EraseColor extends Bonus {
 
     private String color;
 
-    public EraseColor(String iconPath, int basePoints) {
-        super(iconPath, basePoints);
+    public EraseColor(int basePoints) {
+        super("EraseColor", basePoints);
     }
 
     @Override

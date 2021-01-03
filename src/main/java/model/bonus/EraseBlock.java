@@ -11,8 +11,8 @@ public class EraseBlock extends Bonus {
     private static final long serialVersionUID = 123L;
 
 
-    public EraseBlock(String iconPath, int basePoints) {
-        super(iconPath, basePoints);
+    public EraseBlock(int basePoints) {
+        super("EraseBlock", basePoints);
     }
 
     /**

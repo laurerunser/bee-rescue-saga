@@ -22,8 +22,8 @@ public class ChangeBlockColor extends Bonus {
      */
     private String colorTo;
 
-    public ChangeBlockColor(String iconPath) {
-        super(iconPath, 0);
+    public ChangeBlockColor() {
+        super("ChangeBlockColor", 0);
     }
 
 

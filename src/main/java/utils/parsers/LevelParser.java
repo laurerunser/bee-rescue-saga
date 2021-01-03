@@ -152,12 +152,12 @@ public class LevelParser {
     private Bonus readBonus(String value) {
         // TODO : update the String for the iconPath
         return switch (value) {
-            case "ChangeBlockColor" -> new ChangeBlockColor("AAAA");
-            case "EraseBlock" -> new EraseBlock("BBBB", 2);
-            case "EraseColor" -> new EraseColor("CCCC", 5);
-            case "EraseColumn" -> new EraseColumn("DDDD", 2);
-            case "FreeBee" -> new FreeBee("EEEE");
-            case "FreeBlock" -> new FreeBlock("FFFF");
+            case "ChangeBlockColor" -> new ChangeBlockColor();
+            case "EraseBlock" -> new EraseBlock(2);
+            case "EraseColor" -> new EraseColor(5);
+            case "EraseColumn" -> new EraseColumn(2);
+            case "FreeBee" -> new FreeBee();
+            case "FreeBlock" -> new FreeBlock();
             default -> null;
         };
     }

@@ -25,7 +25,7 @@ public abstract class Bonus implements Serializable {
      * @param basePoints The number of points
      */
     public Bonus(String iconPath, int basePoints) {
-        this.iconPath = iconPath;
+        this.iconPath = "pictures/" + iconPath + ".png";
         this.basePoints = basePoints;
     }
 

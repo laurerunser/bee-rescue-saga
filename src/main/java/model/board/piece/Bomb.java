@@ -15,11 +15,12 @@ public class Bomb extends Piece {
     public Bomb(int points, boolean isFree) {
         super(points, isFree);
         setCurrentIconPath("pictures/Bomb.png");
-        setTrappedIconPath("pictures/tBomb.png");
+        //TODO : add trapped icon for Bomb
+        //setTrappedIconPath("pictures/tBomb.png");
         if (isFree) {
             setCurrentIconPath(getIconPath());
         } else {
-            setCurrentIconPath(getTrappedIconPath());
+            //   setCurrentIconPath(getTrappedIconPath());
         }
     }
 

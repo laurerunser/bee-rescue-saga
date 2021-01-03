@@ -10,8 +10,8 @@ import model.board.piece.Piece;
 public class EraseColumn extends Bonus {
     private static final long serialVersionUID = 123L;
 
-    public EraseColumn(String iconPath, int basePoints) {
-        super(iconPath, basePoints);
+    public EraseColumn(int basePoints) {
+        super("EraseColumn", basePoints);
     }
 
     @Override

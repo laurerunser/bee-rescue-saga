@@ -10,8 +10,8 @@ import model.board.piece.Piece;
 public class FreeBee extends Bonus {
     private static final long serialVersionUID = 123L;
 
-    public FreeBee(String iconPath) {
-        super(iconPath, 0);
+    public FreeBee() {
+        super("FreeBee", 0);
     }
 
     @Override
