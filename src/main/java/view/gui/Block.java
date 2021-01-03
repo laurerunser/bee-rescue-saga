@@ -32,10 +32,12 @@ public class Block extends JButton {
     }
 
     private void initIcon(Piece piece) {
+        System.out.println(piece == null);
         if (piece != null) {
             String path = piece.getCurrentIconPath();
-            System.out.println(piece.getCurrentIconPath());
-            ImageIcon i = new ImageIcon(getClass().getClassLoader().getResource(path));
+            System.out.println("init : " + piece.getCurrentIconPath());
+            //System.out.println(getClass().getClassLoader().getResource(path));
+            ImageIcon i = new ImageIcon(getClass().getClassLoader().getResource("pictures/r1.png"));
             this.setIcon(i);
         }
     }

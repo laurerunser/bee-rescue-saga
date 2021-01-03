@@ -22,13 +22,6 @@ public class LevelController implements PlayerMovesListener {
         this.view = view;
         this.levelListeners = levelListeners;
         playerMovesListeners.add(this);
-
-        for (int i = 0; i < level.getBoard().getBoard().length; i++) {
-            for (int j = 0; j < level.getBoard().getBoard()[i].length; j++) {
-                if (level.getBoard().getBoard()[i][j] != null)
-                    System.out.println("test" + level.getBoard().getBoard()[i][j].getCurrentIconPath());
-            }
-        }
     }
 
     /**

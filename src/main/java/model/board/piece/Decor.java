@@ -5,17 +5,22 @@ import model.board.Board;
 public class Decor extends Piece {
     private static final long serialVersionUID = 123L;
 
-    private final static String iconPath = "";
-    private final static String trappedIconPath = "";
+    private final String currentIconPath;
 
     /**
      * Constructs a Decor : can't be deleted so doesn't have points
      */
     public Decor() {
         super(0, true);
-        setCurrentIconPath("pictures/Decor.png");
+        currentIconPath = "pictures/Decor.png";
     }
     // TODO if several different pictures for Decor, do a random selection (like in ColorBlock)
+
+
+    @Override
+    public String getCurrentIconPath() {
+        return currentIconPath;
+    }
 
     /**
      * Does nothing because it can't be deleted

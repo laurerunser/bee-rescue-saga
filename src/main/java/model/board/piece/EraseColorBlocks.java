@@ -10,6 +10,9 @@ public class EraseColorBlocks extends Piece {
      */
     private final String color;
 
+    private final String freeIconPath;
+    private String currentIconPath;
+
     /**
      * Constructs a EraseColorBlocks
      *
@@ -20,14 +23,25 @@ public class EraseColorBlocks extends Piece {
     public EraseColorBlocks(int points, boolean isFree, String color) {
         super(points, isFree);
         this.color = color;
-        setCurrentIconPath("pictures/Ballon" + color.charAt(0) + ".png");
-        //TODO : add the trapped icon path for EraseColorBlock
-        //setTrappedIconPath("pictures/tEraseColor" + color.charAt(0) + ".png");
+
+        freeIconPath = "pictures/Ballon" + color.charAt(0) + ".png";
+        String trappedIconPath = "pictures/tBallon" + color.charAt(0) + ".png";
         if (isFree) {
-            setCurrentIconPath(getIconPath());
+            currentIconPath = freeIconPath;
         } else {
-            setCurrentIconPath(getTrappedIconPath());
+            currentIconPath = trappedIconPath;
         }
+    }
+
+    @Override
+    public void setFree() {
+        super.setFree();
+        currentIconPath = freeIconPath;
+    }
+
+    @Override
+    public String getCurrentIconPath() {
+        return currentIconPath;
     }
 
     public String getColor() { return color; }

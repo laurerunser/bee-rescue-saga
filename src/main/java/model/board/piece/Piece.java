@@ -12,18 +12,7 @@ public abstract class Piece implements Serializable {
      * without any extra points (for ex when using a bonus)
      */
     private final int points;
-    /**
-     * The path to the icon
-     */
-    public String iconPath;
-    /**
-     * The path to the icon when the Piece is trapped/not free
-     */
-    public String trappedIconPath;
-    /**
-     * The path to the current icon
-     */
-    public String currentIconPath;
+
     /**
      * True if the Piece is free, false otherwise
      */
@@ -38,12 +27,12 @@ public abstract class Piece implements Serializable {
     public Piece(int points, boolean isFree) {
         this.points = points;
         this.isFree = isFree;
+
     }
 
     /** Sets the Piece free. Changes the currentIconPath to the default iconPath. */
     public void setFree() {
         isFree = true;
-        currentIconPath = iconPath;
     }
 
     /** @return true if the Piece is free, false otherwise */
@@ -74,17 +63,10 @@ public abstract class Piece implements Serializable {
      */
     public abstract String charForCli();
 
-    public String getIconPath() { return iconPath; }
 
-    public void setIconPath(String path) { iconPath = path; }
-
-    public String getTrappedIconPath() { return trappedIconPath; }
-
-    public void setTrappedIconPath(String path) { trappedIconPath = path; }
-
-    public String getCurrentIconPath() { return currentIconPath; }
-
-    public void setCurrentIconPath(String path) { currentIconPath = path; }
-
+    /**
+     * @return the current icon path
+     */
+    public String getCurrentIconPath() { return "toto"; }
 
 }

@@ -12,6 +12,9 @@ public class Bee extends Piece {
      */
     private final String color;
 
+    private final String freeIconPath;
+    private String currentIconPath;
+
     /**
      * Constructs a Bee that is trapped in a box of that color
      *
@@ -21,9 +24,9 @@ public class Bee extends Piece {
     public Bee(int points, String color) {
         super(points, false);
         this.color = color;
-        setIconPath("pictures/Bee-happy.png");
-        setTrappedIconPath("pictures/Bee-happy-" + color.charAt(0) + ".png");
-        setCurrentIconPath(getTrappedIconPath());
+
+        freeIconPath = "pictures/Bee-happy.png";
+        currentIconPath = "pictures/Bee-happy-" + color.charAt(0) + ".png";
     }
 
     /**
@@ -33,9 +36,20 @@ public class Bee extends Piece {
      */
     public Bee(int points) {
         super(points, true);
-        setIconPath("pictures/Bee-happy.png");
         color = "";
-        setCurrentIconPath(getIconPath());
+        freeIconPath = "pictures/Bee-happy.png";
+        currentIconPath = freeIconPath;
+    }
+
+    @Override
+    public void setFree() {
+        super.setFree();
+        currentIconPath = freeIconPath;
+    }
+
+    @Override
+    public String getCurrentIconPath() {
+        return currentIconPath;
     }
 
     /**

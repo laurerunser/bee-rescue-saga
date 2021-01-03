@@ -6,6 +6,10 @@ import model.board.Board;
 public class Bomb extends Piece {
     private static final long serialVersionUID = 123L;
 
+
+    private final String freeIconPath;
+    private String currentIconPath;
+
     /**
      * Constructs a Bomb
      *
@@ -14,14 +18,25 @@ public class Bomb extends Piece {
      */
     public Bomb(int points, boolean isFree) {
         super(points, isFree);
-        setCurrentIconPath("pictures/Bomb.png");
-        //TODO : add trapped icon for Bomb
-        //setTrappedIconPath("pictures/tBomb.png");
+
+        freeIconPath = "pictures/Bomb.png";
+        String trappedIconPath = "pictures/tBomb.png";
         if (isFree) {
-            setCurrentIconPath(getIconPath());
+            currentIconPath = freeIconPath;
         } else {
-            setCurrentIconPath(getTrappedIconPath());
+            currentIconPath = trappedIconPath;
         }
+    }
+
+    @Override
+    public void setFree() {
+        super.setFree();
+        currentIconPath = freeIconPath;
+    }
+
+    @Override
+    public String getCurrentIconPath() {
+        return currentIconPath;
     }
 
     /**

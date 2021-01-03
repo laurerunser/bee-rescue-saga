@@ -10,6 +10,9 @@ public class ColorBlock extends Piece {
      */
     private String color;
 
+    private final String freeIconPath;
+    private String currentIconPath;
+
     /**
      * Constructs a ColorBlock
      *
@@ -20,13 +23,25 @@ public class ColorBlock extends Piece {
     public ColorBlock(int points, boolean isFree, String color) {
         super(points, isFree);
         this.color = color;
-        setIconPath("pictures/" + color.charAt(0) + random() + ".png");
-        setTrappedIconPath("pictures/t" + color.charAt(0) + random() + ".png");
+        this.freeIconPath = "pictures/" + color.charAt(0) + random() + ".png";
+        String trappedIconPath = "pictures/t" + color.charAt(0) + random() + ".png";
         if (isFree) {
-            setCurrentIconPath(getIconPath());
+            this.currentIconPath = freeIconPath;
         } else {
-            setCurrentIconPath(getTrappedIconPath());
+            this.currentIconPath = trappedIconPath;
         }
+        // TODO : modify the iconpath to get a random selection from 1 to 3 (both included_
+    }
+
+    @Override
+    public void setFree() {
+        super.setFree();
+        currentIconPath = freeIconPath;
+    }
+
+    @Override
+    public String getCurrentIconPath() {
+        return currentIconPath;
     }
 
     /**
@@ -42,9 +57,7 @@ public class ColorBlock extends Piece {
     /**
      * @return the color
      */
-    public String getColor() {
-        return color;
-    }
+    public String getColor() { return color; }
 
     /**
      * Sets the color to the new value
