@@ -10,7 +10,7 @@ public class ColorBlock extends Piece {
      */
     private String color;
 
-    private final String freeIconPath;
+    private String freeIconPath;
     private String currentIconPath;
 
     /**
@@ -43,6 +43,8 @@ public class ColorBlock extends Piece {
     public String getCurrentIconPath() {
         return currentIconPath;
     }
+
+    private void setFreeIconPath(String icon) { this.freeIconPath = icon; }
 
     /**
      * Returns a number between 1 and 3 (both included)

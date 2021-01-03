@@ -1,7 +1,7 @@
 package view.gui;
 
 import controller.listeners.PlayerMovesListeners;
-import model.board.piece.Piece;
+import model.board.piece.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -29,17 +29,63 @@ public class Block extends JButton {
 
         // other cosmetic stuff
         this.setPreferredSize(new Dimension(60, 60));
+        this.setBackground(new Color(237, 198, 63));
     }
 
     private void initIcon(Piece piece) {
-        System.out.println(piece == null);
-        if (piece != null) {
-            String path = piece.getCurrentIconPath();
-            System.out.println("init : " + piece.getCurrentIconPath());
-            //System.out.println(getClass().getClassLoader().getResource(path));
-            ImageIcon i = new ImageIcon(getClass().getClassLoader().getResource("pictures/r1.png"));
+        // TODO : clean it up and go back to using the currentIconPath field in the class of the different pieces
+        // The problem is that currentIconPath seems to be null, no matter how I initialize it...
+//        if (piece != null) {
+//            String path = piece.getCurrentIconPath();
+//            ImageIcon i = new ImageIcon(getClass().getClassLoader().getResource("pictures/r1.png"));
+//            this.setIcon(i);
+//        }
+        String path = "pictures/";
+        if (piece instanceof ColorBlock) {
+            if (piece.isFree()) {
+                path = path + ((ColorBlock) piece).getColor().charAt(0) + random() + ".png";
+            } else {
+                path = path + "t" + ((ColorBlock) piece).getColor().charAt(0) + random() + ".png";
+            }
+        } else if (piece instanceof Bee) {
+            if (piece.isFree()) {
+                path = path + "Bee-happy.png";
+            } else {
+                path = path + "Bee-happy-" + ((Bee) piece).getColor().charAt(0) + ".png";
+            }
+        } else if (piece instanceof Bomb) {
+            if (piece.isFree()) {
+                path = path + "Bomb.png";
+            } else {
+                path = path + "tBomb.png";
+            }
+        } else if (piece instanceof Decor) {
+            path = path + "Decor.png";
+        } else if (piece instanceof EraseColorBlocks) {
+            if (piece.isFree()) {
+                path = path + "Ballon" + ((EraseColorBlocks) piece).getColor().charAt(0) + ".png";
+            } else {
+                path = path + "tBallon" + ((EraseColorBlocks) piece).getColor().charAt(0) + ".png";
+            }
+        } else {
+            path = null;
+        }
+
+        System.out.println(path);
+        if (path != null) {
+            ImageIcon i = new ImageIcon(getClass().getClassLoader().getResource(path));
             this.setIcon(i);
         }
+    }
+
+    /**
+     * Returns a number between 1 and 3 (both included)
+     *
+     * @return an int between 1 and 3 (both included)
+     */
+    private String random() {
+        int a = (int) (Math.random() * (3 - 1 + 1) + 1);
+        return String.valueOf(a);
     }
 
 }
