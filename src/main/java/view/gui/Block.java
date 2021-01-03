@@ -31,6 +31,9 @@ public class Block extends JButton {
         this.setPreferredSize(new Dimension(65, 65));
         this.setBackground(new Color(237, 198, 63));
         this.setBorder(null);// empty border
+        this.setContentAreaFilled(false);
+
+        // TODO : make the button go grey or smth when mouse hovers
     }
 
     private void initIcon(Piece piece) {
