@@ -20,7 +20,7 @@ public class Bomb extends Piece {
         if (isFree) {
             setCurrentIconPath(getIconPath());
         } else {
-            //   setCurrentIconPath(getTrappedIconPath());
+            setCurrentIconPath(getTrappedIconPath());
         }
     }
 

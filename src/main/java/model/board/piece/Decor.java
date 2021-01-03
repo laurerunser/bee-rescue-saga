@@ -14,7 +14,6 @@ public class Decor extends Piece {
     public Decor() {
         super(0, true);
         setCurrentIconPath("pictures/Decor.png");
-        setCurrentIconPath(getIconPath());
     }
     // TODO if several different pictures for Decor, do a random selection (like in ColorBlock)
 

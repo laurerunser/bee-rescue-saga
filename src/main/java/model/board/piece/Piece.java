@@ -4,29 +4,26 @@ import model.board.Board;
 
 import java.io.Serializable;
 
-//TODO : fill all the iconPath and trappedIconPath
 public abstract class Piece implements Serializable {
     private static final long serialVersionUID = 123L;
 
     /**
+     * The number of points the Player gets when deleting the Piece,
+     * without any extra points (for ex when using a bonus)
+     */
+    private final int points;
+    /**
      * The path to the icon
      */
-    private String iconPath = "";
-
+    public String iconPath;
     /**
      * The path to the icon when the Piece is trapped/not free
      */
-    private String trappedIconPath = "";
-
+    public String trappedIconPath;
     /**
      * The path to the current icon
      */
-    private String currentIconPath;
-
-    /**
-     * The number of points the Player gets hen deleting the Piece, without the multiplicators or extra points
-     */
-    private final int points;
+    public String currentIconPath;
     /**
      * True if the Piece is free, false otherwise
      */
@@ -41,11 +38,6 @@ public abstract class Piece implements Serializable {
     public Piece(int points, boolean isFree) {
         this.points = points;
         this.isFree = isFree;
-        if (isFree) {
-            currentIconPath = iconPath;
-        } else {
-            currentIconPath = trappedIconPath;
-        }
     }
 
     /** Sets the Piece free. Changes the currentIconPath to the default iconPath. */

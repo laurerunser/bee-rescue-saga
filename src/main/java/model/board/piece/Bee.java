@@ -34,8 +34,8 @@ public class Bee extends Piece {
     public Bee(int points) {
         super(points, true);
         setIconPath("pictures/Bee-happy.png");
-        setCurrentIconPath(getIconPath());
         color = "";
+        setCurrentIconPath(getIconPath());
     }
 
     /**

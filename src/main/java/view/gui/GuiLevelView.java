@@ -1,6 +1,7 @@
 package view.gui;
 
 import controller.listeners.PlayerMovesListeners;
+import model.board.piece.Piece;
 import model.level.Level;
 import view.LevelView;
 
@@ -16,8 +17,9 @@ public class GuiLevelView extends JPanel implements LevelView {
     private final JLabel pointsLeftTo1star = new JLabel();
     private final JLabel pointsLeftTo2stars = new JLabel();
     private final JLabel pointsLeftTo3stars = new JLabel();
-
     private final JLabel beesToSave = new JLabel();
+
+    private JPanel board = new JPanel();
 
 
     /**
@@ -42,7 +44,7 @@ public class GuiLevelView extends JPanel implements LevelView {
         // add elements
         this.setLayout(new BorderLayout());
         initStats();
-        initBoard();
+        updateBoard();
         initBonus();
         initGoal();
 
@@ -80,11 +82,6 @@ public class GuiLevelView extends JPanel implements LevelView {
         this.add(panel, BorderLayout.NORTH);
     }
 
-
-    private void initBoard() {
-
-    }
-
     /**
      * Add a sentence saying the goal of the level at the bottom of the screen
      */
@@ -94,6 +91,15 @@ public class GuiLevelView extends JPanel implements LevelView {
     }
 
     private void initBonus() {
+        initFreeBonus();
+        initAvailableBonus();
+    }
+
+    private void initFreeBonus() {
+
+    }
+
+    private void initAvailableBonus() {
 
     }
 
@@ -114,17 +120,32 @@ public class GuiLevelView extends JPanel implements LevelView {
         beesToSave.setText(level.getBeeSaved() + " / " + level.getObjBees() + " bees saved !");
     }
 
-    private void initAvailableBonus() {
-
-    }
 
     @Override
     public void updateBoard() {
+        board = new JPanel();
+        int x = level.getBoard().getBoard().length;
+        int y = level.getBoard().getBoard()[0].length;
+        board.setLayout(new GridLayout(x, y));
+
+        Piece[][] p = level.getBoard().getBoard();
+        for (int i = p.length - 1; i >= 0; i--) {
+            for (int j = p[i].length - 1; j >= 0; j--) {
+                Block b = new Block(i, j, playerMovesListeners, p[i][j]);
+                if (b.getIcon() != null) {
+                    board.add(b, p.length - 1 - i, p[i].length - 1 - j);
+                } else {
+                    // if the icon is null, there is no Piece to display
+                    // so I add an invisible JPanel to fill the space
+                    JPanel panel = new JPanel();
+                    panel.setPreferredSize(new Dimension(60, 60));
+                    board.add(panel, p.length - 1 - i, p[i].length - 1 - j);
+                }
+            }
+        }
+        this.add(board, BorderLayout.CENTER);
     }
 
-    private void initFreeBonus() {
-
-    }
 
     @Override
     public void updateAvailableBonus() {

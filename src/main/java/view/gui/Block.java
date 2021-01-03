@@ -1,10 +1,10 @@
 package view.gui;
 
 import controller.listeners.PlayerMovesListeners;
-import model.board.piece.Bee;
 import model.board.piece.Piece;
 
 import javax.swing.*;
+import java.awt.*;
 
 
 public class Block extends JButton {
@@ -18,29 +18,26 @@ public class Block extends JButton {
      * @param piece                The piece that is being represented by the Block
      */
     public Block(int x, int y, PlayerMovesListeners playerMovesListeners, Piece piece) {
-        this.addActionListener(actionEvent -> playerMovesListeners.onPieceClicked(x, y));
+        this.addActionListener(actionEvent -> {
+            playerMovesListeners.onPieceClicked(x, y);
+        });
 
-        if (piece instanceof Bee) {
-            initBee();
-        } else {
-            initBlock(piece);
+        initIcon(piece);
+        this.setText(x + " " + y);
+
+        //TODO add animation for the Bee (from Bee-happy.png to Bee-sad).png
+
+        // other cosmetic stuff
+        this.setPreferredSize(new Dimension(60, 60));
+    }
+
+    private void initIcon(Piece piece) {
+        if (piece != null) {
+            String path = piece.getCurrentIconPath();
+            System.out.println(piece.getCurrentIconPath());
+            ImageIcon i = new ImageIcon(getClass().getClassLoader().getResource(path));
+            this.setIcon(i);
         }
     }
-
-    /**
-     * Initializes the Block if the represented Piece is a Bee.
-     * Creates an animation where the picture of the Bee moves.
-     */
-    private void initBee() {
-
-    }
-
-    /**
-     * Normal initialization without any animation
-     */
-    private void initBlock(Piece piece) {
-
-    }
-
 
 }
