@@ -184,7 +184,12 @@ public class Board implements Serializable {
         if (change) {
             result[2] = 1; // otherwise stays 0
         }
-        while (change) { change = fillEmptySpaces(); } // do it over again until there is no more changes to do
+        while (change) {
+            int[] tmp2 = deleteBees();
+            result[0] += tmp2[0];
+            result[1] += tmp2[1];
+            change = fillEmptySpaces();
+        } // do it over again until there is no more changes to do
         for (int j = 0; j < board[0].length; j++) { // count how many empty fields in the top row
             if (isEmpty(0, j)) result[3] += 1;
         }
@@ -217,10 +222,7 @@ public class Board implements Serializable {
      * @return true if a change was made, false otherwise
      */
     private boolean fillEmptySpaces() {
-        //TODO : fix it so that the Pieces fall if :
-        // - no Piece to fall on the empty space from directly above
-        // - but the Piece right of the empty space is a Decor/trapped Piece
-        // - then the Piece above the Decor/trapped Piece falls (if it can)
+        System.out.println("OOOO");
         boolean change = false;
         // move the empty columns
         for (int j = 0; j < board[0].length - 1; j++) {
@@ -231,18 +233,18 @@ public class Board implements Serializable {
         }
         // move the pieces
         for (int i = board.length - 1; i >= 0; i--) {
-            for (int j = 0; j <= board[i].length; j++) {
+            for (int j = 0; j < board[i].length; j++) {
                 if (isEmpty(i, j)) {
                     if (isInsideBoard(i - 1, j)  // the Piece just above
                             && !isEmpty(i - 1, j)
                             && !(board[i - 1][j] instanceof Decor)
-                            && (board[i - 1][j].isFree() || board[i - 1][j] instanceof Bee)) { // either a free Piece or a trapped Bee
+                            && (board[i - 1][j].isFree() || board[i - 1][j] instanceof Bee || board[i - 1][j] == null)) { // either a free Piece or a trapped Bee or null
                         board[i][j] = board[i - 1][j];
                         board[i - 1][j] = null;
                         change = true;
                     } else if (isInsideBoard(i - 1, j + 1) // the Piece above and right
                             && !isEmpty(i - 1, j + 1)
-                            && (board[i - 1][j + 1].isFree() || board[i - 1][j + 1] instanceof Bee) // either a free Piece or a trapped Bee
+                            && (board[i - 1][j + 1].isFree() || board[i - 1][j + 1] instanceof Bee || board[i - 1][j + 1] == null) // either a free Piece or a trapped Bee or null
                             && !(board[i - 1][j + 1] instanceof Decor)) {
                         board[i][j] = board[i - 1][j + 1];
                         board[i - 1][j + 1] = null;
@@ -277,6 +279,19 @@ public class Board implements Serializable {
                 board[i][j + 1] = null;
             }
         }
+    }
+
+    /**
+     * Tests that not all the columns to the right of column y are empty
+     *
+     * @param y The column to start at
+     * @return false if all columns to the right are empty, true otherwise
+     */
+    private boolean notAllColumnsToTheRightEmpty(int y) {
+        for (int i = y; i < board[0].length; i++) {
+            if (!emptyColumn(i)) return true;
+        }
+        return false;
     }
 
     /**

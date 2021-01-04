@@ -28,13 +28,14 @@ public class LevelMap implements Serializable {
 
     public LevelMap() {
         currentLevel = 0;
-        levels = new Level[4];
-        levelsCompleted = new int[4][2];
+        levels = new Level[5];
+        levelsCompleted = new int[5][2];
         levelVisible = 0;
 
         // fill the map with the serialized levels
-        for (int i = 0; i <= 3; i++) {
+        for (int i = 0; i <= 4; i++) {
             //TODO : find a way to automatically input the number of levels (3) so that I don't have to go back to it if I add levels
+            // remember to replace the number above in both array declarations
             Level l;
             try {
                 String name = "src/main/resources/levelsSER/level" + i + ".ser";

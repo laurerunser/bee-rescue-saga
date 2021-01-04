@@ -17,15 +17,16 @@ import java.util.Arrays;
  * Each file is named levelN where N is the number of the level, starting from 0
  */
 
-// TODO : add the decor pieces
+// TODO : the first level is not appearing ???
 // TODO : adjust the score objectives so that the levels can be won
 public class Install {
     public static void main(String[] args) {
-        Level[] levels = new Level[4];
+        Level[] levels = new Level[5];
         levels[0] = level0();
         levels[1] = level1();
         levels[2] = level2();
         levels[3] = level3();
+        levels[4] = level4();
 
         for (Level l : levels) {
             writeOut(l, l.getLevel());
@@ -53,6 +54,24 @@ public class Install {
     }
 
     public static LevelLimitedPieces level0() {
+        Piece[][] p = new Piece[4][4];
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                p[i][j] = new ColorBlock(10, true, "blue");
+            }
+        }
+        p[0][2] = new Bee(10);
+
+        boolean[][] visible = new boolean[4][4];
+        for (boolean[] line : visible) {
+            Arrays.fill(line, true);
+        }
+        Board b = new Board(p, visible);
+        int[] obj = {10, 30, 50};
+        return new LevelLimitedPieces(0, b, null, null, 0, 0, null, 2, obj, 42);
+    }
+
+    public static LevelLimitedPieces level1() {
         Piece[][] p = new Piece[7][7];
         p[0][1] = new Bee(1000);
         p[0][5] = new Bee(1000);
@@ -114,7 +133,7 @@ public class Install {
         return new LevelLimitedPieces(0, b, null, null, 0, 0, null, 2, obj, 42);
     }
 
-    public static LevelLimitedPieces level1() {
+    public static LevelLimitedPieces level2() {
         Piece[][] p = new Piece[7][5];
         p[1][0] = new Bee(1000);
         p[1][2] = new Bee(1000);
@@ -162,7 +181,7 @@ public class Install {
         return new LevelLimitedPieces(1, b, null, null, 0, 0, null, 5, obj, 28);
     }
 
-    public static LevelLimitedPieces level2() {
+    public static LevelLimitedPieces level3() {
         Piece[][] p = new Piece[9][7];
 
         p[0][2] = new Bee(1000);
@@ -227,7 +246,7 @@ public class Install {
         return new LevelLimitedPieces(2, b, null, null, 0, 0, null, 3, obj, 46);
     }
 
-    public static LevelLimitedPieces level3() {
+    public static LevelLimitedPieces level4() {
         Piece[][] p = new Piece[8][8];
 
         p[0][4] = new Bee(1000);

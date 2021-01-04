@@ -2,12 +2,21 @@ package view.gui;
 
 import controller.listeners.PlayerMovesListeners;
 import model.board.piece.*;
+import model.bonus.*;
 
 import javax.swing.*;
 import java.awt.*;
 
 
 public class Block extends JButton {
+    /**
+     * The Bonus currently selected (if any)
+     */
+    private static Bonus bonus;
+    /**
+     * True if the selected Bonus is the freeBonus, false otherwise
+     */
+    private static boolean freeBonus;
 
     /**
      * Constructs a Block
@@ -19,21 +28,42 @@ public class Block extends JButton {
      */
     public Block(int x, int y, PlayerMovesListeners playerMovesListeners, Piece piece) {
         this.addActionListener(actionEvent -> {
-            this.setVisible(false);
-            playerMovesListeners.onPieceClicked(x, y);
+            System.out.println(x + " " + y);
+            decideMovement(x, y, playerMovesListeners);
         });
 
         initIcon(piece);
 
         //TODO add animation for the Bee (from Bee-happy.png to Bee-sad).png
 
-        // other cosmetic stuff
+        initCosmetic();
+
+        // TODO : make the button go grey or smth when mouse hovers
+    }
+
+    /**
+     * Decides, based on the value of bonusChosen, whether the piece is simply clicked, or if a bonus is used.
+     * Then fires the appropriate events
+     *
+     * @param x                    The x-coordinate of the Block clicked
+     * @param y                    The y-coordinate of the Block clicked
+     * @param playerMovesListeners The list of listeners to fire events with
+     */
+    private void decideMovement(int x, int y, PlayerMovesListeners playerMovesListeners) {
+        if (bonus == null) { // no bonus selected
+            playerMovesListeners.onPieceClicked(x, y);
+        } else if (freeBonus) {
+            playerMovesListeners.onUseFreeBonus(bonus, x, y);
+        } else {
+            playerMovesListeners.onUseAvailableBonus(getBonusChar(bonus), x, y);
+        }
+    }
+
+    private void initCosmetic() {
         this.setPreferredSize(new Dimension(65, 65));
         this.setBackground(new Color(237, 198, 63));
         this.setBorder(null);// empty border
         this.setContentAreaFilled(false);
-
-        // TODO : make the button go grey or smth when mouse hovers
     }
 
     private void initIcon(Piece piece) {
@@ -89,6 +119,40 @@ public class Block extends JButton {
     private String random() {
         int a = (int) (Math.random() * (3 - 1 + 1) + 1);
         return String.valueOf(a);
+    }
+
+    /**
+     * Returns the char representing the bonus to be used in useAvailableBonus
+     *
+     * @param bonus the Bonus
+     * @return the char representing the Bonus
+     */
+    // TODO : refactor to have a method in each Bonus class that returns the right char
+    private char getBonusChar(Bonus bonus) {
+        if (bonus instanceof ChangeBlockColor) {
+            return 'C';
+        } else if (bonus instanceof EraseBlock) {
+            return 'B';
+        } else if (bonus instanceof EraseColor) {
+            return 'A';
+        } else if (bonus instanceof EraseColumn) {
+            return 'D';
+        } else if (bonus instanceof FreeBee) {
+            return 'F';
+        } else if (bonus instanceof FreeBlock) {
+            return 'K';
+        } else {
+            return '0';
+        }
+    }
+
+    public Block(Bonus bonus, boolean freeBonus) {
+        this.addActionListener(actionEvent -> {
+            this.setVisible(false); // TODO : make it grey if none left, or decrease the amount
+            this.bonus = bonus;
+            this.freeBonus = freeBonus;
+        });
+        initCosmetic();
     }
 
 }

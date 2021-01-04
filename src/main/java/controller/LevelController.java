@@ -33,7 +33,7 @@ public class LevelController implements PlayerMovesListener {
      */
     public void onPieceClicked(int x, int y) {
         if (level.getBoard().getBoard()[x][y] instanceof ColorBlock && !level.getBoard().isAColorMove(x, y)) {
-            return;    //TODO : launch the view's animations for the different moves
+            return;
         } else {
             //TODO : launch the view's animations for the different moves
             int pointsWon = level.delete(x, y);

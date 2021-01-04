@@ -2,6 +2,7 @@ package view.gui;
 
 import controller.listeners.PlayerMovesListeners;
 import model.board.piece.Piece;
+import model.bonus.Bonus;
 import model.level.Level;
 import view.LevelView;
 
@@ -20,6 +21,7 @@ public class GuiLevelView extends JPanel implements LevelView {
     private final JLabel beesToSave = new JLabel();
 
     private JPanel board = new JPanel();
+    private JPanel freeBonus = null;
 
 
     /**
@@ -96,7 +98,11 @@ public class GuiLevelView extends JPanel implements LevelView {
     }
 
     private void initFreeBonus() {
-
+        Bonus b = level.getFreeBonus();
+        if (b != null) {
+            freeBonus = new JPanel();
+            updateFreeBonus();
+        }
     }
 
     private void initAvailableBonus() {
@@ -129,7 +135,8 @@ public class GuiLevelView extends JPanel implements LevelView {
         int x = level.getBoard().getBoard().length;
         int y = level.getBoard().getBoard()[0].length;
         board.setLayout(new GridLayout(x, y));
-        board.setPreferredSize(new Dimension(x * 60, y * 60));
+        board.setPreferredSize(new Dimension(x * 65, y * 65));
+        board.setBackground(new Color(237, 198, 63));
 
         Piece[][] p = level.getBoard().getBoard();
         for (int i = p.length - 1; i >= 0; i--) {
@@ -146,9 +153,6 @@ public class GuiLevelView extends JPanel implements LevelView {
                 }
             }
         }
-//        JPanel panel = new JPanel(); // need an extra Panel to honor setPreferredSize because GridLayout doesn't on its own
-//        panel.setPreferredSize(new Dimension(x*65, y*65));
-//        panel.add(board);
         this.add(board, BorderLayout.CENTER);
         board.setVisible(true);
     }
@@ -161,6 +165,22 @@ public class GuiLevelView extends JPanel implements LevelView {
 
     @Override
     public void updateFreeBonus() {
+        freeBonus.removeAll();
+        freeBonus.setLayout(new BoxLayout(freeBonus, BoxLayout.PAGE_AXIS));
 
+        if (freeBonus != null) { // if null there is no free bonus on the level
+            Block b = new Block(level.getFreeBonus(), true);
+            freeBonus.add(b);
+            int[] c = level.getFreeBonusConditions();
+            JLabel condition = new JLabel("You have " + c[0] + " free bonus in stock.");
+            JLabel movesReplenish = new JLabel("You have to wait at least " + c[1] + " moves before you get your next free bonus");
+            freeBonus.add(condition);
+            freeBonus.add(movesReplenish);
+        } else {
+            JLabel noBonus = new JLabel("There is no free bonus on this level.");
+            freeBonus.add(noBonus);
+        }
+        freeBonus.setVisible(true);
     }
+
 }
