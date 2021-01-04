@@ -2,7 +2,6 @@ package view.gui;
 
 import controller.listeners.PlayerMovesListeners;
 import model.board.piece.Piece;
-import model.bonus.Bonus;
 import model.level.Level;
 import view.LevelView;
 
@@ -98,11 +97,9 @@ public class GuiLevelView extends JPanel implements LevelView {
     }
 
     private void initFreeBonus() {
-        Bonus b = level.getFreeBonus();
-        if (b != null) {
-            freeBonus = new JPanel();
-            updateFreeBonus();
-        }
+        freeBonus = new JPanel();
+        freeBonus.setLayout(new BoxLayout(freeBonus, BoxLayout.PAGE_AXIS));
+        updateFreeBonus();
     }
 
     private void initAvailableBonus() {
@@ -166,9 +163,8 @@ public class GuiLevelView extends JPanel implements LevelView {
     @Override
     public void updateFreeBonus() {
         freeBonus.removeAll();
-        freeBonus.setLayout(new BoxLayout(freeBonus, BoxLayout.PAGE_AXIS));
 
-        if (freeBonus != null) { // if null there is no free bonus on the level
+        if (level.getFreeBonus() != null) { // if null there is no free bonus on the level
             Block b = new Block(level.getFreeBonus(), true);
             freeBonus.add(b);
             int[] c = level.getFreeBonusConditions();
@@ -180,7 +176,7 @@ public class GuiLevelView extends JPanel implements LevelView {
             JLabel noBonus = new JLabel("There is no free bonus on this level.");
             freeBonus.add(noBonus);
         }
-        freeBonus.setVisible(true);
+        this.add(freeBonus, BorderLayout.EAST);
     }
 
 }
