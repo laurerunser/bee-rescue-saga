@@ -1,5 +1,6 @@
 package view.gui;
 
+import controller.listeners.MapNavigationListeners;
 import controller.listeners.PlayerMovesListeners;
 import model.board.piece.Piece;
 import model.level.Level;
@@ -177,6 +178,42 @@ public class GuiLevelView extends JPanel implements LevelView {
             freeBonus.add(noBonus);
         }
         this.add(freeBonus, BorderLayout.EAST);
+    }
+
+    @Override
+    public void drawWon(int score, int stars, MapNavigationListeners mapNavigationListeners) {
+        String message = "CONGRATULATIONS you've won with a score of " + score + ".\nYou also have " + stars + " stars !";
+        drawEndMessage(message, mapNavigationListeners);
+    }
+
+
+    @Override
+    public void drawLost(MapNavigationListeners mapNavigationListeners) {
+        String message = "Sorry, you've lost !";
+        drawEndMessage(message, mapNavigationListeners);
+    }
+
+    private void drawEndMessage(String message, MapNavigationListeners mapNavigationListeners) {
+        String[] options = {"Play again !", "Go back to the map"};
+        message += "\n don't click on \"Play again!\", it doesn't work right now";
+        int result = JOptionPane.showOptionDialog(this, message,
+                                                  "You've won level " + level,
+                                                  JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, options,
+                                                  options[0]);
+
+        if (result == JOptionPane.YES_OPTION) {
+            mapNavigationListeners.onPlayLevel(level.getLevel() + 1);
+            // I got confused with the numbers of the levels. It has to be +1 bc I wanted the user to start at level 1
+            // but arrays start at 0...
+        } else {
+            mapNavigationListeners.onGoBackToMap();
+        }
+
+        //TODO implement restarting a level
+        // this code works and fires the rights events
+        // but the level needs tobe "restarted" : right now it starts back where we left it,
+        // that is to say in a winning state
+        // don't forget to delete the part of the message that says it doesn't work
     }
 
 }

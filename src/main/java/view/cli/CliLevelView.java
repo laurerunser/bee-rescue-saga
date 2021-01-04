@@ -1,5 +1,6 @@
 package view.cli;
 
+import controller.listeners.MapNavigationListeners;
 import controller.listeners.PlayerMovesListeners;
 import model.board.piece.Piece;
 import model.bonus.Bonus;
@@ -235,6 +236,42 @@ public class CliLevelView implements LevelView {
         System.out.println();
         System.out.println();
         System.out.println("There is no free bonus for this level !");
+    }
+
+    @Override
+    public void drawWon(int score, int stars, MapNavigationListeners mapNavigationListeners) {
+        System.out.println("CONGRATULATIONS !");
+        System.out.println("You have won level " + level.getLevel() + " and saved all the bees from a terrible death !");
+        System.out.println("You got a score of " + score + " points");
+        System.out.println("This gives you " + stars + " stars");
+
+        int[] obj = level.getObjScore();
+        if (stars == 1) {
+            System.out.println("Try again to get a second star : you only need to get " + obj[1]);
+        } else if (stars == 2) {
+            System.out.println("Try again to get a third star : you only need to get " + obj[2]);
+        } else {
+            System.out.println("Congratulations, you got all the stars for this level !");
+            System.out.println("Play it again to best your score !");
+        }
+        drawBackToMap(mapNavigationListeners);
+    }
+
+    @Override
+    public void drawLost(MapNavigationListeners mapNavigationListeners) {
+        System.out.println("Sorry you've lost !");
+        drawBackToMap(mapNavigationListeners);
+    }
+
+    private void drawBackToMap(MapNavigationListeners mapNavigationListeners) {
+        // TODO : let the user choose to go back to the map OR to replay the level
+        System.out.println("Type [OK] to go back to the map !");
+        Scanner sc = new Scanner(System.in);
+        String choice = "";
+        while (choice.equals("")) {
+            choice = sc.nextLine();
+        }
+        mapNavigationListeners.onGoBackToMap();
     }
 
 

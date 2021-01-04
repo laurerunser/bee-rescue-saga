@@ -68,7 +68,7 @@ public class Install {
         }
         Board b = new Board(p, visible);
         int[] obj = {10, 30, 50};
-        return new LevelLimitedPieces(0, b, null, null, 0, 0, null, 2, obj, 42);
+        return new LevelLimitedPieces(0, b, null, null, 0, 0, null, 1, obj, 9);
     }
 
     public static LevelLimitedPieces level1() {
@@ -130,7 +130,7 @@ public class Install {
         }
         Board b = new Board(p, visible);
         int[] obj = {2000, 2700, 3000};
-        return new LevelLimitedPieces(0, b, null, null, 0, 0, null, 2, obj, 42);
+        return new LevelLimitedPieces(1, b, null, null, 0, 0, null, 2, obj, 42);
     }
 
     public static LevelLimitedPieces level2() {
@@ -178,7 +178,7 @@ public class Install {
         }
         Board b = new Board(p, visible);
         int[] obj = {27000, 30000, 35000};
-        return new LevelLimitedPieces(1, b, null, null, 0, 0, null, 5, obj, 28);
+        return new LevelLimitedPieces(2, b, null, null, 0, 0, null, 5, obj, 28);
     }
 
     public static LevelLimitedPieces level3() {
@@ -243,7 +243,7 @@ public class Install {
         }
         Board b = new Board(p, visible);
         int[] obj = {24000, 30000, 35000};
-        return new LevelLimitedPieces(2, b, null, null, 0, 0, null, 3, obj, 46);
+        return new LevelLimitedPieces(3, b, null, null, 0, 0, null, 3, obj, 46);
     }
 
     public static LevelLimitedPieces level4() {
@@ -302,7 +302,7 @@ public class Install {
         }
         Board b = new Board(p, visible);
         int[] obj = {25000, 30000, 350000};
-        return new LevelLimitedPieces(3, b, null, null, 0, 0, null, 4, obj, 39);
+        return new LevelLimitedPieces(4, b, null, null, 0, 0, null, 4, obj, 39);
     }
 
 }

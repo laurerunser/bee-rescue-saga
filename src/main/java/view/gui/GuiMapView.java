@@ -88,7 +88,8 @@ public class GuiMapView extends JPanel implements MapView {
         panel.setLayout(new FlowLayout());
         int nbLevels = map.getLastLevelVisible();
         for (int i = 0; i <= nbLevels; i++) {
-            JButton b = new JButton("Level " + i + 1);
+            int j = i + 1;
+            JButton b = new JButton("Level " + j);
             b.addActionListener(actionEvent -> showLevelDetails(getButtonLevel(b)));
             panel.add(b);
         }
@@ -162,4 +163,6 @@ public class GuiMapView extends JPanel implements MapView {
             }
         }
     }
+
+
 }

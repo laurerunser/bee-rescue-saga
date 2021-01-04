@@ -28,7 +28,6 @@ public class Block extends JButton {
      */
     public Block(int x, int y, PlayerMovesListeners playerMovesListeners, Piece piece) {
         this.addActionListener(actionEvent -> {
-            System.out.println(x + " " + y);
             decideMovement(x, y, playerMovesListeners);
         });
 

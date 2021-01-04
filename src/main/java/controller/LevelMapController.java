@@ -77,6 +77,7 @@ public class LevelMapController implements MapNavigationListener, LevelListener 
 
     @Override
     public void onShowLevelDetails(int i) {
+        i = i - 1;
         boolean canPlay = canPlay(i);
         mapView.showLevelDetails(i);
         if (mapView instanceof CliMapView) {
@@ -121,7 +122,7 @@ public class LevelMapController implements MapNavigationListener, LevelListener 
      * @param n The number of the Level to play
      */
     public void onPlayLevel(int n) {
-        Level toPlay = player.getMap().getLevels()[n];
+        Level toPlay = player.getMap().getLevels()[n - 1];
         PlayerMovesListeners playerMovesListeners = new PlayerMovesListeners();
         if (gui) {
             currentView = new GuiLevelView(toPlay, playerMovesListeners, frame);
@@ -149,11 +150,13 @@ public class LevelMapController implements MapNavigationListener, LevelListener 
         player.addToScore(score);
         player.addGold(10);
         player.getMap().hasWon(stars, score, level);
+        ((LevelView) currentView).drawWon(stars, score, mapNavigationListeners);
     }
 
     @Override
     public void onHasLost() {
         player.decreaseLives();
+        ((LevelView) currentView).drawLost(mapNavigationListeners);
     }
 
     @Override

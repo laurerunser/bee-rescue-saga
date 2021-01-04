@@ -222,15 +222,17 @@ public class Board implements Serializable {
      * @return true if a change was made, false otherwise
      */
     private boolean fillEmptySpaces() {
-        System.out.println("OOOO");
+        // TODO : fix bug => when a column is empty, infinite loop
         boolean change = false;
+
         // move the empty columns
         for (int j = 0; j < board[0].length - 1; j++) {
-            if (emptyColumn(j)) { // column empty
+            if (emptyColumn(j) && !emptyColumn(j + 1)) { // column empty
                 moveColumnsLeft(j);
                 change = true;
             }
         }
+
         // move the pieces
         for (int i = board.length - 1; i >= 0; i--) {
             for (int j = 0; j < board[i].length; j++) {
@@ -253,6 +255,7 @@ public class Board implements Serializable {
                 }
             }
         }
+
         return change;
     }
 
