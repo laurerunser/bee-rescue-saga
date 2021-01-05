@@ -150,7 +150,7 @@ public class LevelMapController implements MapNavigationListener, LevelListener 
         player.addToScore(score);
         player.addGold(10);
         player.getMap().hasWon(stars, score, level);
-        ((LevelView) currentView).drawWon(stars, score, mapNavigationListeners);
+        ((LevelView) currentView).drawWon(score, stars, mapNavigationListeners);
     }
 
     @Override

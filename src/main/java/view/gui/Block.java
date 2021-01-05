@@ -19,6 +19,22 @@ public class Block extends JButton {
     private static boolean freeBonus;
 
     /**
+     * Constructs a Block for a Bonus
+     *
+     * @param bonus     The Bonus
+     * @param freeBonus True if this is a free bonus, false otherwise
+     */
+    public Block(Bonus bonus, boolean freeBonus) {
+        this.addActionListener(actionEvent -> {
+            this.setVisible(false); // TODO : make it grey if none left, and decrease the amount
+            Block.bonus = bonus;
+            Block.freeBonus = freeBonus;
+        });
+        initCosmetic();
+        this.setToolTipText(bonus.getToolTipText());
+    }
+
+    /**
      * Constructs a Block for a Piece
      *
      * @param x                    The x-coordinate on the board
@@ -70,21 +86,6 @@ public class Block extends JButton {
         }
     }
 
-    /**
-     * Constructs a Block for a Bonus
-     *
-     * @param bonus     The Bonus
-     * @param freeBonus True if this is a free bonus, false otherwise
-     */
-    public Block(Bonus bonus, boolean freeBonus) {
-        this.addActionListener(actionEvent -> {
-            this.setVisible(false); // TODO : make it grey if none left, or decrease the amount
-            Block.bonus = bonus;
-            Block.freeBonus = freeBonus;
-        });
-        initCosmetic();
-        this.setToolTipText(bonus.getToolTipText());
-    }
 
     private void initIcon(Piece piece) {
         // TODO : clean it up and go back to using the currentIconPath field in the class of the different pieces

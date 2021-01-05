@@ -3,11 +3,13 @@ package view.gui;
 import controller.listeners.MapNavigationListeners;
 import controller.listeners.PlayerMovesListeners;
 import model.board.piece.Piece;
+import model.bonus.Bonus;
 import model.level.Level;
 import view.LevelView;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Map;
 
 public class GuiLevelView extends JPanel implements LevelView {
     private final Level level;
@@ -21,7 +23,8 @@ public class GuiLevelView extends JPanel implements LevelView {
     private final JLabel beesToSave = new JLabel();
 
     private JPanel board = new JPanel();
-    private JPanel freeBonus = null;
+    private JPanel freeBonus = new JPanel();
+    private JPanel availableBonus = new JPanel();
 
 
     /**
@@ -93,18 +96,28 @@ public class GuiLevelView extends JPanel implements LevelView {
     }
 
     private void initBonus() {
+        JPanel panel = new JPanel();
+        panel.setBackground(new Color(255, 120, 63));
+        panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
         initFreeBonus();
         initAvailableBonus();
+        panel.add(Box.createRigidArea(new Dimension(10, 10)));
+        panel.add(freeBonus);
+        panel.add(Box.createRigidArea(new Dimension(10, 10)));
+        panel.add(availableBonus);
+        this.add(panel, BorderLayout.EAST);
     }
 
     private void initFreeBonus() {
-        freeBonus = new JPanel();
+        freeBonus.setBackground(new Color(255, 120, 63));
         freeBonus.setLayout(new BoxLayout(freeBonus, BoxLayout.PAGE_AXIS));
         updateFreeBonus();
     }
 
     private void initAvailableBonus() {
-
+        availableBonus.setBackground(new Color(255, 120, 63));
+        availableBonus.setLayout(new BoxLayout(availableBonus, BoxLayout.PAGE_AXIS));
+        updateAvailableBonus();
     }
 
     @Override
@@ -158,7 +171,23 @@ public class GuiLevelView extends JPanel implements LevelView {
 
     @Override
     public void updateAvailableBonus() {
-
+        availableBonus.removeAll();
+        var bonus = level.getAvailableBonus();
+        if (bonus == null) {
+            JLabel label = new JLabel("You currently possess no bonus.\n Go to the shop to buy some !");
+            availableBonus.add(label);
+        } else {
+            for (Map.Entry<Bonus, Integer> bonusEntry : bonus.entrySet()) {
+                if (bonusEntry.getValue() != 0) {
+                    JLabel label = new JLabel("Quantity : " + bonusEntry.getValue().toString());
+                    Block block = new Block(bonusEntry.getKey(), false);
+                    JPanel panel = new JPanel();
+                    panel.add(block);
+                    panel.add(label);
+                    availableBonus.add(panel);
+                }
+            }
+        }
     }
 
     @Override
@@ -177,7 +206,6 @@ public class GuiLevelView extends JPanel implements LevelView {
             JLabel noBonus = new JLabel("There is no free bonus on this level.");
             freeBonus.add(noBonus);
         }
-        this.add(freeBonus, BorderLayout.EAST);
     }
 
     @Override
@@ -197,7 +225,7 @@ public class GuiLevelView extends JPanel implements LevelView {
         String[] options = {"Play again !", "Go back to the map"};
         message += "\n don't click on \"Play again!\", it doesn't work right now";
         int result = JOptionPane.showOptionDialog(this, message,
-                                                  "You've won level " + level,
+                                                  "You've won level " + level.getLevel(),
                                                   JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, options,
                                                   options[0]);
 
