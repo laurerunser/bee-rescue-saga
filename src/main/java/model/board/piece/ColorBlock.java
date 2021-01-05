@@ -30,7 +30,7 @@ public class ColorBlock extends Piece {
         } else {
             this.currentIconPath = trappedIconPath;
         }
-        // TODO : modify the iconpath to get a random selection from 1 to 3 (both included_
+        // TODO : modify the iconpath to get a random selection from 1 to 3 (both included)
     }
 
     @Override

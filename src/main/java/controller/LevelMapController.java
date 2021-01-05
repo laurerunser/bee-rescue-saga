@@ -83,9 +83,6 @@ public class LevelMapController implements MapNavigationListener, LevelListener 
         if (mapView instanceof CliMapView) {
             if (canPlay) {
                 mapNavigationListeners.onPlayLevel(i);
-            } else {
-                // TODO : implement
-                System.out.println("Can't play the level yet !");
             }
         }
         // the GUI view launches the level itself
@@ -109,11 +106,11 @@ public class LevelMapController implements MapNavigationListener, LevelListener 
     }
 
     public void onGoToShop() {
-        // TODO : switch current view to ShopView
+        // TODO : implement the shop and switch current view to ShopView
     }
 
     public void onGoToRaffle() {
-        // TODO : switch current view to RaffleView
+        // TODO : implement the raffle and switch current view to RaffleView
     }
 
     /**
@@ -162,7 +159,6 @@ public class LevelMapController implements MapNavigationListener, LevelListener 
     @Override
     public void onSave() {
         player.save();
-        //TODO a screen/message that says everything has been saved correctly
         currentView.draw();
     }
 

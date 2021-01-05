@@ -23,8 +23,8 @@ public class GuiLevelView extends JPanel implements LevelView {
     private final JLabel beesToSave = new JLabel();
 
     private JPanel board = new JPanel();
-    private JPanel freeBonus = new JPanel();
-    private JPanel availableBonus = new JPanel();
+    private final JPanel freeBonus = new JPanel();
+    private final JPanel availableBonus = new JPanel();
 
 
     /**
@@ -238,10 +238,10 @@ public class GuiLevelView extends JPanel implements LevelView {
         }
 
         //TODO implement restarting a level
-        // this code works and fires the rights events
+        // this code works and fires the right events
         // but the level needs tobe "restarted" : right now it starts back where we left it,
         // that is to say in a winning state
-        // don't forget to delete the part of the message that says it doesn't work
+        // Don't forget to delete the part of the message that says it doesn't work
     }
 
 }

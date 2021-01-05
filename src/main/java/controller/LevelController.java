@@ -35,7 +35,6 @@ public class LevelController implements PlayerMovesListener {
         if (level.getBoard().getBoard()[x][y] instanceof ColorBlock && !level.getBoard().isAColorMove(x, y)) {
             return;
         } else {
-            //TODO : launch the view's animations for the different moves
             int pointsWon = level.delete(x, y);
             level.addToScore(pointsWon);
             view.updateScore();
@@ -59,9 +58,7 @@ public class LevelController implements PlayerMovesListener {
             if (view instanceof CliLevelView) {
                 ((CliLevelView) view).noFreeBonus();
             }
-            // TODO animations
         } else {
-            // TODO : launch the view's animations for the different moves
             // TODO : if a ChangeColorBlock : set the colorTo attribute
             int pointsWon = level.useBonus(bonus, x, y);
             if (pointsWon != -1) { // the Bonus can be used
@@ -94,7 +91,6 @@ public class LevelController implements PlayerMovesListener {
             }
             return;
         } else {
-            //TODO : launch the view's animations for the different moves
             int pointsWon = level.useBonus(bonus, x, y);
             if (pointsWon == -1) return; // the bonus can't be used
             level.addToScore(pointsWon);

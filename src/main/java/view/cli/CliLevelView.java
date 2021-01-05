@@ -33,22 +33,18 @@ public class CliLevelView implements LevelView {
     public void updateFreeBonus() { drawLevel(); }
 
     /**
-     * Prompt the user for their next move and fires the appropriate events.
+     * Prints the entire Level
      */
-    public void promptNextMove() {
-        Scanner sc = new Scanner(System.in);
-        String move = "";
-        do {
-            System.out.print("Do you want to [C]lick on a piece on the board, use your [F]ree bonus, use a [B]onus, or save and [R]eturn to the map ? ");
-            move = sc.nextLine();
-            System.out.println();
-        } while (!move.toUpperCase().equals("C") && !move.toUpperCase().equals("F") && !move.toUpperCase().equals("B") && !move.toUpperCase().equals("R"));
-        switch (move) {
-            case "C" -> askWhichPiece(sc);
-            case "F" -> askFreeBonusCoordinates(sc);
-            case "B" -> askWhichBonus(sc);
-            case "R" -> playerMovesListeners.onReturnToMap();
-        }
+    public void drawLevel() {
+        drawHeader();
+        drawEndHeader();
+        drawBonus();
+        drawBoard();
+        boolean freeBonus = false;
+        boolean availableBonus = false;
+        if (level.getFreeBonus() != null) freeBonus = true;
+        if (level.getAvailableBonus() != null) availableBonus = true;
+        promptNextMove(freeBonus, availableBonus);
     }
 
     /**
@@ -116,14 +112,48 @@ public class CliLevelView implements LevelView {
     ////////////////////////////////////////////// DRAWING METHODS /////////////////////////////////////////////////////
 
     /**
-     * Prints the entire Level
+     * Prompt the user for their next move and fires the appropriate events.
      */
-    public void drawLevel() {
-        drawHeader();
-        drawEndHeader();
-        drawBonus();
-        drawBoard();
-        promptNextMove();
+    public void promptNextMove(boolean freeBonus, boolean availableBonus) {
+        String message = "Do you want to [C]lick on a piece on the board, ";
+        if (freeBonus) message = message + "use your [F]ree bonus, ";
+        if (availableBonus) message = message + "use a [B]onus, ";
+        message = message + "or save and [R]eturn to the map ? ";
+        Scanner sc = new Scanner(System.in);
+        String move = "";
+        do {
+            System.out.print(message);
+            move = sc.nextLine();
+            System.out.println();
+        } while (!nextMoveOK(move, freeBonus, availableBonus));
+        switch (move) {
+            case "C" -> askWhichPiece(sc);
+            case "F" -> askFreeBonusCoordinates(sc);
+            case "B" -> askWhichBonus(sc);
+            case "R" -> playerMovesListeners.onReturnToMap();
+        }
+    }
+
+    /**
+     * Determines if the move is ok, depending on whether the player possesses a bonus or not.
+     * Eg : the player can't try to use a free bonus if there is none on the level
+     *
+     * @param move           2    The String to asses
+     * @param freeBonus      True if there is a freeBonus, false otherwise
+     * @param availableBonus True if the player has a bonus, false otherwise
+     * @return true if the move is ok, false otherwise
+     */
+    private boolean nextMoveOK(String move, boolean freeBonus, boolean availableBonus) {
+        if (freeBonus && availableBonus) {
+            return !move.toUpperCase().equals("C") && !move.toUpperCase().equals("F")
+                    && !move.toUpperCase().equals("B") && !move.toUpperCase().equals("R");
+        } else if (freeBonus) {
+            return !move.toUpperCase().equals("C") && !move.toUpperCase().equals("F") && !move.toUpperCase().equals("R");
+        } else if (availableBonus) {
+            return !move.toUpperCase().equals("C") && !move.toUpperCase().equals("B") && !move.toUpperCase().equals("R");
+        } else {
+            return !move.toUpperCase().equals("C") && !move.toUpperCase().equals("R");
+        }
     }
 
     /**
@@ -223,7 +253,6 @@ public class CliLevelView implements LevelView {
         System.out.println();
     }
 
-    // TODO : make it so that the user can only try to use bonus they possess
     public void noAvailableBonus() {
         System.out.println();
         System.out.println();
@@ -231,7 +260,6 @@ public class CliLevelView implements LevelView {
         System.out.println("Go to the shop to buy more !");
     }
 
-    // TODO : make it so that the user can't try to use the free bonus if there is none available
     public void noFreeBonus() {
         System.out.println();
         System.out.println();

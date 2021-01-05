@@ -101,8 +101,7 @@ public class Main {
         if (savedNames.contains(name)) {
             p = Player.deserialize(name);
             if (p == null) {
-                // TODO : make a nice exception instead of a lame error message
-                System.out.println("The saved game couldn't be opened");
+                System.out.println("ERROR : The saved game couldn't be opened");
                 System.exit(0);
             }
         } else {

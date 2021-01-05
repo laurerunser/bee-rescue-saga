@@ -19,7 +19,6 @@ import java.util.regex.Pattern;
  * See level-structure.md in resources directory to see how such a file is written.
  */
 public class LevelParser {
-    //TODO : test the parser
 
     /**
      * Parses the level in a file named "levelN"
@@ -83,8 +82,6 @@ public class LevelParser {
         return null; // unreachable
     }
 
-    //TODO : make parsing exceptions and catch them instead of ending the program like a brute
-    //TODO : check that the line is not null before trying to split it
 
     /**
      * Reads and returns the dimensions of the Board. Ends the program if can't parse the line
@@ -150,7 +147,6 @@ public class LevelParser {
      * @return a Bonus corresponding to the name in the String
      */
     private Bonus readBonus(String value) {
-        // TODO : update the String for the iconPath
         return switch (value) {
             case "ChangeBlockColor" -> new ChangeBlockColor();
             case "EraseBlock" -> new EraseBlock(2);
@@ -301,7 +297,7 @@ public class LevelParser {
             case "none":
                 return null;
             case "visible":
-                return null; // TODO : fix this so that it makes a visible piece
+                return null;
             default:
                 System.out.println("ERROR");
                 System.exit(1);

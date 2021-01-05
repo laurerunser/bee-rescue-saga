@@ -84,7 +84,6 @@ public class LevelMap implements Serializable {
         }
         if (level == levelVisible) {
             uncoverMap();
-            // TODO : launch animations & reward for uncovering levels
         }
     }
 

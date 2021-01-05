@@ -17,7 +17,6 @@ import java.util.Arrays;
  * Each file is named levelN where N is the number of the level, starting from 0
  */
 
-// TODO : the first level is not appearing ???
 // TODO : adjust the score objectives so that the levels can be won
 public class Install {
     public static void main(String[] args) {
