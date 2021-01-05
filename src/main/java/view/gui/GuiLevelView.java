@@ -10,6 +10,7 @@ import view.LevelView;
 import javax.swing.*;
 import java.awt.*;
 import java.util.Map;
+import java.util.Objects;
 
 public class GuiLevelView extends JPanel implements LevelView {
     private final Level level;
@@ -62,6 +63,10 @@ public class GuiLevelView extends JPanel implements LevelView {
     private void initStats() {
         JPanel panel = new JPanel();
         panel.setLayout(new FlowLayout());
+        // banner
+        ImageIcon banner = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("pictures/Banner.png")));
+        panel.add(new JLabel(banner));
+
         // return to map button
         JButton backToMap = new JButton("Back");
         backToMap.addActionListener(actionEvent -> playerMovesListeners.onReturnToMap());

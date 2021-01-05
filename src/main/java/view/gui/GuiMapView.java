@@ -8,6 +8,7 @@ import view.MapView;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Objects;
 
 public class GuiMapView extends JPanel implements MapView {
     private final Player player;
@@ -116,8 +117,31 @@ public class GuiMapView extends JPanel implements MapView {
     private void initStats() {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
-        panel.add(new JLabel("Hello " + player.getName()));
-        panel.add(new JLabel(player.getNbLives() + " / " + player.getMaxLives() + " lives"));
+        panel.setBackground(new Color(237, 198, 63));
+
+        // banner at the top
+        ImageIcon banner = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("pictures/Banner.png")));
+        panel.add(new JLabel(banner));
+
+        int nbLives = player.getNbLives();
+        JPanel lives = new JPanel();
+        lives.setBackground(new Color(237, 198, 63));
+        ImageIcon heart = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("pictures/Heart.png")));
+        ImageIcon heartGrey = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("pictures/HeartGrey.png")));
+        for (int i = 0; i < nbLives; i++) { lives.add(new JLabel(heart)); }
+        for (int i = nbLives; i < player.getMaxLives(); i++) { lives.add(new JLabel(heartGrey)); }
+        panel.add(lives);
+
+        JPanel helloName = new JPanel();
+        helloName.setBackground(new Color(237, 198, 63));
+        ImageIcon hello = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("pictures/Hello.png")));
+        helloName.add(new JLabel(hello));
+        JLabel name = new JLabel(player.getName());
+        name.setFont(new Font("Serif", Font.PLAIN, 55));
+        helloName.add(name);
+        panel.add(helloName);
+
+
         panel.add(new JLabel(player.getGold() + " gold"));
         panel.add(new JLabel(player.getRaffleTurns() + " raffle turns available"));
         panel.add(new JLabel(player.getScore() + " points"));
