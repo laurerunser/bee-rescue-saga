@@ -51,7 +51,6 @@ public class GuiMapView extends JPanel implements MapView {
      * Initializes the menu bar
      */
     private void initMenu() {
-        // TODO : add action listeners for the menu items
         JMenuBar menuBar = new JMenuBar();
         JMenuItem exit = new JMenuItem("Exit");
         JMenuItem save = new JMenuItem("Save");
@@ -59,7 +58,10 @@ public class GuiMapView extends JPanel implements MapView {
         JMenuItem about = new JMenuItem("About");
 
         exit.addActionListener(actionEvent -> exit());
-        save.addActionListener(actionEvent -> mapNavigationListeners.onSave());
+        save.addActionListener(actionEvent -> {
+            mapNavigationListeners.onSave();
+            showSavedOk();
+        });
         changeUser.addActionListener(actionEvent -> changeUser());
         about.addActionListener(actionEvent -> about());
 
@@ -84,6 +86,7 @@ public class GuiMapView extends JPanel implements MapView {
             System.exit(0);
         } else if (result == JOptionPane.NO_OPTION) {
             mapNavigationListeners.onSave();
+            showSavedOk();
             System.exit(0);
         }
     }
@@ -204,6 +207,14 @@ public class GuiMapView extends JPanel implements MapView {
                 mapNavigationListeners.onGoBackToMap();
             }
         }
+    }
+
+    /**
+     * Opens a pop-up that says the game was saved successfully
+     */
+    private void showSavedOk() {
+        String message = "Your progress was saved successfully !";
+        JOptionPane.showMessageDialog(this, message);
     }
 
 
