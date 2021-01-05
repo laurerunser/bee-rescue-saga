@@ -19,7 +19,7 @@ public class Block extends JButton {
     private static boolean freeBonus;
 
     /**
-     * Constructs a Block
+     * Constructs a Block for a Piece
      *
      * @param x                    The x-coordinate on the board
      * @param y                    The y-coordinate on the board
@@ -36,8 +36,20 @@ public class Block extends JButton {
         //TODO add animation for the Bee (from Bee-happy.png to Bee-sad).png
 
         initCosmetic();
-
+        if (piece != null && !piece.getToolTipText().equals("")) {
+            this.setToolTipText(piece.getToolTipText());
+        }
         // TODO : make the button go grey or smth when mouse hovers
+    }
+
+    /**
+     * Init some cosmetic stuff that both a Piece and a Bonus need
+     */
+    private void initCosmetic() {
+        this.setPreferredSize(new Dimension(65, 65));
+        this.setBackground(new Color(237, 198, 63));
+        this.setBorder(null);// empty border
+        this.setContentAreaFilled(false);
     }
 
     /**
@@ -58,11 +70,20 @@ public class Block extends JButton {
         }
     }
 
-    private void initCosmetic() {
-        this.setPreferredSize(new Dimension(65, 65));
-        this.setBackground(new Color(237, 198, 63));
-        this.setBorder(null);// empty border
-        this.setContentAreaFilled(false);
+    /**
+     * Constructs a Block for a Bonus
+     *
+     * @param bonus     The Bonus
+     * @param freeBonus True if this is a free bonus, false otherwise
+     */
+    public Block(Bonus bonus, boolean freeBonus) {
+        this.addActionListener(actionEvent -> {
+            this.setVisible(false); // TODO : make it grey if none left, or decrease the amount
+            Block.bonus = bonus;
+            Block.freeBonus = freeBonus;
+        });
+        initCosmetic();
+        this.setToolTipText(bonus.getToolTipText());
     }
 
     private void initIcon(Piece piece) {
@@ -145,13 +166,5 @@ public class Block extends JButton {
         }
     }
 
-    public Block(Bonus bonus, boolean freeBonus) {
-        this.addActionListener(actionEvent -> {
-            this.setVisible(false); // TODO : make it grey if none left, or decrease the amount
-            this.bonus = bonus;
-            this.freeBonus = freeBonus;
-        });
-        initCosmetic();
-    }
 
 }
