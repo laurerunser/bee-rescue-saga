@@ -48,4 +48,9 @@ public abstract class Bonus implements Serializable {
      * @return true if the Bonus is unlocked, false otherwise
      */
     public abstract boolean isUnlocked();
+
+    /**
+     * @return the tool tip text that describes the action of the bonus
+     */
+    public abstract String getToolTipText();
 }

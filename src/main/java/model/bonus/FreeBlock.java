@@ -36,4 +36,9 @@ public class FreeBlock extends Bonus {
         }
         return false;
     }
+
+    @Override
+    public String getToolTipText() {
+        return "Frees any block (except Bees)";
+    }
 }

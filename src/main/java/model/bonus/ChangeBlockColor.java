@@ -57,4 +57,10 @@ public class ChangeBlockColor extends Bonus {
         }
         return false;
     }
+
+
+    @Override
+    public String getToolTipText() {
+        return "Transforms all block of a given color into another color";
+    }
 }

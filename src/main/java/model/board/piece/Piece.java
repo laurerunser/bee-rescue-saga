@@ -69,4 +69,10 @@ public abstract class Piece implements Serializable {
      */
     public String getCurrentIconPath() { return "toto"; }
 
+    /**
+     * @return the tool tip text to be displayed to explain what the bonus do. Default is empty String for the
+     * other Pieces
+     */
+    public String getToolTipText() { return ""; }
+
 }

@@ -36,4 +36,10 @@ public class FreeBee extends Bonus {
         }
         return false;
     }
+
+
+    @Override
+    public String getToolTipText() {
+        return "Frees a Bee";
+    }
 }

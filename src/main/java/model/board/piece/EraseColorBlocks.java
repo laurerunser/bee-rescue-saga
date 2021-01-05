@@ -75,15 +75,22 @@ public class EraseColorBlocks extends Piece {
         return pointsWon * coefficient; // multiply by the coefficient of the EraseColorBlocks
     }
 
+    @Override
     public String toString() {
         return color + " color balloun : pop it to delete all the color blocks of that color";
     }
 
+    @Override
     public String charForCli() {
         if (isFree()) {
             return "_" + color.toLowerCase().charAt(0) + "ECB_";
         } else {
             return "x" + color.toLowerCase().charAt(0) + "ECB_";
         }
+    }
+
+    @Override
+    public String getToolTipText() {
+        return "Erases all the blocks of this color";
     }
 }

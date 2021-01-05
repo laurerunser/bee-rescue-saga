@@ -141,15 +141,22 @@ public class Bomb extends Piece {
         return pointsPiece;
     }
 
+    @Override
     public String toString() {
         return "Bomb : deletes or frees the 8 surrounding pieces";
     }
 
+    @Override
     public String charForCli() {
         if (isFree()) {
             return "_bomb_";
         } else {
             return "x_bomb";
         }
+    }
+
+    @Override
+    public String getToolTipText() {
+        return "Erases or sets free all 8 surrounding blocks";
     }
 }

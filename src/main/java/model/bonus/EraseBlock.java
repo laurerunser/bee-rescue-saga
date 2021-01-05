@@ -45,4 +45,10 @@ public class EraseBlock extends Bonus {
         }
         return false;
     }
+
+
+    @Override
+    public String getToolTipText() {
+        return "Deletes the chosen block";
+    }
 }

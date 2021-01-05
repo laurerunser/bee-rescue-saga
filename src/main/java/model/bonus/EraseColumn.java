@@ -44,4 +44,10 @@ public class EraseColumn extends Bonus {
         }
         return false;
     }
+
+
+    @Override
+    public String getToolTipText() {
+        return "Deletes or frees all the blocks in the column";
+    }
 }
