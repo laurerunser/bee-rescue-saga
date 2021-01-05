@@ -53,16 +53,58 @@ public class GuiMapView extends JPanel implements MapView {
     private void initMenu() {
         // TODO : add action listeners for the menu items
         JMenuBar menuBar = new JMenuBar();
-        JMenu exit = new JMenu("Exit");
-        JMenu save = new JMenu("Save");
-        JMenu changeUser = new JMenu("Change user");
-        JMenu about = new JMenu("About");
+        JMenuItem exit = new JMenuItem("Exit");
+        JMenuItem save = new JMenuItem("Save");
+        JMenuItem changeUser = new JMenuItem("Change user");
+        JMenuItem about = new JMenuItem("About");
+
+        exit.addActionListener(actionEvent -> exit());
+        save.addActionListener(actionEvent -> mapNavigationListeners.onSave());
+        changeUser.addActionListener(actionEvent -> changeUser());
+        about.addActionListener(actionEvent -> about());
+
         menuBar.add(exit);
         menuBar.add(save);
         menuBar.add(changeUser);
         menuBar.add(about);
 
         frame.setJMenuBar(menuBar);
+    }
+
+    /**
+     * Opens a dialog window to warn the user that exiting doesn't save their progress
+     */
+    private void exit() {
+        String message = "Exiting now will not save your progress. Are you sure ?";
+        String[] options = {"Yes, exit now", "Save and exit", "Cancel"};
+        int result = JOptionPane.showOptionDialog(this, message, "Are you sure you want to leave ?",
+                                                  JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE, null, options,
+                                                  options[1]);
+        if (result == JOptionPane.YES_OPTION) {
+            System.exit(0);
+        } else if (result == JOptionPane.NO_OPTION) {
+            mapNavigationListeners.onSave();
+            System.exit(0);
+        }
+    }
+
+    /**
+     * Brings back to the first screen where the user chooses their username and/or saved games
+     */
+    private void changeUser() {
+        // TODO : implement
+    }
+
+    /**
+     * Opens a pop-up with information about the developers and the original game
+     */
+    private void about() {
+        String message = "Ce jeu a ete developpe par Laure Runser dans le cadre de l'UE POOIG de la licence d'informatique" +
+                "de l'Universite de Paris pendant l'annee 2020-2021.\n" +
+                "Le code source est disponible ici : https://github.com/laurerunser/bee-rescue-saga.\n" +
+                "Ce programme est sous licence GPLv3. Pour plus d'informations, voir le depot git.\n" +
+                "Ce projet est base sur le jeu mobile Pet Rescue Sage de King disponible ici : https://www.king.com/game/petrescue.\n";
+        JOptionPane.showMessageDialog(this, message);
     }
 
     /**
