@@ -256,4 +256,13 @@ public class Level implements Serializable {
         currentCountReplenishingBonus = movesReplenishFreeBonus;
     }
 
+    /**
+     * Returns a String to describe the goal of the level
+     *
+     * @return a String to describe the goal of the level
+     */
+    public String getGoal() {
+        return "You need to save all the bees !";
+    }
+
 }

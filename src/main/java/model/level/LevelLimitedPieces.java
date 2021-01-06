@@ -36,17 +36,11 @@ public class LevelLimitedPieces extends Level {
         this.nbPieces = nbPieces;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public boolean hasWon() {
         return allBeesSaved() && nbPieces >= 0;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public boolean hasLost() {
         if (freeBonus != null) return true; // you can always play the free Bonus
@@ -76,4 +70,10 @@ public class LevelLimitedPieces extends Level {
         }
         return p;
     }
+
+    @Override
+    public String getGoal() {
+        return "You need to erase all the pieces off the board, and save the bees !\n";
+    }
+
 }

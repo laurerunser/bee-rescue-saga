@@ -6,8 +6,9 @@ import model.board.Board;
 public class Bomb extends Piece {
     private static final long serialVersionUID = 123L;
 
-    private final static String iconPath = "";
-    private final static String trappedIconPath = "";
+
+    private final String freeIconPath;
+    private String currentIconPath;
 
     /**
      * Constructs a Bomb
@@ -17,6 +18,25 @@ public class Bomb extends Piece {
      */
     public Bomb(int points, boolean isFree) {
         super(points, isFree);
+
+        freeIconPath = "pictures/Bomb.png";
+        String trappedIconPath = "pictures/tBomb.png";
+        if (isFree) {
+            currentIconPath = freeIconPath;
+        } else {
+            currentIconPath = trappedIconPath;
+        }
+    }
+
+    @Override
+    public void setFree() {
+        super.setFree();
+        currentIconPath = freeIconPath;
+    }
+
+    @Override
+    public String getCurrentIconPath() {
+        return currentIconPath;
     }
 
     /**
@@ -121,15 +141,22 @@ public class Bomb extends Piece {
         return pointsPiece;
     }
 
+    @Override
     public String toString() {
         return "Bomb : deletes or frees the 8 surrounding pieces";
     }
 
+    @Override
     public String charForCli() {
         if (isFree()) {
             return "_bomb_";
         } else {
             return "x_bomb";
         }
+    }
+
+    @Override
+    public String getToolTipText() {
+        return "Erases or sets free all 8 surrounding blocks";
     }
 }

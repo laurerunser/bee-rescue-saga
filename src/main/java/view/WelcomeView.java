@@ -13,7 +13,7 @@ public interface WelcomeView {
     void welcome();
 
     /**
-     * @return the name of the Player
+     * Asks the name of the Player
      */
-    String askName(ArrayList<String> savedNames);
+    void askName(ArrayList<String> savedNames);
 }

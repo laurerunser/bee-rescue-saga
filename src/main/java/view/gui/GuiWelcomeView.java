@@ -1,27 +1,24 @@
 package view.gui;
 
+import main.Main;
 import view.WelcomeView;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
-public class GuiWelcomeView implements WelcomeView, ActionListener {
-    private final JFrame frame = new JFrame();
+public class GuiWelcomeView extends JFrame implements WelcomeView {
     private JPanel panel;
-    private boolean nameIsChosen = false;
-    private String name;
 
-    public boolean nameChosen() {
-        return nameIsChosen;
-    }
-
-    public String getName() { return name; }
+    // TODO : make it pretty
 
     @Override
     public void welcome() {
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        this.setPreferredSize(new Dimension(900, 900));
+        this.setTitle("Bee Rescue Saga");
         welcomeAnimation();
     }
 
@@ -30,46 +27,77 @@ public class GuiWelcomeView implements WelcomeView, ActionListener {
     }
 
     @Override
-    public String askName(ArrayList<String> savedNames) {
+    public void askName(ArrayList<String> savedNames) {
         panel = new JPanel();
-        frame.setContentPane(panel);
-        frame.setVisible(true);
+        //panel.setBackground(new Color(237, 198, 63));
         panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
-        panel.add(new JLabel("If you wish to resume a saved game, please select your name on the list below"));
+        panel.setBackground(new Color(237, 198, 63));
 
-        ButtonGroup group = new ButtonGroup();
+
+        ImageIcon banner = new ImageIcon(getClass().getClassLoader().getResource("pictures/Banner.png"));
+        panel.add(new JLabel(banner));
+
+        ImageIcon listNames = new ImageIcon(getClass().getClassLoader().getResource("pictures/ListNames.png"));
+        panel.add(new JLabel(listNames));
         for (String s : savedNames) {
-            JRadioButton b = new JRadioButton(s);
-            b.addActionListener(this);
-            b.setActionCommand(s); // give the action of the button the name in the savedNames list
-            group.add(b);
+            JButton b = new JButton(s);
+            b.addActionListener(actionEvent -> {
+                JButton b1 = (JButton) actionEvent.getSource();
+                Main.startGame(b1.getText());
+            });
             panel.add(b);
-            panel.setVisible(true);
-            b.setVisible(true);
         }
 
-        panel.add(new JLabel("Otherwise, please enter your name below : "));
+        panel.add(Box.createRigidArea(new Dimension(900, 30)));
+
+        ImageIcon promptName = new ImageIcon(getClass().getClassLoader().getResource("pictures/EnterName.png"));
+        panel.add(new JLabel(promptName));
+
+        JPanel panelTextField = new JPanel();
+        panelTextField.setPreferredSize(new Dimension(900, 50));
+        panelTextField.setBackground(new Color(237, 198, 63));
         JTextField textField = new JTextField(20);
-        textField.addActionListener(this);
-        panel.add(textField);
+        textField.setPreferredSize(new Dimension(50, 40));
+        panelTextField.add(textField);
+        panel.add(panelTextField);
+        panel.add(Box.createRigidArea(new Dimension(900, 15)));
+
         panel.add(new JLabel("Your name must have less than 20 characters"));
         panel.add(new JLabel("Please make sure to choose a name that is not in the above list," +
                                      " or you will erase the saved game associated with it"));
-        return null;
-    }
+        panel.add(Box.createRigidArea(new Dimension(900, 10)));
 
-    @Override
-    public void actionPerformed(ActionEvent actionEvent) {
-        if (actionEvent.getSource() instanceof JRadioButton) {
-            // get the name on the selected button
-            name = actionEvent.getActionCommand();
-            System.out.println(name);
-        } else {
-            // get the name in the input box
-            name = ((JTextField) actionEvent.getSource()).getText();
-        }
-        nameIsChosen = true;
-    }
+        ImageIcon letsGo = new ImageIcon(getClass().getClassLoader().getResource("pictures/LetsGo.png"));
+        JButton go = new JButton(letsGo);
+        go.setContentAreaFilled(false);
+        go.setBorder(null);
+        go.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent mouseEvent) {
+                String name = textField.getText();
+                Main.startGame(name);
+            }
 
+            public void mousePressed(MouseEvent mouseEvent) { }
+
+            public void mouseReleased(MouseEvent mouseEvent) { }
+
+            @Override
+            public void mouseEntered(MouseEvent mouseEvent) {
+                go.setIcon(new ImageIcon(getClass().getClassLoader().getResource("pictures/LetsGoHover.png")));
+            }
+
+            @Override
+            public void mouseExited(MouseEvent mouseEvent) {
+                go.setIcon(new ImageIcon(getClass().getClassLoader().getResource("pictures/LetsGo.png")));
+            }
+        });
+        panel.add(go);
+
+        panel.add(Box.createRigidArea(new Dimension(900, 200)));
+
+        this.setContentPane(panel);
+        this.setVisible(true);
+    }
 
 }

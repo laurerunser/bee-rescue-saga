@@ -5,13 +5,13 @@ import model.board.Board;
 public class ColorBlock extends Piece {
     private static final long serialVersionUID = 123L;
 
-    private final static String iconPath = "";
-    private final static String trappedIconPath = "";
-
     /**
      * The color of the block : yellow, red, green, blue, orange, purple
      */
     private String color;
+
+    private String freeIconPath;
+    private String currentIconPath;
 
     /**
      * Constructs a ColorBlock
@@ -23,14 +23,43 @@ public class ColorBlock extends Piece {
     public ColorBlock(int points, boolean isFree, String color) {
         super(points, isFree);
         this.color = color;
+        this.freeIconPath = "pictures/" + color.charAt(0) + random() + ".png";
+        String trappedIconPath = "pictures/t" + color.charAt(0) + random() + ".png";
+        if (isFree) {
+            this.currentIconPath = freeIconPath;
+        } else {
+            this.currentIconPath = trappedIconPath;
+        }
+        // TODO : modify the iconpath to get a random selection from 1 to 3 (both included)
+    }
+
+    @Override
+    public void setFree() {
+        super.setFree();
+        currentIconPath = freeIconPath;
+    }
+
+    @Override
+    public String getCurrentIconPath() {
+        return currentIconPath;
+    }
+
+    private void setFreeIconPath(String icon) { this.freeIconPath = icon; }
+
+    /**
+     * Returns a number between 1 and 3 (both included)
+     *
+     * @return an int between 1 and 3 (both included)
+     */
+    private String random() {
+        int a = (int) (Math.random() * (4 - 1 + 1) + 1);
+        return String.valueOf(a);
     }
 
     /**
      * @return the color
      */
-    public String getColor() {
-        return color;
-    }
+    public String getColor() { return color; }
 
     /**
      * Sets the color to the new value
@@ -95,5 +124,6 @@ public class ColorBlock extends Piece {
             return "_x" + color.toLowerCase().charAt(0) + "Blk";
         }
     }
+
 
 }

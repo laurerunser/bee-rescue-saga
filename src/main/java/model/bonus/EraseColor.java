@@ -13,8 +13,8 @@ public class EraseColor extends Bonus {
 
     private String color;
 
-    public EraseColor(String iconPath, int basePoints) {
-        super(iconPath, basePoints);
+    public EraseColor(int basePoints) {
+        super("EraseColor", basePoints);
     }
 
     @Override
@@ -51,5 +51,11 @@ public class EraseColor extends Bonus {
             if (unlocked[i].equals("EraseColor")) return true;
         }
         return false;
+    }
+
+
+    @Override
+    public String getToolTipText() {
+        return "Deletes or frees all the blocks of the chosen color";
     }
 }

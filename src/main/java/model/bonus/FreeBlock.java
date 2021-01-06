@@ -10,8 +10,8 @@ import model.board.piece.Piece;
 public class FreeBlock extends Bonus {
     private static final long serialVersionUID = 123L;
 
-    public FreeBlock(String iconPath) {
-        super(iconPath, 0);
+    public FreeBlock() {
+        super("FreeBlock", 0);
     }
 
     @Override
@@ -35,5 +35,10 @@ public class FreeBlock extends Bonus {
             if (unlocked[i].equals("FreeBlock")) return true;
         }
         return false;
+    }
+
+    @Override
+    public String getToolTipText() {
+        return "Frees any block (except Bees)";
     }
 }

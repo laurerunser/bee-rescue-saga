@@ -1,5 +1,7 @@
 package view;
 
+import controller.listeners.MapNavigationListeners;
+
 public interface LevelView extends Vue {
 
     default void draw() {
@@ -17,4 +19,10 @@ public interface LevelView extends Vue {
     void updateAvailableBonus();
 
     void updateFreeBonus();
+
+    void drawWon(int score, int stars, MapNavigationListeners mapNavigationListeners);
+
+    void drawLost(MapNavigationListeners mapNavigationListeners);
+
 }
+

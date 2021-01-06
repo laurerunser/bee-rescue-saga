@@ -25,7 +25,7 @@ public abstract class Bonus implements Serializable {
      * @param basePoints The number of points
      */
     public Bonus(String iconPath, int basePoints) {
-        this.iconPath = iconPath;
+        this.iconPath = "pictures/" + iconPath + ".png";
         this.basePoints = basePoints;
     }
 
@@ -48,4 +48,9 @@ public abstract class Bonus implements Serializable {
      * @return true if the Bonus is unlocked, false otherwise
      */
     public abstract boolean isUnlocked();
+
+    /**
+     * @return the tool tip text that describes the action of the bonus
+     */
+    public abstract String getToolTipText();
 }

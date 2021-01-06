@@ -6,13 +6,14 @@ import model.board.Board;
 public class Bee extends Piece {
     private static final long serialVersionUID = 123L;
 
-    private final static String iconPath = "";
-    private final static String trappedIconPath = "";
     /**
      * The color of the box the Bee can be trapped in : yellow, red, green, blue, orange, purple
      * If the Bee is not trapped, color = "" (empty String)
      */
     private final String color;
+
+    private final String freeIconPath;
+    private String currentIconPath;
 
     /**
      * Constructs a Bee that is trapped in a box of that color
@@ -23,6 +24,9 @@ public class Bee extends Piece {
     public Bee(int points, String color) {
         super(points, false);
         this.color = color;
+
+        freeIconPath = "pictures/Bee-happy.png";
+        currentIconPath = "pictures/Bee-happy-" + color.charAt(0) + ".png";
     }
 
     /**
@@ -33,6 +37,19 @@ public class Bee extends Piece {
     public Bee(int points) {
         super(points, true);
         color = "";
+        freeIconPath = "pictures/Bee-happy.png";
+        currentIconPath = freeIconPath;
+    }
+
+    @Override
+    public void setFree() {
+        super.setFree();
+        currentIconPath = freeIconPath;
+    }
+
+    @Override
+    public String getCurrentIconPath() {
+        return currentIconPath;
     }
 
     /**

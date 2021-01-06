@@ -5,13 +5,13 @@ import model.board.Board;
 public class EraseColorBlocks extends Piece {
     private static final long serialVersionUID = 123L;
 
-    private final static String iconPath = "";
-    private final static String trappedIconPath = "";
-
     /**
      * The color of the blocks this Piece deletes. Can be : yellow, red, green, blue, orange, purple
      */
     private final String color;
+
+    private final String freeIconPath;
+    private String currentIconPath;
 
     /**
      * Constructs a EraseColorBlocks
@@ -23,6 +23,25 @@ public class EraseColorBlocks extends Piece {
     public EraseColorBlocks(int points, boolean isFree, String color) {
         super(points, isFree);
         this.color = color;
+
+        freeIconPath = "pictures/Ballon" + color.charAt(0) + ".png";
+        String trappedIconPath = "pictures/tBallon" + color.charAt(0) + ".png";
+        if (isFree) {
+            currentIconPath = freeIconPath;
+        } else {
+            currentIconPath = trappedIconPath;
+        }
+    }
+
+    @Override
+    public void setFree() {
+        super.setFree();
+        currentIconPath = freeIconPath;
+    }
+
+    @Override
+    public String getCurrentIconPath() {
+        return currentIconPath;
     }
 
     public String getColor() { return color; }
@@ -56,15 +75,22 @@ public class EraseColorBlocks extends Piece {
         return pointsWon * coefficient; // multiply by the coefficient of the EraseColorBlocks
     }
 
+    @Override
     public String toString() {
         return color + " color balloun : pop it to delete all the color blocks of that color";
     }
 
+    @Override
     public String charForCli() {
         if (isFree()) {
             return "_" + color.toLowerCase().charAt(0) + "ECB_";
         } else {
             return "x" + color.toLowerCase().charAt(0) + "ECB_";
         }
+    }
+
+    @Override
+    public String getToolTipText() {
+        return "Erases all the blocks of this color";
     }
 }

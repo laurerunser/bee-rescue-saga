@@ -40,20 +40,19 @@ public class LevelLimitedTime extends Level {
         this.pointsPerSecondLeft = pointsPerSecondLeft;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public boolean hasWon() {
         return allBeesSaved() && (seconds >= 0);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public boolean hasLost() {
         return !allBeesSaved() && (seconds == 0);
+    }
+
+    @Override
+    public String getGoal() {
+        return "You need to save the Bees before you run out of time !";
     }
 
 }

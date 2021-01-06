@@ -1,5 +1,6 @@
 package view.cli;
 
+import main.Main;
 import view.WelcomeView;
 
 import java.util.ArrayList;
@@ -40,15 +41,16 @@ public class CliWelcomeView implements WelcomeView {
     }
 
     @Override
-    public String askName(ArrayList<String> savedNames) {
-        System.out.println("Here is the list of people who have played the game on this computer :");
+    public void askName(ArrayList<String> savedNames) {
+        System.out.println("Here is the list of people who have played the game on this computer : ");
         savedNames.forEach(n -> System.out.println("- " + n));
         System.out.println("If you wish to continue your saved game, enter the same name below.");
-        System.out.println("If you want to start a new game, enter a name that is not already on the list");
+        System.out.println("If you want to start a new game, enter a name that is not already on the list.");
         System.out.println();
         System.out.print("What is your name ? ");
         Scanner sc = new Scanner(System.in);
-        return sc.next();
+        String name = sc.nextLine();
+        Main.startGame(name);
     }
 }
 

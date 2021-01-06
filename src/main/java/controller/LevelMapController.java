@@ -11,6 +11,8 @@ import view.cli.CliMapView;
 import view.gui.GuiLevelView;
 import view.gui.GuiMapView;
 
+import javax.swing.*;
+
 
 public class LevelMapController implements MapNavigationListener, LevelListener {
     /**
@@ -33,25 +35,39 @@ public class LevelMapController implements MapNavigationListener, LevelListener 
      */
     private MapView mapView;
 
+    /**
+     * The list of listeners to listen on the player's actions
+     */
     private final MapNavigationListeners mapNavigationListeners;
+
+    /**
+     * The JFrame to pass on to the GUI views
+     */
+    private final JFrame frame;
 
     /**
      * Constructs a LevelMapController, the appropriate views and makes them visible
      *
-     * @param player The player
-     * @param gui    True for GUI, false for CLI
+     * @param player                 The player
+     * @param gui                    True for GUI, false for CLI
+     * @param mapNavigationListeners The listeners for the player's choices
+     * @param frame                  The JFrame to pass on to the GUI views
      */
-    public LevelMapController(Player player, boolean gui, MapNavigationListeners mapNavigationListeners) {
+    public LevelMapController(Player player, boolean gui, MapNavigationListeners mapNavigationListeners, JFrame frame) {
         this.player = player;
         this.gui = gui;
         this.mapNavigationListeners = mapNavigationListeners;
+        this.frame = frame;
         mapNavigationListeners.add(this);
         init();
     }
 
+    /**
+     * Creates the CLI or GUI view
+     */
     public void init() {
         if (gui) {
-            mapView = new GuiMapView(player, mapNavigationListeners);
+            mapView = new GuiMapView(player, mapNavigationListeners, frame);
         } else {
             mapView = new CliMapView(player, mapNavigationListeners);
         }
@@ -61,14 +77,18 @@ public class LevelMapController implements MapNavigationListener, LevelListener 
 
     @Override
     public void onShowLevelDetails(int i) {
+        i = i - 1;
         boolean canPlay = canPlay(i);
         mapView.showLevelDetails(i);
-        if (canPlay) {
-            mapNavigationListeners.onPlayLevel(i);
-        } else {
-            // TODO : implement
-            System.out.println("Can't play the level yet !");
+        if (mapView instanceof CliMapView) {
+            if (canPlay) {
+                mapNavigationListeners.onPlayLevel(i);
+            }
         }
+        // the GUI view launches the level itself
+
+        //TODO : clean up and make the CLI also launch the level itself if possible
+        // or better : don't let it ask the player if they want to play the level when they can't
     }
 
     @Override
@@ -86,44 +106,40 @@ public class LevelMapController implements MapNavigationListener, LevelListener 
     }
 
     public void onGoToShop() {
-        // TODO : switch current view to ShopView
+        // TODO : implement the shop and switch current view to ShopView
     }
 
     public void onGoToRaffle() {
-        // TODO : switch current view to RaffleView
+        // TODO : implement the raffle and switch current view to RaffleView
     }
 
     /**
-     * If the Player can play, switches the view to a LevelView of the correct Level, then draws the view.
-     * Otherwise ??
+     * Switches the view to a LevelView of the correct Level, then draws the view.
      *
      * @param n The number of the Level to play
      */
     public void onPlayLevel(int n) {
-        Level toPlay = player.getMap().getLevels()[n];
-        if (player.getNbLives() < 0 || n > player.getMap().getLastLevelVisible()) { // can't play
-            // todo define what to do otherwise
-        } else { // can play
-            PlayerMovesListeners playerMovesListeners = new PlayerMovesListeners();
-            if (gui) {
-                currentView = new GuiLevelView(toPlay, playerMovesListeners);
-            } else {
-                currentView = new CliLevelView(toPlay, playerMovesListeners);
-            }
-            LevelListeners levelListeners = new LevelListeners();
-            levelListeners.add(this);
-            LevelController levelController = new LevelController(toPlay, (LevelView) currentView, levelListeners, playerMovesListeners);
-            currentView.draw();
+        Level toPlay = player.getMap().getLevels()[n - 1];
+        PlayerMovesListeners playerMovesListeners = new PlayerMovesListeners();
+        if (gui) {
+            currentView = new GuiLevelView(toPlay, playerMovesListeners, frame);
+        } else {
+            currentView = new CliLevelView(toPlay, playerMovesListeners);
         }
+        LevelListeners levelListeners = new LevelListeners();
+        levelListeners.add(this);
+        LevelController levelController = new LevelController(toPlay, (LevelView) currentView, levelListeners, playerMovesListeners);
+        currentView.draw();
     }
 
     /**
      * Tests if the player can play the level (= they have completed all the previous ones)
      *
      * @param n The number of the level
+     * @return true if the level can be played, false otherwise
      */
-    private boolean canPlay(int n) {
-        return n - 1 < 0 || player.getMap().getCurrentLevel() >= n;
+    public boolean canPlay(int n) {
+        return player.getMap().canPlay(n);
     }
 
     @Override
@@ -131,17 +147,18 @@ public class LevelMapController implements MapNavigationListener, LevelListener 
         player.addToScore(score);
         player.addGold(10);
         player.getMap().hasWon(stars, score, level);
+        ((LevelView) currentView).drawWon(score, stars, mapNavigationListeners);
     }
 
     @Override
     public void onHasLost() {
         player.decreaseLives();
+        ((LevelView) currentView).drawLost(mapNavigationListeners);
     }
 
     @Override
     public void onSave() {
         player.save();
-        //TODO a screen/message that says everything has been saved correctly
         currentView.draw();
     }
 

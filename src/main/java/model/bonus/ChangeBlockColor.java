@@ -22,8 +22,8 @@ public class ChangeBlockColor extends Bonus {
      */
     private String colorTo;
 
-    public ChangeBlockColor(String iconPath) {
-        super(iconPath, 0);
+    public ChangeBlockColor() {
+        super("ChangeBlockColor", 0);
     }
 
 
@@ -56,5 +56,11 @@ public class ChangeBlockColor extends Bonus {
             if (unlocked[i].equals("ChangeColorBlock")) return true;
         }
         return false;
+    }
+
+
+    @Override
+    public String getToolTipText() {
+        return "Transforms all block of a given color into another color";
     }
 }

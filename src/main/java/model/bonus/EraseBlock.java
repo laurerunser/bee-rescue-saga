@@ -11,8 +11,8 @@ public class EraseBlock extends Bonus {
     private static final long serialVersionUID = 123L;
 
 
-    public EraseBlock(String iconPath, int basePoints) {
-        super(iconPath, basePoints);
+    public EraseBlock(int basePoints) {
+        super("EraseBlock", basePoints);
     }
 
     /**
@@ -44,5 +44,11 @@ public class EraseBlock extends Bonus {
             if (unlocked[i].equals("EraseBlock")) return true;
         }
         return false;
+    }
+
+
+    @Override
+    public String getToolTipText() {
+        return "Deletes the chosen block";
     }
 }

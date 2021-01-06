@@ -4,27 +4,15 @@ import model.board.Board;
 
 import java.io.Serializable;
 
-//TODO : fill all the iconPath and trappedIconPath
 public abstract class Piece implements Serializable {
     private static final long serialVersionUID = 123L;
 
     /**
-     * The path to the icon
-     */
-    private final static String iconPath = "";
-    /**
-     * The path to the icon when the Piece is trapped/not free
-     */
-    private final static String trappedIconPath = "";
-    /**
-     * The path to the current icon
-     */
-    private String currentIconPath;
-
-    /**
-     * The number of points the Player gets hen deleting the Piece, without the multiplicators or extra points
+     * The number of points the Player gets when deleting the Piece,
+     * without any extra points (for ex when using a bonus)
      */
     private final int points;
+
     /**
      * True if the Piece is free, false otherwise
      */
@@ -39,17 +27,12 @@ public abstract class Piece implements Serializable {
     public Piece(int points, boolean isFree) {
         this.points = points;
         this.isFree = isFree;
-        if (isFree) {
-            currentIconPath = iconPath;
-        } else {
-            currentIconPath = trappedIconPath;
-        }
+
     }
 
     /** Sets the Piece free. Changes the currentIconPath to the default iconPath. */
     public void setFree() {
         isFree = true;
-        currentIconPath = iconPath;
     }
 
     /** @return true if the Piece is free, false otherwise */
@@ -79,5 +62,17 @@ public abstract class Piece implements Serializable {
      * @return a String of length 6 that represents the Piece
      */
     public abstract String charForCli();
+
+
+    /**
+     * @return the current icon path
+     */
+    public String getCurrentIconPath() { return "toto"; }
+
+    /**
+     * @return the tool tip text to be displayed to explain what the bonus do. Default is empty String for the
+     * other Pieces
+     */
+    public String getToolTipText() { return ""; }
 
 }

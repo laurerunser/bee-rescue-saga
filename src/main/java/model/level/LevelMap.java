@@ -28,13 +28,14 @@ public class LevelMap implements Serializable {
 
     public LevelMap() {
         currentLevel = 0;
-        levels = new Level[4];
-        levelsCompleted = new int[4][2];
+        levels = new Level[5];
+        levelsCompleted = new int[5][2];
         levelVisible = 0;
 
         // fill the map with the serialized levels
-        for (int i = 0; i <= 3; i++) {
-            //TODO : find a way to automatically input the number of levels (3) so that I don't have to go back to it if I add levels
+        for (int i = 0; i < 5; i++) {
+            //TODO : find a way to automatically input the number of levels (4) so that I don't have to go back to it if I add levels
+            // remember to replace the number above in both array declarations
             Level l;
             try {
                 String name = "src/main/resources/levelsSER/level" + i + ".ser";
@@ -53,8 +54,6 @@ public class LevelMap implements Serializable {
     public Level[] getLevels() { return levels; }
 
     public int[][] getLevelsCompleted() { return levelsCompleted; }
-
-    public int getCurrentLevel() { return currentLevel; }
 
     public int getLastLevelVisible() { return levelVisible; }
 
@@ -85,7 +84,16 @@ public class LevelMap implements Serializable {
         }
         if (level == levelVisible) {
             uncoverMap();
-            // TODO : launch animations & reward for uncovering levels
         }
+    }
+
+    /**
+     * Returns whether or not the level can be played = if all the previous ones have been won
+     *
+     * @param n The number of the level to test
+     * @return true if the level can be played, false otherwise
+     */
+    public boolean canPlay(int n) {
+        return currentLevel >= n - 1;
     }
 }

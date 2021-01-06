@@ -10,8 +10,8 @@ import model.board.piece.Piece;
 public class EraseColumn extends Bonus {
     private static final long serialVersionUID = 123L;
 
-    public EraseColumn(String iconPath, int basePoints) {
-        super(iconPath, basePoints);
+    public EraseColumn(int basePoints) {
+        super("EraseColumn", basePoints);
     }
 
     @Override
@@ -43,5 +43,11 @@ public class EraseColumn extends Bonus {
             if (unlocked[i].equals("EraseColumn")) return true;
         }
         return false;
+    }
+
+
+    @Override
+    public String getToolTipText() {
+        return "Deletes or frees all the blocks in the column";
     }
 }
