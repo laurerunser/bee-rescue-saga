@@ -1,3 +1,11 @@
+# Problemes
+
+- sur cette branche, les niveaux ne fonctionnent pas
+
+- merci d'aller sur la branche levelworksFromThere pour tester les niveaux
+
+```git checkout levelworksFromThere```
+
 # Bee Rescue Saga
 Project for the POOIG class 2020-2021
 
